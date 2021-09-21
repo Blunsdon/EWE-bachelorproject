@@ -87,7 +87,7 @@
       <workItem from="1632207863807" duration="7653000" />
       <workItem from="1632222341115" duration="37000" />
       <workItem from="1632222635370" duration="46000" />
-      <workItem from="1632223045412" duration="2662000" />
+      <workItem from="1632223045412" duration="3338000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
@@ -126,6 +126,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="34f37c12-f9fa-4d19-bbfa-71137572e1ff">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/Bluns/Desktop/bachelor/EWE-bachelorproject/django-website/website/venv_gl_bl" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
