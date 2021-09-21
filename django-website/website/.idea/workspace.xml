@@ -44,6 +44,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bluns\Desktop\bachelor\EWE-bachelorproject\django-website\website" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="website" type="Python.DjangoServer" factoryName="Django server">
       <module name="website" />
