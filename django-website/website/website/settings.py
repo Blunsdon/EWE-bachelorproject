@@ -59,7 +59,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [str(BASE_DIR.joinpath('templates'))]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -72,6 +72,8 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_REDIRECT_URL = '/login_redirect/'
 
 WSGI_APPLICATION = 'website.wsgi.application'
 
@@ -105,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'website.Users'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
