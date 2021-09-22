@@ -15,8 +15,13 @@ Including another URLconf
 """
 "commit test"
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+# TODO: check if all added
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('create_user/', include('create_user.urls')),
+    path('field_user_home/', include('field_user.urls')),
+    #path('office_user/', include('office_user.urls')),
+    #path('rest_api/', include('rest_api.urls')),
 ]
