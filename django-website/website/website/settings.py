@@ -77,6 +77,8 @@ LOGIN_REDIRECT_URL = '/login_redirect/'
 
 WSGI_APPLICATION = 'website.wsgi.application'
 
+STATIC_URL = '/static/'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

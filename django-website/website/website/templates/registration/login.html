@@ -1,7 +1,51 @@
-<!-- templates/registration/login.html -->
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url('{% static "website/EWE-baggrundsbillede-website.png" %}');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Field user home page</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 style="font-weight: bold; font-size: 25px;">Log In</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+    <div class="form-group">
+
+        <label for="{{ form.username.id_for_label }}"
+               style="font-weight: bold; font-size: 25px;">Username:</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+
+    </div>
+    <div class="form-group">
+
+        <label for="{{ form.password.id_for_label }}"
+        style="font-weight: bold; font-size: 25px;">Password:</label>
+        {{ form.password }}
+        {{ form.password.errors }}
+    </div>
+        <br>
+        <button type="submit" style="padding: 16px; width: 200px; background-color:
+      darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log in</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <!-- Shall be changed to create user site redirection -->
+    <button onClick="document.location.href = '../../'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create user</button>
+</body>
+</html>
