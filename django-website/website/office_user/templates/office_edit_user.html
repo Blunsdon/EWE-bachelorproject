@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>INFO: Choose user to edit</h1>
+    <h1>BOX-DROPDOWN: Company</h1>
+    <h1>BOX-DROPDOWN: User</h1>
+    <button onClick="document.location.href = '../office_edit_user_final/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit user</button>
+    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</body>
+</html>
