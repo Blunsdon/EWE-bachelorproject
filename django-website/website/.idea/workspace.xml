@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/website.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/images/EWE-baggrundsbillede-website.png" beforeDir="false" afterPath="$PROJECT_DIR$/website/static/website/EWE-baggrundsbillede-website.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/templates/field_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/templates/field_user_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/office_user/static/office_user/EWE-baggrundsbillede-website.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_user/templates/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/templates/create_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_access.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/migrations/0001_initial.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
