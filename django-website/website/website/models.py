@@ -21,10 +21,16 @@ class Users(AbstractBaseUser, PermissionsMixin):
     phoneNumber = models.CharField(max_length=20)
     company = models.CharField(max_length=120)
     password = models.CharField(max_length=200)
-    userType = models.CharField(max_length=30, default="Field user")
+
+    userTypes = (
+        ('Admin', 'Admin'),
+        ('Office user', 'Office user'),
+        ('Field user', 'Field user'))
+    userType = models.CharField(max_length=30, choices=userTypes, default="Field_user")
 
     """Next 3 fields might need deletion"""
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
     #set email to be the login "name"

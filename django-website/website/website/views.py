@@ -10,10 +10,10 @@ def index(request):
         return redirect('/field_user_home')
     elif usertype == 'Office user':
         return redirect('/office_user_home')
-    elif usertype == 'admin':
+    elif usertype == 'Admin':
         return redirect('/admin')
     else:
-        return redirect('https://google.com')
+        return redirect('')
 
 def homepage(request):
     return redirect('/accounts/login')

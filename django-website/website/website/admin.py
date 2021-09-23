@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import Group
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import Users, Facilities, Logs, JoinTableFacility, JoinTableUser
 
@@ -13,10 +14,10 @@ class CustomUserAdmin(UserAdmin):
     model = Users
 
     # What is shown in the list of users
-    list_display = ('email', 'is_staff')
+    list_display = ('name', 'company', 'email', 'userType')
 
     # What filters can be applied to the entries
-    list_filter = ('email', 'is_staff')
+    list_filter = ('userType',)
 
     # What is shown when editing user
     fieldsets = (
@@ -31,6 +32,7 @@ class CustomUserAdmin(UserAdmin):
          )}),
         ('Permissions',
          {'fields': (
+             'is_superuser',
              'is_staff',
          )}),
     )
@@ -47,15 +49,16 @@ class CustomUserAdmin(UserAdmin):
                 'company',
                 'userType',
                 'password', 'password2',
-                'is_staff'
+                'is_superuser',
+                'is_staff',
             )}),
     )
 
     # What field can be searched by
-    search_fields = ('email',)
+    search_fields = ('email', 'name', 'company', 'phoneNumber')
 
     # What are the fields ordered by as standard
-    ordering = ('email',)
+    ordering = ('name',)
 
 
 """
@@ -69,4 +72,7 @@ admin.site.register(Logs)
 admin.site.register(Facilities)
 admin.site.register(JoinTableUser)
 admin.site.register(JoinTableFacility)
+
+# Remove group field on admin site
+admin.site.unregister(Group)
 
