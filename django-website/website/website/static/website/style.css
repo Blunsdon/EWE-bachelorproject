@@ -1,0 +1,15 @@
+.button2 {
+    display: block;
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+}

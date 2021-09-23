@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-    {% load static %}
+    <link rel="stylesheet" href="{% static 'website/style.css' %}">
     <style>
         body {
             background-image: url('{% static "website/EWE-baggrundsbillede-website.png" %}');
@@ -11,41 +12,46 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Field user home page</title>
+    <title>login</title>
 </head>
-<body>
+<body class="center-screen">
     <br>
     <br>
     <br>
     <br>
-    <h2 style="font-weight: bold; font-size: 25px;">Log In</h2>
     <form method="post">
       {% csrf_token %}
       {{ form.non_field_errors }}
     <div class="form-group">
 
         <label for="{{ form.username.id_for_label }}"
-               style="font-weight: bold; font-size: 25px;">Username:</label>
+               style="font-weight: bold; font-size: 25px;">Email:</label>
+        <br>
         {{ form.username }}
         {{ form.username.errors }}
 
     </div>
+        <br>
     <div class="form-group">
 
         <label for="{{ form.password.id_for_label }}"
         style="font-weight: bold; font-size: 25px;">Password:</label>
+        <br>
         {{ form.password }}
         {{ form.password.errors }}
     </div>
-        <br>
+        <div>
+            <br>
         <button type="submit" style="padding: 16px; width: 200px; background-color:
-      darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log in</button>
+      darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" >Log in</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div>
+        <button onClick="document.location.href = '../../create_user'" style="padding: 16px; width: 200px; background-color:
+        darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create user</button>
+        </div>
     </form>
-    <br>
-    <br>
-    <br>
-    <!-- Shall be changed to create user site redirection -->
-    <button onClick="document.location.href = '../../'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create user</button>
 </body>
 </html>
