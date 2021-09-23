@@ -11,21 +11,21 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>office user home page</title>
+    <title>Office user home page</title>
 </head>
 <body>
     <br>
     <br>
     <br>
     <br>
-    <h1>INFO: Field user home page</h1>
+    <h1>INFO: Office user home page</h1>
     <button onClick="document.location.href = 'office_user_info/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Personal info</button>
     <br>
     <button onClick="document.location.href = 'office_user_access/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Facility access</button>
     <br>
-    <button onClick="document.location.href = '../accounts/login'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="document.location.href = '{% url 'logout' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log out</button>
 
 </body>
