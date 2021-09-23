@@ -51,3 +51,23 @@ def facility_access_give(request):
 def facility_access_remove(request):
 
     return render(request, "facility_access_remove.html")
+
+@login_required
+def facility(request):
+
+    return render(request, "facility.html")
+
+@login_required
+def facility_add(request):
+
+    return render(request, "facility_add.html")
+
+@login_required
+def facility_edit(request):
+
+    return render(request, "facility_edit.html")
+
+@login_required
+def facility_remove(request):
+
+    return render(request, "facility_remove.html")

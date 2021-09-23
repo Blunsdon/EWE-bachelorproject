@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Facility page</title>
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>INFO: Facility page</h1>
+    <button onClick="document.location.href = 'facility_add/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add facility</button>
+    <br>
+    <button onClick="document.location.href = 'facility_edit/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility</button>
+    <br>
+    <button onClick="document.location.href = 'facility_remove/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Remove facility</button>
+    <br>
+    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+
+</body>
+</html>

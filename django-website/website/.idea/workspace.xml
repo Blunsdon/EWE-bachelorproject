@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
-      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_access.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_access_give.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_access_remove.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/office_user/templates/facility.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/office_user/templates/facility_remove.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_access_give.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_access_give.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/office_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
     </list>

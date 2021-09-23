@@ -14,4 +14,8 @@ urlpatterns = [
     path('facility_access/', views.facility_access, name="facility_access"),
     path('facility_access/facility_access_give/', views.facility_access_give, name="facility_access_give"),
     path('facility_access/facility_access_remove/', views.facility_access_remove, name="facility_access_remove"),
+    path('facility/', views.facility, name="facility"),
+    path('facility/facility_add/', views.facility_add, name="facility_add"),
+    path('facility/facility_edit/', views.facility_edit, name="facility_edit"),
+    path('facility/facility_remove/', views.facility_remove, name="facility_remove"),
 ]
