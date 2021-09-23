@@ -10,6 +10,7 @@ urlpatterns = [
     path('login_redirect/', views.index),
     path('create_user/', include('create_user.urls')),
     path('field_user_home/', include('field_user.urls')),
+    path('', views.homepage)
     path('office_user_home/', include('office_user.urls')),
     #path('rest_api/', include('rest_api.urls')),
 ]
