@@ -11,4 +11,7 @@ urlpatterns = [
     path('office_edit_user_final/', views.office_edit_user_final, name="office_edit_user_final"),
     path('logs_facility/', views.logs_facility, name="logs_facility"),
     path('logs_user/', views.logs_user, name="logs_user"),
+    path('facility_access/', views.facility_access, name="facility_access"),
+    path('facility_access/facility_access_give/', views.facility_access_give, name="facility_access_give"),
+    path('facility_access/facility_access_remove/', views.facility_access_remove, name="facility_access_remove"),
 ]
