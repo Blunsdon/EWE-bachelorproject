@@ -14,3 +14,6 @@ def index(request):
         return redirect('/admin')
     else:
         return redirect('https://google.com')
+
+def homepage(request):
+    return redirect('/accounts/login')
