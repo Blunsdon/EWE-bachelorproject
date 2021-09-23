@@ -26,7 +26,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
         ('Admin', 'Admin'),
         ('Office user', 'Office user'),
         ('Field user', 'Field user'))
-    userType = models.CharField(max_length=30, choices=userTypes, default="Field_user")
+    userType = models.CharField(max_length=30, choices=userTypes, default="Field user")
 
     """Next 3 fields might need deletion"""
     is_staff = models.BooleanField(default=False)
