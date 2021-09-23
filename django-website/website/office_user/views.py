@@ -26,3 +26,13 @@ def office_edit_user(request):
 def office_edit_user_final(request):
 
     return render(request, "office_edit_user_final.html")
+
+@login_required
+def logs_facility(request):
+
+    return render(request, "logs_facility.html")
+
+@login_required
+def logs_user(request):
+
+    return render(request, "logs_user.html")
