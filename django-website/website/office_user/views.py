@@ -16,3 +16,58 @@ def office_user_info(request):
 def office_user_access(request):
 
     return render(request, "office_user_access.html")
+
+@login_required
+def office_edit_user(request):
+
+    return render(request, "office_edit_user.html")
+
+@login_required
+def office_edit_user_final(request):
+
+    return render(request, "office_edit_user_final.html")
+
+@login_required
+def logs_facility(request):
+
+    return render(request, "logs_facility.html")
+
+@login_required
+def logs_user(request):
+
+    return render(request, "logs_user.html")
+
+@login_required
+def facility_access(request):
+
+    return render(request, "facility_access.html")
+
+@login_required
+def facility_access_give(request):
+
+    return render(request, "facility_access_give.html")
+
+@login_required
+def facility_access_remove(request):
+
+    return render(request, "facility_access_remove.html")
+
+@login_required
+def facility(request):
+
+    return render(request, "facility.html")
+
+@login_required
+def facility_add(request):
+
+    return render(request, "facility_add.html")
+
+@login_required
+def facility_edit(request):
+
+    return render(request, "facility_edit.html")
+
+@login_required
+def facility_remove(request):
+
+    return render(request, "facility_remove.html")
