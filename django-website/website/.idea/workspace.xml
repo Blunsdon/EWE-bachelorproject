@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
-      <change beforePath="$PROJECT_DIR$/website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/website.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/static/field_user/EWE-baggrundsbillede-website.png" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/static/create_user/EWE-baggrundsbillede-website.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/templates/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/templates/create_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +133,7 @@
       <workItem from="1632313391583" duration="5612000" />
       <workItem from="1632379619702" duration="1269000" />
       <workItem from="1632384546153" duration="9376000" />
+      <workItem from="1632403679699" duration="1700000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
