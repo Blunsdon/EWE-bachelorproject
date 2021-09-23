@@ -77,6 +77,8 @@ LOGIN_REDIRECT_URL = '/login_redirect/'
 
 WSGI_APPLICATION = 'website.wsgi.application'
 
+STATIC_URL = '/static/'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -126,6 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = str(BASE_DIR.joinpath('static'))
 STATIC_URL = '/static/'
 
 # Default primary key field type
