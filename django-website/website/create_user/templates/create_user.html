@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Create user page</title>
 </head>
 <body>
-    <h1>Create user fun!!!</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>INFO: Create user page</h1>
+    <h1>BOX: Name</h1>
+    <h1>BOX: Phone</h1>
+    <h1>BOX: Email</h1>
+    <h1>BOX: Company</h1>
+    <h1>BOX: Password</h1>
+    <h1>BOX: Create user code</h1>
+    <h1>INFO: Important!!
+        first time login finger scan is needed</h1>
+    <br>
+    <button onClick="document.location.href = '../accounts/login'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
+    <button onClick="document.location.href = '../create_user/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create user</button>
+
 </body>
 </html>
