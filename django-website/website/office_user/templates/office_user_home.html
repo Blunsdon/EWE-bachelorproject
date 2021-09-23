@@ -19,14 +19,29 @@
     <br>
     <br>
     <h1>INFO: Office user home page</h1>
+    <button onClick="document.location.href = 'office_edit_user/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit user</button>
+    <button onClick="document.location.href = '../facility_logs/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View facility logs</button>
+    <button onClick="document.location.href = '../user_logs'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View user logs</button>
+    <button onClick="document.location.href = '../facility_access'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility access</button>
+
+    <br>
+    <br>
     <button onClick="document.location.href = 'office_user_info/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Personal info</button>
-    <br>
     <button onClick="document.location.href = 'office_user_access/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Facility access</button>
-    <br>
     <button onClick="document.location.href = '{% url 'logout' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log out</button>
+    <br>
+    <br>
+    <button onClick="document.location.href = '../facility'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add/Edit/Remove facility</button>
+    <button  style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">BOX: Create user code:</button>
 
 </body>
 </html>
