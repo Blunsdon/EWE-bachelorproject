@@ -18,11 +18,39 @@
     <br>
     <br>
     <br>
-    <h1>INFO: Choose user to edit</h1>
-    <h1>BOX-DROPDOWN: Company</h1>
-    <h1>BOX-DROPDOWN: User</h1>
-    <button onClick="document.location.href = '../office_edit_user_final/'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit user</button>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- BOX-DROPDOWN: company -->
+    <form action={% url 'office_edit_user' %} method="post">
+    {% csrf_token %}
+        <select name="company_list">
+            <option value="None" selected hidden>Choose company</option>
+            {% for val in company %}
+                <option value={{ val }}> {{ val }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter">
+    </form>
+    <br>
+
+    <!-- BOX-DROPDOWN: user -->
+    <form action={% url 'office_edit_user_final'  %}>
+    {% csrf_token %}
+        <select name="users_list">
+            {% for val in users %}
+                <option value="None" selected hidden>Choose user</option>
+                <option value={{ val.email }}> {{ val.name }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Edit user">
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
     <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </body>

@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+import website.forms
+from website.models import Users
 
 # Create your views here.
 @login_required
@@ -19,13 +22,25 @@ def office_user_access(request):
 
 @login_required
 def office_edit_user(request):
+    comp = 'comp'
+    company = Users.objects.order_by().values_list('company', flat=True).distinct()
+    users = Users.objects.order_by()
+    if request.method == 'POST':
+        data = request.POST['company_list']
+        if data != "None":
+            users = Users.objects.order_by().filter(company=data)
+            print(users.values_list())
+            return render(request, "office_edit_user.html", {'company': company, 'users': users, 'param': data})
 
-    return render(request, "office_edit_user.html")
+    return render(request, "office_edit_user.html", {'company': company, 'users': users, 'param': comp})
 
 @login_required
 def office_edit_user_final(request):
-
-    return render(request, "office_edit_user_final.html")
+    data = request.GET['users_list']
+    if data == 'None':
+        return redirect("office_edit_user")
+    form = website.forms.EditAllUsers
+    return render(request, "office_edit_user_final.html", {'user': data})
 
 @login_required
 def logs_facility(request):
