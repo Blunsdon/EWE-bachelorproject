@@ -9,22 +9,64 @@
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
     </style>
+
     <meta charset="UTF-8">
     <title>Personal info</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Field user personal info page</h1>
-    <h1>BOX: Name</h1>
-    <h1>BOX: Phone with Edit</h1>
-    <h1>BOX: Email with Edit</h1>
-    <h1>BOX: Company</h1>
-    <h1>BOX: Password with Edit</h1>
-    <button onClick="document.location.href = '../../field_user_home/'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+<dl>
+    <br><br><br><br><br><br><br><br>
+        <fieldset>
+        <legend>Personal info</legend>
+        <form action="" >
+            <table>
+                <tr>
+                    <td><label for="name"; >Name:</label></td>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <td><label for="Company"; >Company:</label></td>
+                    <td>{{ company }}</td>
+                </tr>
+                <tr>
+                    <td><label for="phone"; >Phone number:</label></td>
+                    <td><input type="tel" id="phone" name="phone" placeholder={{ phone }} pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></td>
+                    <td><button  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="email"; >Email:</label></td>
+                    <td><input type="email" id="email" name="email" placeholder={{ email }} ></td>
+                    <td><button  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="password"; >password:</label></td>
+                    <td><input type="password" id="password" name="password" placeholder="************" ></td>
+                    <td> <button  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+            </table>
+        <br>
+        <br>
+
+        </form>
+            <button onClick="document.location.href = '../../field_user_home/'" style="padding: 14px; width: 100px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 16px">back</button>
+        </fieldset>
+
+</dl>
 </body>
 </html>
