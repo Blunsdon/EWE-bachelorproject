@@ -17,15 +17,49 @@
     <br>
     <br>
     <br>
-    {{ user }}
     <br>
-    <h1>INFO: Edit the changes</h1>
-    <h1>BOX: Name</h1>
-    <h1>BOX: Phone with Edit</h1>
-    <h1>BOX: Email with Edit</h1>
-    <h1>BOX: Company</h1>
-    <h1>BOX: Password</h1>
-    <h1>BOX: User type</h1>
+    <br>
+    <br>
+    <br>
+    <form action="" method = "POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="name"; >Name:</label></td>
+                    <td><input type="text" id="name" name="name" value={{ user.name }}></td>
+                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="company"; >Company:</label></td>
+                    <td><input type="text" id="company" name="company" value={{ user.company }}></td>
+                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="phoneNumber"; >Phone number:</label></td>
+                    <td><input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{6,20}" value={{ user.phoneNumber }}></td>
+                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="email"; >Email:</label></td>
+                    <td><input type="email" id="email" name="email"  value={{ user.email }} ></td>
+                    <td><button  style="padding: 4px; width: 40px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <!-- Update to become functional -->
+                    <td><label for="password"; >Password:</label></td>
+                    <td> **** **** **** </td>
+                    <td> <!-- <button  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td> -->
+                </tr>
+            </table>
+        <br>
+        <br>
+
+        </form>
     <button style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Upgrade to office user</button>
     <br>

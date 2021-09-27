@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-import website.forms
+from website.forms import *
 from website.models import Users
 
 # Create your views here.
@@ -39,8 +39,22 @@ def office_edit_user_final(request):
     data = request.GET['users_list']
     if data == 'None':
         return redirect("office_edit_user")
-    form = website.forms.EditAllUsers
-    return render(request, "office_edit_user_final.html", {'user': data})
+
+    user_choice = Users.objects.get(email=data)
+
+    if request.method == 'POST':
+        print('request succes')
+        form = EditAllUsers(request.POST, instance=user_choice)
+        print(form)
+        if form.is_valid():
+            form.save()
+            print("save succes")
+            return redirect(office_edit_user)
+        else:
+            print(form.errors.values())
+            return redirect('/error')
+
+    return render(request, "office_edit_user_final.html", {'user': user_choice})
 
 @login_required
 def logs_facility(request):
