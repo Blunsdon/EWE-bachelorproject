@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/field_user/templates/edit_user_error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/field_user/templates/field_user_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/templates/field_user_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/field_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/field_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/forms.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +134,7 @@
       <workItem from="1632403679699" duration="2537000" />
       <workItem from="1632463604403" duration="4336000" />
       <workItem from="1632481622670" duration="11827000" />
-      <workItem from="1632724231895" duration="6247000" />
+      <workItem from="1632724231895" duration="16718000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
