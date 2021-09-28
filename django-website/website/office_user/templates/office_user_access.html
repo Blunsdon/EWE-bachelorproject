@@ -9,20 +9,36 @@
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        td, th {
+            border: 2px solid black;
+            text-align: left;
+            padding: 6px;
+        }
+        table{
+            width: 30%;
+            text-align: left;
+            background-color: lightskyblue;
+            border-collapse: collapse;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Facility access</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
     <h1>INFO: Office user facility access page</h1>
-    <h1>BOX: facility access</h1>
-    <h1>BOX: facility X: xx hours</h1>
-    <h1>BOX: facility y: xx hours</h1>
-    <h1>BOX: facility z: xx hours</h1>
+    <table>
+    <tr>
+        <th style="width:70%"> <h3>Facility</h3></th>
+        <th><h3>Access until</h3></th>
+    </tr>
+    {% for i in facility %}
+        <tr>
+        <th style= "background-color: white" > {{ i.facility }}  </th>
+        <th style= "background-color: white" > {{ i.user }} </th>
+        </tr>
+    {% endfor %}
+    </table>
     <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </body>
