@@ -4,27 +4,69 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
     <meta charset="UTF-8">
     <title>Personal info</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Office user personal info page</h1>
-    <h1>BOX: Name</h1>
-    <h1>BOX: Phone with Edit</h1>
-    <h1>BOX: Email with Edit</h1>
-    <h1>BOX: Company</h1>
-    <h1>BOX: Password with Edit</h1>
-    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+ <br><br><br><br><br><br><br><br>
+        <fieldset>
+        <legend>Personal info</legend>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="name"; >Name:</label></td>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <td><label for="Company"; >Company:</label></td>
+                    <td>{{ company }}</td>
+                </tr>
+                <tr>
+                    <td><label for="phoneNumber"; >Phone number:</label></td>
+                    <td><input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{6,20}" value={{ phoneNumber }}></td>
+                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+                <tr>
+                    <td><label for="email"; >Email:</label></td>
+                    <td><input type="email" id="email" name="email"  value={{ email }} ></td>
+                    <td><button  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
+                </tr>
+            </table>
+        </form>
+            <table>
+                <tr>
+                    <td><label for="password"; ><span style="padding-right:32px">Password:</span></label>  </td>
+                    <td> <span style="padding-right:45px">**** **** ****</span> </td>
+                    <td> <button onClick="document.location.href = '../office_user_change_password/'"  style="padding: 4px; width: 40px; background-color:
+    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit </button></td>
+                </tr>
+            </table>
+        <br><br>
+            <button onClick="document.location.href = '../'" style="padding: 14px; width: 100px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 16px">back</button>
+        </fieldset>
 </body>
 </html>

@@ -20,4 +20,6 @@ urlpatterns = [
     path('facility/facility_add/', views.facility_add, name="facility_add"),
     path('facility/facility_edit/', views.facility_edit, name="facility_edit"),
     path('facility/facility_remove/', views.facility_remove, name="facility_remove"),
+    path('edit_user_error/', views.edit_user_error, name="office_user_edit_error"),
+    path('office_user_change_password/', views.office_user_change_password, name="office_user_change_password"),
 ]
