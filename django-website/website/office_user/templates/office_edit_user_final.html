@@ -27,41 +27,31 @@
                 <tr>
                     <td><label for="name"; >Name:</label></td>
                     <td><input type="text" id="name" name="name" value={{ user.name }}></td>
-                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
-                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
                 </tr>
                 <tr>
                     <td><label for="company"; >Company:</label></td>
                     <td><input type="text" id="company" name="company" value={{ user.company }}></td>
-                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
-                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
                 </tr>
                 <tr>
                     <td><label for="phoneNumber"; >Phone number:</label></td>
                     <td><input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{6,20}" value={{ user.phoneNumber }}></td>
-                    <td><button onclick="" style="padding: 4px; width: 40px; background-color:
-                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
                 </tr>
                 <tr>
                     <td><label for="email"; >Email:</label></td>
                     <td><input type="email" id="email" name="email"  value={{ user.email }} ></td>
-                    <td><button  style="padding: 4px; width: 40px; background-color:
-                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td>
                 </tr>
                 <tr>
                     <!-- Update to become functional -->
                     <td><label for="password"; >Password:</label></td>
                     <td> **** **** **** </td>
-                    <td> <!-- <button  style="padding: 4px; width: 40px; background-color:
-                    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td> -->
                 </tr>
                 <tr>
                     <!-- Update to become functional -->
-                    <td><label for="userType"; >Password:</label></td>
+                    <td><label for="userType"; >User type:</label></td>
                     <td> {{ user.userType }} </td>
-                    <td> <!-- <button  style="padding: 4px; width: 40px; background-color:
-                    lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit</button></td> -->
                 </tr>
+                <td><br><button  style="padding: 4px; width: 150px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 18px">Accept edits</button></td>
             </table>
         <br>
         <br>
@@ -70,28 +60,29 @@
     {% if user.userType == "Field user" %}
         <form action={% url 'upgrade_field_user' %}>
         {%  csrf_token %}
-            <button type="submit" name="upgrade_user" value={{ user.email }}>Upgrade user</button>
+            <button type="submit" name="upgrade_user" value='{{ user.email }}'
+                    style="padding: 16px; width: 200px; background-color:
+                    darkblue; color:aliceblue; border-radius: 8px; font-size: 18px;">
+            Upgrade user</button>
     <br>
     <br>
         </form>
     {% endif %}
 
-    <form action={% url 'office_edit_user_final'  %}>
-    {% csrf_token %}
-        <select name="users_list">
-            {% for val in users %}
-                <option value="None" selected hidden>Choose user</option>
-                <option value={{ val.email }}> {{ val.name }} </option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Edit user">
-    </form>
-
+    {% if user.userType == "Field user" %}
+        <form action={% url 'delete_field_user' %}>
+        {%  csrf_token %}
+            <button type="submit" name="delete_user" value='{{ user.email }}'
+                    style="padding: 16px; width: 200px; background-color:
+                    darkblue; color:aliceblue; border-radius: 8px; font-size: 18px;">
+            Delete user</button>
+    <br>
+    <br>
+        </form>
+    {% endif %}
 
     <button onClick="document.location.href = '../office_edit_user'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
-    <button style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Delete user</button>
 
 </body>
 </html>

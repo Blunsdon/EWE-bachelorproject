@@ -7,8 +7,31 @@ from website.forms import *
 from website.models import *
 
 
+# used for custom decorator
+from functools import wraps
+
+# custom decorator
+def user_controller(function):
+    """
+    Checks the user type, and redirects if wrong type
+
+    :param function:
+    :return:
+    """
+    @wraps(function)
+    def wrap(request, *args, **kwargs):
+        usertype = request.user.userType
+        if usertype == "Admin" or usertype == "Field user":
+            return function(request, *args, **kwargs)
+        else:
+            return redirect('field_user_home')
+
+    return wrap
+
+
 "Home page for field user"
 @login_required
+@user_controller
 def field_user_home(request):
 
     return render(request, "field_user_home.html")
@@ -16,6 +39,7 @@ def field_user_home(request):
 
 "Personal information page for field user"
 @login_required
+@user_controller
 def field_user_info(request):
     """Takes changes from user input and saves it"""
     if request.method == 'POST':
@@ -37,6 +61,7 @@ def field_user_info(request):
 
 "field user facility access view"
 @login_required
+@user_controller
 def field_user_access(request):
     name = request.user.name
     facility = JoinTable.objects.filter(user__name=name)
@@ -44,6 +69,7 @@ def field_user_access(request):
     return render(request, "field_user_access.html", context)
 
 @login_required
+@user_controller
 def edit_user_error(request):
 
     return render(request, "edit_user_error.html")
