@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
-from .models import Users, JoinTableUser, JoinTableFacility
+from .models import Users, JoinTable
 
 
 
@@ -30,5 +30,5 @@ class EditFieldUser(ModelForm):
 
 class FacilityAccessJoinTable(ModelForm):
     class Meta:
-        model = JoinTableUser
+        model = JoinTable
         fields = ('user', 'facility')

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import Users, Facilities, Logs, JoinTableFacility, JoinTableUser
+from .models import Users, Facilities, Logs, JoinTable
 
 
 class CustomUserAdmin(UserAdmin):
@@ -70,8 +70,7 @@ admin.site.register(Users, CustomUserAdmin)
 # These use Djangos standard templates
 admin.site.register(Logs)
 admin.site.register(Facilities)
-admin.site.register(JoinTableUser)
-admin.site.register(JoinTableFacility)
+admin.site.register(JoinTable)
 
 # Remove group field on admin site
 admin.site.unregister(Group)

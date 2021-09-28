@@ -72,22 +72,15 @@ class Logs(models.Model):
     facilityName = models.CharField(max_length=80)
 
 
-"Join tables:"
-class JoinTableUser(models.Model):
+"Join table:"
+class JoinTable(models.Model):
     """
-    Model for join table from user->facilities.
+    Model for join table.
     """
     id = models.AutoField(primary_key=True)
-    facility = models.OneToOneField(Facilities, on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
+    facility = models.ForeignKey('Facilities', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     user = models.ForeignKey('Users', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
 
 
-class JoinTableFacility(models.Model):
-    """
-    Model for join table from facility->users.
-    """
-    id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(Users, on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
-    facility = models.ForeignKey('Facilities', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
 
 
