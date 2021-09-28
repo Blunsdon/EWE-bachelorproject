@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from pytz import unicode
+
 
 from website.forms import *
+from website.models import *
 
 # Create your views here.
 
@@ -17,11 +18,9 @@ def field_user_home(request):
 @login_required
 def field_user_info(request):
     if request.method == 'POST':
-        print('iam posting')
         form = EditFieldUser(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            print('Should be saved')
             return redirect('/field_user_home')
         else:
             return redirect('/field_user_home/edit_user_error')
@@ -33,10 +32,14 @@ def field_user_info(request):
     dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company, 'password': password}
     return render(request, "field_user_info.html", dict)
 
+
+"field user facility access view"
 @login_required
 def field_user_access(request):
-
-    return render(request, "field_user_access.html")
+    name = request.user.name
+    facility = JoinTableUser.objects.filter(user__name=name)
+    context = {'facility': facility}
+    return render(request, "field_user_access.html", context)
 
 @login_required
 def edit_user_error(request):
