@@ -246,6 +246,7 @@ def facility_remove(request):
 
 
 @login_required
+@user_controller
 def edit_user_error(request):
 
     return render(request, "edit_user_error.html")
@@ -253,6 +254,7 @@ def edit_user_error(request):
 
 "office user password change"
 @login_required
+@user_controller
 def office_user_change_password(request):
     """ Uses Django API """
     if request.method == 'POST':
