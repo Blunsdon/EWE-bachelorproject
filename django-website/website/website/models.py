@@ -80,7 +80,7 @@ class JoinTable(models.Model):
     id = models.AutoField(primary_key=True)
     facility = models.ForeignKey('Facilities', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     user = models.ForeignKey('Users', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
-    timer = models.CharField(max_length=80, null=True, db_constraint=False, blank=True)
+    timer = models.CharField(max_length=80, null=True, blank=True)
 
 
 class CreateUserCode(models.Model):
