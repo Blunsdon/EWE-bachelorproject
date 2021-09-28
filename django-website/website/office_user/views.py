@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
+# used for test
+from django.http import HttpResponse
+
 from website.forms import *
 from website.models import Users
 
@@ -22,39 +25,73 @@ def office_user_access(request):
 
 @login_required
 def office_edit_user(request):
+    # Dummy parameter
     comp = 'comp'
+
+    # Query all unique companies in the database
     company = Users.objects.order_by().values_list('company', flat=True).distinct()
+
+    # No company chosen yet, so query all users in the database
     users = Users.objects.order_by()
+
+    # Company is chosen:
     if request.method == 'POST':
         data = request.POST['company_list']
         if data != "None":
+            # Query database for users, filtered by chosen company
             users = Users.objects.order_by().filter(company=data)
-            print(users.values_list())
-            return render(request, "office_edit_user.html", {'company': company, 'users': users, 'param': data})
+            user_header_text = "Users for: " + str(data)
+            # Render page with filtered users, instead of all users
+            render_dict = {
+                'company': company,
+                'users': users,
+                'param': data,
+                'header_text': user_header_text}
+            return render(request, "office_edit_user.html", render_dict)
 
-    return render(request, "office_edit_user.html", {'company': company, 'users': users, 'param': comp})
+    # Text for a header
+    user_header_text = "All users:"
+
+    # Default render with all companies, and all users
+    render_dict = {
+        'company': company,
+        'users': users,
+        'param': comp,
+        'header_text': user_header_text}
+    return render(request, "office_edit_user.html", render_dict)
 
 @login_required
 def office_edit_user_final(request):
+    # Get user chosen from "office_edit_user"
     data = request.GET['users_list']
+
+    # If there's no user chosen, redirect back to "office_edit_user"
     if data == 'None':
         return redirect("office_edit_user")
 
+    # Make query based on chosen user from "office_edit_user"
     user_choice = Users.objects.get(email=data)
 
+    # Run if statement, if "edit button" is clicked on website
     if request.method == 'POST':
-        print('request succes')
-        form = EditAllUsers(request.POST, instance=user_choice)
+        form = AllUsersFields(request.POST, instance=user_choice)
         print(form)
+        # Save changes to model entry, and redirect to "office_edit_user"
         if form.is_valid():
             form.save()
-            print("save succes")
             return redirect(office_edit_user)
         else:
+            # TODO: Create proper error statement
             print(form.errors.values())
             return redirect('/error')
 
     return render(request, "office_edit_user_final.html", {'user': user_choice})
+
+@login_required
+def upgrade_field_user(request):
+    data = request.GET['upgrade_user']
+    print(data)
+    return HttpResponse('success')
 
 @login_required
 def logs_facility(request):

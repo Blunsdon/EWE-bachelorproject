@@ -23,10 +23,12 @@
     <br>
     <br>
     <!-- BOX-DROPDOWN: company -->
+    <h1>Choose a company</h1>
     <form action={% url 'office_edit_user' %} method="post">
     {% csrf_token %}
         <select name="company_list">
             <option value="None" selected hidden>Choose company</option>
+            <option value="None">All companies</option>
             {% for val in company %}
                 <option value={{ val }}> {{ val }} </option>
             {% endfor %}
@@ -36,6 +38,7 @@
     <br>
 
     <!-- BOX-DROPDOWN: user -->
+    <h1>{{ header_text }}</h1>
     <form action={% url 'office_edit_user_final'  %}>
     {% csrf_token %}
         <select name="users_list">

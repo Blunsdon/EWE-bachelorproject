@@ -15,7 +15,7 @@ class CustomUserChangeForm(UserChangeForm):
         model = Users
         fields = ('email', 'name', 'phoneNumber', 'company', 'userType')
 
-class EditAllUsers(ModelForm):
+class AllUsersFields(ModelForm):
     class Meta:
         model = Users
         fields = ('email', 'name', 'phoneNumber', 'company')

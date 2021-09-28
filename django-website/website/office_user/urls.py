@@ -10,6 +10,7 @@ urlpatterns = [
     path('office_edit_user/', views.office_edit_user, name="office_edit_user"),
     path('office_edit_user/<str:comp>', views.office_edit_user, name="office_edit_user_comp"),
     path('office_edit_user_final/', views.office_edit_user_final, name="office_edit_user_final"),
+    path('office_user_final/upgrade/', views.upgrade_field_user, name="upgrade_field_user"),
     path('logs_facility/', views.logs_facility, name="logs_facility"),
     path('logs_user/', views.logs_user, name="logs_user"),
     path('facility_access/', views.facility_access, name="facility_access"),
