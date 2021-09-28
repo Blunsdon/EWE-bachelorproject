@@ -48,7 +48,7 @@ class CustomUserAdmin(UserAdmin):
                 'phoneNumber',
                 'company',
                 'userType',
-                'password', 'password2',
+                'password1', 'password2',
                 'is_superuser',
                 'is_staff',
             )}),

@@ -32,3 +32,5 @@ class FacilityAccessJoinTable(ModelForm):
     class Meta:
         model = JoinTable
         fields = ('user', 'facility')
+
+
