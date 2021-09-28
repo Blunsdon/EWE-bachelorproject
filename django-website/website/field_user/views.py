@@ -37,7 +37,7 @@ def field_user_info(request):
 @login_required
 def field_user_access(request):
     name = request.user.name
-    facility = JoinTableUser.objects.filter(user__name=name)
+    facility = JoinTable.objects.filter(user__name=name)
     context = {'facility': facility}
     return render(request, "field_user_access.html", context)
 
