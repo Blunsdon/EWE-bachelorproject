@@ -1,5 +1,12 @@
+from django.contrib.auth import update_session_auth_hash, logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+
+from django.contrib import messages
+
+# used for test
+from django.http import HttpResponse
 
 from website.forms import *
 from website.models import Users
@@ -34,14 +41,32 @@ def office_user_home(request):
 @login_required
 @user_controller
 def office_user_info(request):
+    """Takes changes from user input and saves it"""
+    if request.method == 'POST':
+        form = EditFieldUser(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/office_user_home')
+        else:
+            return redirect('/office_user_home/edit_user_error')
+    "Gets user information"
+    name = request.user.name
+    phone = request.user.phoneNumber
+    email = request.user.email
+    company = request.user.company
+    password = request.user.password
+    dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company, 'password': password}
+    return render(request, "office_user_info.html", dict)
 
-    return render(request, "office_user_info.html")
 
+"Facility access view"
 @login_required
 @user_controller
 def office_user_access(request):
-
-    return render(request, "office_user_access.html")
+    name = request.user.name
+    fac = JoinTable.objects.filter(user__name=name)
+    context = {'facility': fac}
+    return render(request, "office_user_access.html", context)
 
 @login_required
 @user_controller
@@ -218,3 +243,28 @@ def facility_edit(request):
 def facility_remove(request):
 
     return render(request, "facility_remove.html")
+
+
+@login_required
+def edit_user_error(request):
+
+    return render(request, "edit_user_error.html")
+
+
+"office user password change"
+@login_required
+def office_user_change_password(request):
+    """ Uses Django API """
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            logout(request)
+            return redirect('/accounts/login/')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "office_user_change_password.html", {'form': form})

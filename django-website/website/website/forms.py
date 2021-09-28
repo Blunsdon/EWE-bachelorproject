@@ -28,9 +28,3 @@ class EditFieldUser(ModelForm):
         fields = ('phoneNumber', 'email')
 
 
-class FacilityAccessJoinTable(ModelForm):
-    class Meta:
-        model = JoinTable
-        fields = ('user', 'facility')
-
-
