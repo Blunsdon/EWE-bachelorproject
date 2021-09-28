@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test" />
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
@@ -129,6 +130,9 @@
       <workItem from="1632313391583" duration="5612000" />
       <workItem from="1632379619702" duration="1269000" />
       <workItem from="1632384546153" duration="9376000" />
+      <workItem from="1632403679699" duration="1700000" />
+      <workItem from="1632726675961" duration="20193000" />
+      <workItem from="1632815662463" duration="10658000" />
       <workItem from="1632403679699" duration="2537000" />
       <workItem from="1632463604403" duration="4336000" />
       <workItem from="1632481622670" duration="11827000" />
