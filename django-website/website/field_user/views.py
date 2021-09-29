@@ -54,8 +54,7 @@ def field_user_info(request):
     phone = request.user.phoneNumber
     email = request.user.email
     company = request.user.company
-    password = request.user.password
-    dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company, 'password': password}
+    dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company}
     return render(request, "field_user_info.html", dict)
 
 
