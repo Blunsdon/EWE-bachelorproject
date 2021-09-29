@@ -23,8 +23,10 @@ def user_controller(function):
         usertype = request.user.userType
         if usertype == "Admin" or usertype == "Field user":
             return function(request, *args, **kwargs)
+        elif usertype == "Office user":
+            return redirect('office_user_home')
         else:
-            return redirect('field_user_home')
+            return redirect('front_page')
 
     return wrap
 

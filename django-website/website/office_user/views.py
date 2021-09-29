@@ -2,6 +2,7 @@ from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseBadRequest
 
 from django.contrib import messages
 
@@ -27,8 +28,10 @@ def user_controller(function):
         usertype = request.user.userType
         if usertype == "Admin" or usertype == "Office user":
             return function(request, *args, **kwargs)
-        else:
+        elif usertype == "Field user":
             return redirect('field_user_home')
+        else:
+            return redirect('front_page')
 
     return wrap
 
@@ -92,6 +95,7 @@ def office_edit_user(request):
         if data != "None":
             # Query database for users, filtered by chosen company
             users = Users.objects.order_by().filter(company=data)
+            print(data)
             user_header_text = "Users for: " + str(data)
             # Render page with filtered users, instead of all users
             render_dict = {
@@ -139,9 +143,7 @@ def office_edit_user_final(request):
             form.save()
             return redirect(office_edit_user)
         else:
-            # TODO: Create proper error statement
-            print(form.errors.values())
-            return redirect('/error')
+            return HttpResponseBadRequest("Couldn't save user input, because of following error/errors: " + str(form.errors))
 
     return render(request, "office_edit_user_final.html", {'user': user_choice})
 

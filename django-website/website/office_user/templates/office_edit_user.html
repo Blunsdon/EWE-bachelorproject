@@ -30,7 +30,7 @@
             <option value="None" selected hidden>Choose company</option>
             <option value="None">All companies</option>
             {% for val in company %}
-                <option value={{ val }}> {{ val }} </option>
+                <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}
         </select>
         <input type="submit" value="Filter">
@@ -44,7 +44,7 @@
         <select name="users_list">
             {% for val in users %}
                 <option value="None" selected hidden>Choose user</option>
-                <option value={{ val.email }}> {{ val.name }} </option>
+                <option value='{{ val.email }}'> {{ val.name }} </option>
             {% endfor %}
         </select>
         <input type="submit" value="Edit user">
