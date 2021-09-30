@@ -5,29 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/website.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/field_user/templates/change_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/office_user/templates/edit_user_error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/office_user/templates/office_user_change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/cron.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/templates/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/templates/create_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_user/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/templates/field_user_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/templates/field_user_access.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/templates/field_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/templates/field_user_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/templates/field_user_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/templates/field_user_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/field_user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_edit_user_final.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_edit_user_final.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_access.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +28,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
+        <option value="HTML File" />
         <option value="Python Script" />
-        <option value="HTML File" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -86,6 +74,9 @@
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\field_user\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\website" />
+      <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\create_user" />
+      <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\office_user" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\website\static\website" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\website\static\css" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\website\static" />
@@ -101,7 +92,26 @@
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\create_user\templates\create_user" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Django Server.website">
+    <configuration name="cron" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="website" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/website" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/website/cron.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="website" type="Python.DjangoServer" factoryName="Django server">
       <module name="website" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,6 +136,11 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.cron" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -157,6 +172,10 @@
       <workItem from="1632757293832" duration="954000" />
       <workItem from="1632814954049" duration="679000" />
       <workItem from="1632818780528" duration="6863000" />
+      <workItem from="1632895478874" duration="8776000" />
+      <workItem from="1632925608419" duration="809000" />
+      <workItem from="1632990172358" duration="13025000" />
+      <workItem from="1633003334020" duration="4028000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
@@ -232,5 +251,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="urls.py commit test" />
     <option name="LAST_COMMIT_MESSAGE" value="urls.py commit test" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/settings_py$cron.coverage" NAME="cron Coverage Results" MODIFIED="1633005434375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
   </component>
 </project>

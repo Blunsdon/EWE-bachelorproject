@@ -3,7 +3,6 @@ from django.forms import ModelForm
 from .models import Users, JoinTable
 
 
-
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = Users
@@ -28,3 +27,7 @@ class EditFieldUser(ModelForm):
         fields = ('phoneNumber', 'email')
 
 
+class CreateNewUserForm(UserCreationForm):
+    class Meta:
+        model = Users
+        fields = ('email', 'name', 'phoneNumber', 'company')

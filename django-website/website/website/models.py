@@ -10,6 +10,8 @@ from .managers import CustomUserManager
 
 
 "For Users:"
+
+
 class Users(AbstractBaseUser, PermissionsMixin):
     """
     Model for users.
@@ -33,7 +35,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
 
-    #set email to be the login "name"
+    # set email to be the login "name"
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'phoneNumber', 'company']
 
@@ -44,6 +46,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 
 "For facilities:"
+
+
 class Facilities(models.Model):
     """
     Model for facilities.
@@ -60,6 +64,8 @@ class Facilities(models.Model):
 
 
 "log"
+
+
 class Logs(models.Model):
     """
     Model for logs.
@@ -73,6 +79,8 @@ class Logs(models.Model):
 
 
 "Join table:"
+
+
 class JoinTable(models.Model):
     """
     Model for join table.
@@ -89,7 +97,3 @@ class CreateUserCode(models.Model):
     """
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=10)
-
-
-
-
