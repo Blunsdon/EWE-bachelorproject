@@ -4,30 +4,70 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
     <meta charset="UTF-8">
     <title>Add facility</title>
 </head>
 <body>
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+<legend>Add facility</legend>
+    <table>
+        {% for key, value in disp_text.items %}
+            <tr>
+                <td style="font-size: 26px; font-weight: bold">{{ key }}</td>
+                <td style="font-size: 26px; font-weight: bold">{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Add facility page</h1><br>
-    <h1>BOX: Name</h1><br>
-    <h1>BOX: Address</h1><br>
-    <h1>BOX: Owner</h1><br>
-    <h1>BOX: Key</h1><br>
-    <br>
-    <button style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create facility</button><br>
-    <br>
+       <form action="" method = "POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="name"; >Name:</label></td>
+                    <td><input type="text" id="name" name="name" required> </td>
+                </tr>
+                <tr>
+                    <td><label for="location"; >Adress:</label></td>
+                    <td><input type="text" id="loication" name="location" required></td>
+                </tr>
+                <tr>
+                    <td><label for="owner"; >Owner:</label></td>
+                    <td><input type="test" id="owner" name="owner" required></td>
+                </tr>
+                <tr>
+                    <td><label for="key"; >Key:</label></td>
+                    <td><input type="key" id="key" name="key" required></td>
+                </tr>
+                <td><br><button  style="padding: 4px; width: 150px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create facility</button></td>
+            </table>
+        <br>
+        </form>
+
     <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button><br>
+</fieldset>
 </body>
 </html>

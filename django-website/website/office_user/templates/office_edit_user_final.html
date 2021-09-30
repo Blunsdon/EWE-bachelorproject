@@ -4,49 +4,58 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
     <meta charset="UTF-8">
     <title>Edit user</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+<legend>Edit user</legend>
     <form action="" method = "POST">
             {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="name"; >Name:</label></td>
-                    <td><input type="text" id="name" name="name" value={{ user.name }}></td>
+                    <td><input type="text" id="name" name="name" value='{{ user.name }}'></td>
                 </tr>
                 <tr>
                     <td><label for="company"; >Company:</label></td>
-                    <td><input type="text" id="company" name="company" value={{ user.company }}></td>
+                    <td><input type="text" id="company" name="company" value='{{ user.company }}'></td>
                 </tr>
                 <tr>
                     <td><label for="phoneNumber"; >Phone number:</label></td>
-                    <td><input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{6,20}" value={{ user.phoneNumber }}></td>
+                    <td><input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{6,20}" value='{{ user.phoneNumber }}'></td>
                 </tr>
                 <tr>
                     <td><label for="email"; >Email:</label></td>
-                    <td><input type="email" id="email" name="email"  value={{ user.email }} ></td>
+                    <td><input type="email" id="email" name="email"  value='{{ user.email }}' ></td>
                 </tr>
                 <tr>
-                    <!-- Update to become functional -->
                     <td><label for="password"; >Password:</label></td>
                     <td> **** **** **** </td>
                 </tr>
                 <tr>
-                    <!-- Update to become functional -->
                     <td><label for="userType"; >User type:</label></td>
                     <td> {{ user.userType }} </td>
                 </tr>
@@ -74,7 +83,7 @@
         {%  csrf_token %}
             <button type="submit" name="delete_user" value='{{ user.email }}'
                     style="padding: 16px; width: 200px; background-color:
-                    darkblue; color:aliceblue; border-radius: 8px; font-size: 18px;">
+                    brown; color:aliceblue; border-radius: 8px; font-size: 18px;">
             Delete user</button>
     <br>
     <br>
@@ -83,6 +92,6 @@
 
     <button onClick="document.location.href = '../office_edit_user'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
-
+</fieldset>
 </body>
 </html>

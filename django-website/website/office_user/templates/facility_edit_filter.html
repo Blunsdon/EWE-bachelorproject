@@ -25,43 +25,45 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Edit user</title>
+    <title>Edit facility filter</title>
 </head>
 <body>
 <br><br><br><br><br><br><br><br>
-
 <fieldset>
-    <!-- BOX-DROPDOWN: company -->
-    <h1>Choose a company</h1>
-    <form action={% url 'office_edit_user' %} method="post">
+
+    <!-- BOX-DROPDOWN: adress -->
+    <h1>Choose an adress</h1>
+    <form action={% url 'facility_edit_filter' %} method="post">
     {% csrf_token %}
-        <select name="company_list">
-            <option value="None" selected hidden>Choose company</option>
-            <option value="None">All company</option>
-            {% for val in company %}
+        <select name="location_list">
+            <option value="None" selected hidden>Choose adress</option>
+            <option value="None">All adresses</option>
+            {% for val in location %}
                 <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}
         </select>
-        <input type="submit" value="Filter" style="width: 170px">
+        <input type="submit" value="Filter" style="width: 200px">
     </form>
     <br>
 
-    <!-- BOX-DROPDOWN: user -->
+    <!-- BOX-DROPDOWN: names -->
     <h1>{{ header_text }}</h1>
-    <form action={% url 'office_edit_user_final'  %}>
+    <form action={% url 'facility_edit'  %}>
     {% csrf_token %}
-        <select name="users_list" style="width: 40%">
-            {% for val in users %}
-                <option value="None" selected hidden>Choose user</option>
-                <option value='{{ val.email }}'> {{ val.name }} </option>
+        <select name="names_list">
+            {% for val in names %}
+                <option value="None" selected hidden>Choose facility</option>
+                <option value='{{ val.name }}'> {{ val.name }} </option>
             {% endfor %}
         </select>
-        <input type="submit" value="Edit user" style="width: 170px">
+        <input type="submit" value="Edit facility" style="width: 200px">
     </form>
 
     <br>
     <br>
-    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
+    <br>
+    <br>
+    <button onClick="location.href = '{% url 'facility' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </fieldset>
 </body>

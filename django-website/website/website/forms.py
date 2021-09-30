@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
-from .models import Users, JoinTable
+from .models import *
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -20,12 +20,21 @@ class AllUsersFields(ModelForm):
         model = Users
         fields = ('email', 'name', 'phoneNumber', 'company')
 
+class AllFacilityFields(ModelForm):
+    class Meta:
+        model = Facilities
+        fields = ('name', 'location', 'owner', 'key')
+
         
 class EditFieldUser(ModelForm):
     class Meta:
         model = Users
         fields = ('phoneNumber', 'email')
 
+class AddFacility(ModelForm):
+    class Meta:
+        model = Facilities
+        fields = ('name', 'location', 'owner', 'key')
 
 class CreateNewUserForm(UserCreationForm):
     class Meta:

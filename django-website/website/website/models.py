@@ -54,7 +54,7 @@ class Facilities(models.Model):
     """
     id = models.AutoField(primary_key=True)
 
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=80, unique=True)
     location = models.CharField(max_length=120)
     owner = models.CharField(max_length=80)
     key = models.CharField(max_length=200)
