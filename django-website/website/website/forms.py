@@ -3,7 +3,6 @@ from django.forms import ModelForm
 from .models import *
 
 
-
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = Users
@@ -36,3 +35,8 @@ class AddFacility(ModelForm):
     class Meta:
         model = Facilities
         fields = ('name', 'location', 'owner', 'key')
+
+class CreateNewUserForm(UserCreationForm):
+    class Meta:
+        model = Users
+        fields = ('email', 'name', 'phoneNumber', 'company')

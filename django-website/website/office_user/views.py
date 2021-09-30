@@ -10,10 +10,11 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 from website.forms import *
-from website.models import Users
+from website.models import Users, CreateUserCode
 
 # used for custom decorator
 from functools import wraps
+
 
 # custom decorator
 def user_controller(function):
@@ -39,7 +40,15 @@ def user_controller(function):
 @login_required
 @user_controller
 def office_user_home(request):
-    return render(request, "office_user_home.html")
+    """
+    Gets create user code
+    :param request:
+
+    :return:
+    """
+    cuc = CreateUserCode.objects.get(id=1)
+    cu = cuc.code
+    return render(request, "office_user_home.html", {'cu': cu})
 
 @login_required
 @user_controller
@@ -57,8 +66,7 @@ def office_user_info(request):
     phone = request.user.phoneNumber
     email = request.user.email
     company = request.user.company
-    password = request.user.password
-    dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company, 'password': password}
+    dict = {'name': name, 'email': email, 'phoneNumber': phone, 'company': company}
     return render(request, "office_user_info.html", dict)
 
 
