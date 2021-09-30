@@ -9,6 +9,16 @@
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 35%;
+            margin-right: 35%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Create user page</title>
@@ -19,19 +29,36 @@
     <br>
     <br>
     <h1>INFO: Create user page</h1>
-    <h1>BOX: Name</h1>
-    <h1>BOX: Phone</h1>
-    <h1>BOX: Email</h1>
-    <h1>BOX: Company</h1>
-    <h1>BOX: Password</h1>
-    <h1>BOX: Create user code</h1>
     <h1>INFO: Important!!
         first time login finger scan is needed</h1>
-    <br>
-    <button onClick="document.location.href = '../accounts/login'" style="padding: 16px; width: 200px; background-color:
+    <h1>INFO: Create user code </h1>
+  <form method="post">
+    {% csrf_token %}
+      <fieldset>
+        <legend>Create new user</legend>
+            <table>
+                <tr>
+                    <td><label style="" >Create user code:</label></td>
+                    <td><input type="text" id="CreateUserCode" name="CreateUserCode"  value={{ CreateUserCode }} ></td>
+                </tr>
+                {% for field in form %}
+                    <tr>
+                    <td>{{ field.label_tag }}</td> <td>{{ field }}</td>
+                    {% if field.help_text %}
+                      <tr><td><small style="color: black">{{ field.help_text }}</small></td></tr>
+                    {% endif %}
+                    {% for error in field.errors %}
+                      <td><p style="color: red">{{ error }}</p></td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+      <br>
+          <button onClick="document.location.href = '../accounts/login'" style="padding: 8px; width: 100px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
-    <button onClick="document.location.href = '../create_user/'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Create user</button>
-
+          <button style="padding: 8px; width: 100px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" type="submit">Sign up</button>
+      </fieldset>
+  </form>
 </body>
 </html>
