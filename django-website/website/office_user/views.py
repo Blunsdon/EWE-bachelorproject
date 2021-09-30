@@ -141,7 +141,7 @@ def office_edit_user_final(request):
         # Save changes to model entry, and redirect to "office_edit_user"
         if form.is_valid():
             form.save()
-            return redirect(office_edit_user)
+            return redirect('office_edit_user')
         else:
             return HttpResponseBadRequest("Couldn't save user input, because of following error/errors: " + str(form.errors))
 
@@ -231,20 +231,194 @@ def facility(request):
 @login_required
 @user_controller
 def facility_add(request):
+    """
+    This funtion is for adding a new facility to the database
 
-    return render(request, "facility_add.html")
+    :param request:
+    :return:
+    """
+
+    # Initial "welcome" text
+    disp_text = {'': ''}
+
+    if request.method == 'POST':
+        form = AddFacility(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('facility')
+        else:
+            # error text and formatting, for changing "welcome" text
+            disp_text = {"Errors": ""}
+            error_text = form.errors.as_data()
+            for key, value in error_text.items():
+                for items in value:
+                    for item in items:
+                        disp_text["Field " + str(key) + ":"] = item
+            return render(request, "facility_add.html", {'disp_text': disp_text})
+
+    return render(request, "facility_add.html", {'disp_text': disp_text})
+
+@login_required
+@user_controller
+def facility_edit_filter(request):
+    """
+    Function for choosing a facility
+
+    :param request:
+    :return:
+    """
+    # Dummy parameter
+    comp = 'comp'
+
+    # Query all unique companies in the database
+    location = Facilities.objects.order_by().values_list('location', flat=True).distinct()
+
+    # No company chosen yet, so query all users in the database
+    names = Facilities.objects.order_by()
+
+    # Company is chosen:
+    if request.method == 'POST':
+        data = request.POST['location_list']
+        if data != "None":
+            # Query database for users, filtered by chosen company
+            names = Facilities.objects.order_by().filter(location=data)
+            print(data)
+            user_header_text = "Facilities for: " + str(data)
+            # Render page with filtered users, instead of all users
+            render_dict = {
+                'location': location,
+                'names': names,
+                'param': data,
+                'header_text': user_header_text}
+            return render(request, "facility_edit_filter.html", render_dict)
+
+    # Text for a header
+    user_header_text = "All facilities:"
+
+    # Default render with all companies, and all users
+    render_dict = {
+        'location': location,
+        'names': names,
+        'param': comp,
+        'header_text': user_header_text}
+    return render(request, "facility_edit_filter.html", render_dict)
 
 @login_required
 @user_controller
 def facility_edit(request):
+    """
+    This funtion is for editing facilities in the database
 
-    return render(request, "facility_edit.html")
+    :param request:
+    :return:
+    """
+
+    # Get facility chosen from "facility_edit_filter"
+    data = request.GET['names_list']
+
+    # If there's no user chosen, redirect back to "office_edit_user"
+    if data == 'None':
+        return redirect("facility_edit_filter")
+
+    # Make query based on chosen user from "office_edit_user"
+    facility_choice = Facilities.objects.get(name=data)
+
+    # Run if statement, if "edit button" is clicked on website
+    if request.method == 'POST':
+        form = AllFacilityFields(request.POST, instance=facility_choice)
+        # Save changes to model entry, and redirect to "office_edit_user"
+        if form.is_valid():
+            form.save()
+            return redirect('facility_edit_filter')
+        else:
+            # error text and formatting, for changing "welcome" text
+            disp_text = {"Errors": ""}
+            error_text = form.errors.as_data()
+            for key, value in error_text.items():
+                for items in value:
+                    for item in items:
+                        disp_text["Field " + str(key) + ":"] = item
+            dict = {
+                'name': facility_choice,
+                'disp_text': disp_text
+            }
+            return render(request, "facility_edit.html", dict)
+
+    # Initial "welcome" text
+    disp_text = {'': ''}
+
+    dict = {
+        'name': facility_choice,
+        'disp_text': disp_text
+    }
+
+    return render(request, "facility_edit.html", dict)
+
+@login_required
+@user_controller
+def facility_remove_filter(request):
+    """
+    Function for choosing a facility
+
+    :param request:
+    :return:
+    """
+    # Dummy parameter
+    comp = 'comp'
+
+    # Query all unique companies in the database
+    location = Facilities.objects.order_by().values_list('location', flat=True).distinct()
+
+    # No company chosen yet, so query all users in the database
+    names = Facilities.objects.order_by()
+
+    # Company is chosen:
+    if request.method == 'POST':
+        data = request.POST['location_list']
+        if data != "None":
+            # Query database for users, filtered by chosen company
+            names = Facilities.objects.order_by().filter(location=data)
+            print(data)
+            user_header_text = "Facilities for: " + str(data)
+            # Render page with filtered users, instead of all users
+            render_dict = {
+                'location': location,
+                'names': names,
+                'param': data,
+                'header_text': user_header_text}
+            return render(request, "facility_remove_filter.html", render_dict)
+
+    # Text for a header
+    user_header_text = "All facilities:"
+
+    # Default render with all companies, and all users
+    render_dict = {
+        'location': location,
+        'names': names,
+        'param': comp,
+        'header_text': user_header_text}
+    return render(request, "facility_remove_filter.html", render_dict)
 
 @login_required
 @user_controller
 def facility_remove(request):
+    # Get facility chosen from "facility_edit_filter"
+    data = request.GET['names_list']
 
-    return render(request, "facility_remove.html")
+    # If there's no user chosen, redirect back to "office_edit_user"
+    if data == 'None':
+        return redirect("facility_edit_filter")
+
+    # Make query based on chosen user from "office_edit_user"
+    facility_choice = Facilities.objects.get(name=data)
+
+    # Run if statement, if "edit button" is clicked on website
+    if request.method == 'POST':
+        facility_choice.delete()
+        return redirect('facility_remove_filter')
+
+
+    return render(request, "facility_remove.html", {'facility_choice': facility_choice})
 
 
 @login_required

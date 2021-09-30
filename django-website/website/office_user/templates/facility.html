@@ -4,32 +4,53 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
     </style>
     <meta charset="UTF-8">
     <title>Facility page</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
+<br><br><br><br><br><br><br><br>
+<fieldset>
+<legend>Add/Edit/Remove facilities</legend>
     <h1>INFO: Facility page</h1>
-    <button onClick="document.location.href = 'facility_add/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility_add' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add facility</button>
     <br>
-    <button onClick="document.location.href = 'facility_edit/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility_edit_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility</button>
     <br>
-    <button onClick="document.location.href = 'facility_remove/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility_remove_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Remove facility</button>
+    <br>
+    <br>
     <br>
     <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
-
+</fieldset>
 </body>
 </html>
