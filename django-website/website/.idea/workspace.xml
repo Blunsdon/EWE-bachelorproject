@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85ebff88-d1bb-4d43-b2e2-9d806c2e81c9" name="Default Changelist" comment="" />
+    <list default="true" id="85ebff88-d1bb-4d43-b2e2-9d806c2e81c9" name="Default Changelist" comment="urls.py commit test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_add.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/logs_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/logs_user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/models.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,7 +144,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="" />
+      <changelist id="85ebff88-d1bb-4d43-b2e2-9d806c2e81c9" name="Default Changelist" comment="urls.py commit test" />
       <created>1631693058778</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -168,6 +176,7 @@
       <workItem from="1632925608419" duration="809000" />
       <workItem from="1632990172358" duration="13025000" />
       <workItem from="1633003334020" duration="4028000" />
+      <workItem from="1633332240554" duration="17294000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
@@ -233,7 +242,19 @@
         </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/website---fac-logs---jan" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

@@ -4,30 +4,62 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            alignment: center;
+            width: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        table, th, td {
+            margin-left: auto;
+            margin-right: auto;
+            alignment: center;
+            border: 1px solid black;
+        }
+        th, td {
+            width: 30%;
         }
     </style>
     <meta charset="UTF-8">
     <title>User logs</title>
 </head>
 <body>
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+    <table>
+        <tr>
+            <th>facility</th>
+            <th>Date and time</th>
+        </tr>
+        {% for val in data %}
+            <tr>
+                <td>{{ val.facilityName }}</td>
+                <td>{{ val.dateTime }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <br>
     <br>
     <br>
     <br>
-    <h1>INFO: User logs</h1>
-    <br>
-    <br>
-    <h1>BOX-DROPDOWN: Company</h1>
-    <h1>BOX-DROPDOWN: User</h1>
-    <h1>BOX-DROPDOWN: Facility</h1>
-    <h1>INFO: Date and time </h1>
-    <br>
-    <br>
-    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+    <button onClick="location.href = '{% url 'logs_user_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px;">back</button>
+</fieldset>
 </body>
 </html>
