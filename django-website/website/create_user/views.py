@@ -1,9 +1,6 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from website.models import Users, CreateUserCode
 from website.forms import CreateNewUserForm
-
 
 
 def create_user(request):

@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 from website.forms import *
-from website.models import Users, CreateUserCode
+from website.models import Users, CreateUserCode, JoinTable
 
 # used for custom decorator
 from functools import wraps
@@ -36,7 +36,7 @@ def user_controller(function):
 
     return wrap
 
-# Create your views here.
+
 @login_required
 @user_controller
 def office_user_home(request):
@@ -220,9 +220,121 @@ def facility_access(request):
 
 @login_required
 @user_controller
-def facility_access_give(request):
+def facility_access_give_filter(request):
+    """
+    Function for choosing a facility
 
-    return render(request, "facility_access_give.html")
+    :param request:
+    :return:
+    """
+    # Dummy parameter
+    comp = 'comp'
+
+    # Query all unique companies in the database
+    location = Facilities.objects.order_by().values_list('location', flat=True).distinct()
+
+    # No company chosen yet, so query all users in the database
+    names = Facilities.objects.order_by()
+
+    # Company is chosen:
+    if request.method == 'POST':
+        data = request.POST['location_list']
+        if data != "None":
+            # Query database for users, filtered by chosen company
+            names = Facilities.objects.order_by().filter(location=data)
+            print(data)
+            user_header_text = "Facilities for: " + str(data)
+            # Render page with filtered users, instead of all users
+            render_dict = {
+                'location': location,
+                'names': names,
+                'param': data,
+                'header_text': user_header_text}
+            return render(request, "facility_access_give_filter.html", render_dict)
+
+    # Text for a header
+    user_header_text = "All facilities:"
+
+    # Default render with all companies, and all users
+    render_dict = {
+        'location': location,
+        'names': names,
+        'param': comp,
+        'header_text': user_header_text}
+    return render(request, "facility_access_give_filter.html", render_dict)
+
+
+@login_required
+@user_controller
+def facility_access_give(request):
+    """
+    Function for giving a user access to a facility
+
+    :param request:
+    :return:
+    """
+    # Get facility chosen from "facility_edit_filter"
+    data = request.GET['names_list']
+
+    # Query all Users in the database
+    all_user = Users.objects.order_by('name')
+
+    # If there's no user chosen, redirect back to "office_edit_user"
+    if data == 'None':
+        return redirect("facility_access_give_filter")
+
+    # Make query based on chosen user from "office_access_give_filter"
+    facility_choice = Facilities.objects.get(name=data)
+    # Run if statement, if "edit button" is clicked on website
+    if request.method == 'POST':
+        access = JoinTable()
+        # get User object from unique Email
+        access.user = Users.objects.get(email=request.POST['user'])
+        # get facility info
+        access.facility = Facilities.objects.get(name=facility_choice.name)
+        # get date info
+        access.timer_start = request.POST['timer_start']
+        access.timer = request.POST['timer']
+        # check if date is ok
+        if access.timer < access.timer_start:
+            print("Im here in error")
+            return redirect('access_time_error')
+        else:
+            # Try rewrite timer if the access to same user and facility is already given
+            try:
+                access_exist = JoinTable.objects.get(user=access.user, facility=access.facility)
+                # Get object
+                access_exist_obj = JoinTable.objects.get(pk=access_exist.pk)
+                print(access_exist.pk)
+                access_exist_obj.timer = request.POST['timer']
+                access_exist_obj.timer_start = request.POST['timer_start']
+                access_exist_obj.save()
+                return redirect('facility_access')
+            except JoinTable.DoesNotExist:
+                # Save
+                access.save()
+                return redirect('facility_access')
+    # Initial "welcome" text
+    disp_text = {'': ''}
+
+    dict = {
+        'name': facility_choice,
+        'disp_text': disp_text,
+        'users': all_user
+    }
+    return render(request, "facility_access_give.html", dict)
+
+
+@login_required
+@user_controller
+def access_time_error(request):
+    """
+    Return error message
+    :param request:
+    :return:
+    """
+    return render(request, "access_time_error.html")
+
 
 @login_required
 @user_controller
