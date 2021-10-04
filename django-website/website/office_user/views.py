@@ -202,27 +202,101 @@ def delete_field_user(request):
 @login_required
 @user_controller
 def logs_facility(request):
+    facility_chosen = request.GET['facilities_list']
+    # Retrive data object for display
+    if '&' not in facility_chosen:
+        return redirect('logs_facility_filter')
+    else:
+        list = facility_chosen.split("&", 1)
+        data = Logs.objects.all().filter(facilityLocation=list[0]).filter(facilityName=list[1])
 
-    return render(request, "logs_facility.html")
+    dict = {
+        'data': data,
+        'location': list[0],
+        'fac': list[1]
+    }
+    return render(request, "logs_facility.html", dict)
 
 @login_required
 @user_controller
 def logs_facility_filter(request):
 
-    return render(request, "logs_facility_filter.html")
+    # Query all unique facilities in the database
+    facility_locations = []
+
+    facility_locations_fq = Facilities.objects.order_by().values_list('location', flat=True).distinct()
+    facility_locations_lq = Logs.objects.order_by().values_list('facilityLocation', flat=True).distinct()
+    for vals in facility_locations_fq:
+        facility_locations.append(vals)
+    for vals in facility_locations_lq:
+        if vals not in facility_locations:
+            facility_locations.append(vals)
+
+
+    # No facility location chosen yet, so query all facilities in the database
+    facilities = {}
+    try:
+        facilities_fq = Facilities.objects.all()
+        for vals in facilities_fq:
+            facilities[vals.location] = vals.name
+    except:
+        pass
+    try:
+        facilities_lq = Logs.objects.all()
+        for vals in facilities_lq:
+            if vals not in facilities:
+                facilities[vals.facilityLocation] = vals.facilityName
+    except:
+        pass
+
+    # Company is chosen:
+    if request.method == 'POST':
+        data = request.POST['fac_loc_list']
+        if data != "None":
+            # Query database for users, filtered by chosen company
+            facilities = {}
+            try:
+                facilities_fq = Facilities.objects.order_by().filter(location=data)
+                for vals in facilities_fq:
+                    facilities[vals.location] = vals.name
+            except:
+                pass
+            try:
+                facilities_lq = Logs.objects.order_by().filter(facilityLocation=data)
+                for vals in facilities_lq:
+                    facilities[vals.facilityLocation] = vals.facilityName
+            except:
+                pass
+
+            user_header_text = "Facilities on: " + str(data)
+            # Render page with filtered users, instead of all users
+            render_dict = {
+                'facility_locs': facility_locations,
+                'facilities': facilities,
+                'param': data,
+                'header_text': user_header_text}
+            return render(request, "logs_facility_filter.html", render_dict)
+
+    # Text for a header
+    user_header_text = "All facilities:"
+
+    # Default render with all companies, and all users
+    render_dict = {
+        'facility_locs': facility_locations,
+        'facilities': facilities,
+        'header_text': user_header_text}
+    return render(request, "logs_facility_filter.html", render_dict)
 
 @login_required
 @user_controller
 def logs_user(request):
     facility_chosen = request.GET['facility_list']
-    print(facility_chosen)
 
     # Retrive data object for display
     if '&' not in facility_chosen:
         data = Logs.objects.all().filter(userEmail=facility_chosen)
     else:
         list = facility_chosen.split("&", 1)
-        print(list)
         data = Logs.objects.all().filter(userEmail=list[1]).filter(facilityName=list[0])
 
     return render(request, "logs_user.html", {'data': data})
@@ -263,80 +337,92 @@ def logs_user_filter(request):
         if vals not in user_chosen:
             user_chosen[vals.userEmail] = vals.userName
 
-    print(user_chosen)
-    # No user chosen yet, so facility is "blank"
-    facility_chosen = "none"
-
     is_user_chosen = "false"
 
     # Company is chosen:
     if request.method == 'POST':
 
         if 'DC' in request.POST:
-            company_comp = request.POST['company_list']
-            if company_comp != "None":
+            if request.POST['company_list'] != "None":
+                #no user chosen yet
                 is_user_chosen = "false"
-                # Query database for users, filtered by chosen company
-                user_chosen_uq = Users.objects.order_by().filter(company=company_comp)
-                user_chosen = {}
-                for vals in user_chosen_uq:
-                    user_chosen[vals.email] = vals.name
 
-                if not user_chosen:
-                    user_chosen_lq = Logs.objects.order_by().filter(companyName=company_comp)
+                # Query database for users, filtered by chosen company
+                user_chosen = {}
+                try:
+                    user_chosen_uq = Users.objects.order_by().filter(company=request.POST['company_list'])
+                    for vals in user_chosen_uq:
+                        user_chosen[vals.email] = vals.name
+                except:
+                    pass
+                try:
+                    user_chosen_lq = Logs.objects.order_by().filter(companyName=request.POST['company_list'])
                     for vals in user_chosen_lq:
                         user_chosen[vals.userEmail] = vals.userName
+                except:
+                    pass
 
-                user_header_text = "Users for: " + str(company_comp)
+                # Set header text
+                user_header_text = "Users for: " + str(request.POST['company_list'])
+
                 # Render page with filtered users, instead of all users
                 render_dict = {
                     'company_chosen': company_chosen,
                     'user_chosen': user_chosen,
-                    'facility': facility_chosen,
                     'iuc': is_user_chosen,
                     'header_text': user_header_text}
                 return render(request, "logs_user_filter.html", render_dict)
 
         elif 'DU' in request.POST:
-            is_user_chosen = "true"
-            # Get chosen user info
-            try:
-                print('try')
-                user_info = Users.objects.get(email=request.POST['user_list'])
-                user_email = user_info.email
-                company_comp = user_info.company
-                facility_chosen = Logs.objects.order_by().filter(userEmail=user_info.email).values_list('facilityName', flat=True).distinct()
-                user_header_text2 = "Facilities for: " + str(user_info.name)
-            except:
-                print('except')
-                user_info = Logs.objects.get(userEmail=request.POST['user_list'])
-                user_email = user_info.userEmail
-                company_comp = user_info.companyName
-                facility_chosen = Logs.objects.order_by().filter(userEmail=user_info.userEmail).values_list('facilityName', flat=True).distinct()
-                user_header_text2 = "Facilities for: " + str(user_info.userName)
+            if request.POST['user_list'] != 'None':
+                # user is chosen
+                is_user_chosen = "true"
 
-            # Get chosen user/users
-            user_chosen_uq = Users.objects.order_by().filter(company=company_comp)
-            user_chosen = {}
-            for vals in user_chosen_uq:
-                user_chosen[vals.email] = vals.name
+                # Query database for facilites, filtered by chosen user
+                 # Try: query in existing user
+                 # exception: query in Logs for user
+                try:
+                    # query for user and facility
+                    user_info = Users.objects.get(email=request.POST['user_list'])
+                    facility_chosen = Logs.objects.order_by().filter(userEmail=user_info.email).values_list('facilityName', flat=True).distinct()
 
-            if not user_chosen:
-                user_chosen_lq = Logs.objects.order_by().filter(companyName=company_comp)
-                for vals in user_chosen_lq:
-                    user_chosen[vals.userEmail] = vals.userName
+                    # Holders for information
+                    user_email = user_info.email
+                    company_comp = user_info.company
+                    user_header_text2 = "Facilities for: " + str(user_info.name)
+                except:
+                    # query for user and facility
+                    user_info = Logs.objects.get(userEmail=request.POST['user_list'])
+                    facility_chosen = Logs.objects.order_by().filter(userEmail=user_info.userEmail).values_list('facilityName', flat=True).distinct()
 
-            user_header_text = "Users for: " + str(company_comp)
-            # Render page with filtered users, instead of all users
-            render_dict = {
-                'company_chosen': company_chosen,
-                'user_chosen': user_chosen,
-                'user_email': user_email,
-                'facility': facility_chosen,
-                'iuc': is_user_chosen,
-                'header_text': user_header_text,
-                'header_text2': user_header_text2}
-            return render(request, "logs_user_filter.html", render_dict)
+                    # Holders for information
+                    user_email = user_info.userEmail
+                    company_comp = user_info.companyName
+                    user_header_text2 = "Facilities for: " + str(user_info.userName)
+
+                # Get chosen user/users
+                user_chosen_uq = Users.objects.order_by().filter(company=company_comp)
+                user_chosen = {}
+                for vals in user_chosen_uq:
+                    user_chosen[vals.email] = vals.name
+                if not user_chosen:
+                    user_chosen_lq = Logs.objects.order_by().filter(companyName=company_comp)
+                    for vals in user_chosen_lq:
+                        user_chosen[vals.userEmail] = vals.userName
+
+                # header for text
+                user_header_text = "Users for: " + str(company_comp)
+
+                # Render page with filtered users, instead of all users
+                render_dict = {
+                    'company_chosen': company_chosen,
+                    'user_chosen': user_chosen,
+                    'user_email': user_email,
+                    'facility': facility_chosen,
+                    'iuc': is_user_chosen,
+                    'header_text': user_header_text,
+                    'header_text2': user_header_text2}
+                return render(request, "logs_user_filter.html", render_dict)
 
 
     # Text for a header
@@ -346,7 +432,6 @@ def logs_user_filter(request):
     render_dict = {
         'company_chosen': company_chosen,
         'user_chosen': user_chosen,
-        'facility': facility_chosen,
         'iuc': is_user_chosen,
         'header_text': user_header_text}
     return render(request, "logs_user_filter.html", render_dict)

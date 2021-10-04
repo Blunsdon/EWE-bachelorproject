@@ -25,45 +25,43 @@
         }
     </style>
     <meta charset="UTF-8">
-    <title>Edit facility filter</title>
+    <title>Edit user</title>
 </head>
 <body>
 <br><br><br><br><br><br><br><br>
-<fieldset>
 
-    <!-- BOX-DROPDOWN: adress -->
-    <h1>Choose an adress</h1>
-    <form action={% url 'facility_edit_filter' %} method="post">
+<fieldset>
+    <!-- BOX-DROPDOWN: facility location -->
+    <h1>Choose a location</h1>
+    <form action={% url 'logs_facility_filter' %} method="post">
     {% csrf_token %}
-        <select name="location_list">
-            <option value="None" selected hidden>Choose adress</option>
-            <option value="None">All adresses</option>
-            {% for val in location %}
+        <select name="fac_loc_list">
+            <option value="None" selected hidden>Choose location</option>
+            <option value="None">All company</option>
+            {% for val in facility_locs %}
                 <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}
         </select>
-        <input type="submit" value="Filter" style="width: 200px">
+        <input type="submit" value="Filter" style="width: 170px">
     </form>
     <br>
 
-    <!-- BOX-DROPDOWN: names -->
+    <!-- BOX-DROPDOWN: facilities -->
     <h1>{{ header_text }}</h1>
-    <form action={% url 'facility_edit'  %}>
+    <form action={% url 'logs_facility'  %}>
     {% csrf_token %}
-        <select name="names_list">
-            {% for val in names %}
-                <option value="None" selected hidden>Choose facility</option>
-                <option value='{{ val.name }}'> {{ val.name }} </option>
+        <select name="facilities_list" style="width: 40%">
+            <option value="None" selected hidden>Choose facility</option>
+            {% for key, values in facilities.items %}
+                <option value='{{ key }}&{{ values }}'> {{ values }} </option>
             {% endfor %}
         </select>
-        <input type="submit" value="Edit facility" style="width: 200px">
+        <input type="submit" value="view facility" style="width: 170px">
     </form>
 
     <br>
     <br>
-    <br>
-    <br>
-    <button onClick="location.href = '{% url 'facility' %}'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </fieldset>
 </body>

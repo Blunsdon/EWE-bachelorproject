@@ -78,6 +78,7 @@ class Logs(models.Model):
     userName = models.CharField(max_length=80)
     userEmail = models.EmailField(null=True, blank=True)
     facilityName = models.CharField(max_length=80)
+    facilityLocation = models.CharField(max_length=120, null=True, blank=True)
 
 
 "Join table:"
