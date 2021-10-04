@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85ebff88-d1bb-4d43-b2e2-9d806c2e81c9" name="Default Changelist" comment="urls.py commit test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/logs_facility.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/logs_facility.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/logs_facility_filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/logs_facility_filter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/office_user_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/office_user_home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +170,7 @@
       <workItem from="1632925608419" duration="809000" />
       <workItem from="1632990172358" duration="13025000" />
       <workItem from="1633003334020" duration="4028000" />
-      <workItem from="1633332240554" duration="22864000" />
+      <workItem from="1633332240554" duration="23276000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>

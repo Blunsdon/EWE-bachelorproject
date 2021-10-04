@@ -202,7 +202,9 @@ def delete_field_user(request):
 @login_required
 @user_controller
 def logs_facility(request):
+
     facility_chosen = request.GET['facilities_list']
+
     # Retrive data object for display
     if '&' not in facility_chosen:
         return redirect('logs_facility_filter')
@@ -220,10 +222,18 @@ def logs_facility(request):
 @login_required
 @user_controller
 def logs_facility_filter(request):
+    """
+    This function is for choosing a facility log in the database
 
-    # Query all unique facilities in the database
+    :param request:
+    :return:
+    """
+
+    # List's to be used:
     facility_locations = []
+    facilities = {}
 
+    # Query all unique locations in the database
     facility_locations_fq = Facilities.objects.order_by().values_list('location', flat=True).distinct()
     facility_locations_lq = Logs.objects.order_by().values_list('facilityLocation', flat=True).distinct()
     for vals in facility_locations_fq:
@@ -234,26 +244,19 @@ def logs_facility_filter(request):
 
 
     # No facility location chosen yet, so query all facilities in the database
-    facilities = {}
-    try:
-        facilities_fq = Facilities.objects.all()
-        for vals in facilities_fq:
-            facilities[vals.location] = vals.name
-    except:
-        pass
-    try:
-        facilities_lq = Logs.objects.all()
-        for vals in facilities_lq:
-            if vals not in facilities:
-                facilities[vals.facilityLocation] = vals.facilityName
-    except:
-        pass
+    facilities_fq = Facilities.objects.all()
+    facilities_lq = Logs.objects.all()
+    for vals in facilities_fq:
+        facilities[vals.location] = vals.name
+    for vals in facilities_lq:
+        if vals not in facilities:
+            facilities[vals.facilityLocation] = vals.facilityName
 
-    # Company is chosen:
+    # Location is chosen:
     if request.method == 'POST':
         data = request.POST['fac_loc_list']
         if data != "None":
-            # Query database for users, filtered by chosen company
+            # Query database for facilities, filtered by chosen location
             facilities = {}
             try:
                 facilities_fq = Facilities.objects.order_by().filter(location=data)
@@ -268,8 +271,10 @@ def logs_facility_filter(request):
             except:
                 pass
 
+            # Set header text
             user_header_text = "Facilities on: " + str(data)
-            # Render page with filtered users, instead of all users
+
+            # Render page with filtered facilities, instead of all facilities
             render_dict = {
                 'facility_locs': facility_locations,
                 'facilities': facilities,
@@ -277,10 +282,10 @@ def logs_facility_filter(request):
                 'header_text': user_header_text}
             return render(request, "logs_facility_filter.html", render_dict)
 
-    # Text for a header
+    # Set header text
     user_header_text = "All facilities:"
 
-    # Default render with all companies, and all users
+    # Default render with all locations, and all facilities
     render_dict = {
         'facility_locs': facility_locations,
         'facilities': facilities,
@@ -290,6 +295,12 @@ def logs_facility_filter(request):
 @login_required
 @user_controller
 def logs_user(request):
+    """
+    Display log information
+
+    :param request:
+    :return:
+    """
     facility_chosen = request.GET['facility_list']
 
     # Retrive data object for display
@@ -300,10 +311,6 @@ def logs_user(request):
         data = Logs.objects.all().filter(userEmail=list[1]).filter(facilityName=list[0])
 
     return render(request, "logs_user.html", {'data': data})
-
-
-
-    return render(request, "logs_user.html")
 
 @login_required
 @user_controller
