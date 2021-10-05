@@ -339,8 +339,87 @@ def access_time_error(request):
 @login_required
 @user_controller
 def facility_access_remove(request):
+    """
+        This function is for filtering the JoinTable
+        :param request:
+        :return:
+        """
+    # Query all unique users in the database
+    facility_is_chosen = False
+    user_is_chosen = False
+    access_remove = False
+    # No facility location chosen yet, so query all facilities in the database
+    facilities = JoinTable.objects.values_list('facility__name', flat=True).distinct()
+    users = JoinTable.objects.values_list('user__name', 'user__email').distinct()
 
-    return render(request, "facility_access_remove.html")
+    # Facility is chosen:
+    if request.method == 'POST':
+        if 'sel_facility' in request.POST:
+            data = request.POST['facility']
+            if data != "None":
+                facility_is_chosen = True
+                # Set header text
+                user_header_text = "Facility chosen: " + str(data)
+                users = JoinTable.objects.filter(facility__name=data).values_list('user__name',
+                                                                                  'user__email').distinct()
+                # Render page with filtered facilities, instead of all facilities
+                render_dict = {
+                    'users': users,
+                    'facilities': data,
+                    'fc': facility_is_chosen,
+                    'uc': user_is_chosen,
+                    'ac': access_remove,
+                    'param': data,
+                    'header_text': user_header_text}
+                return render(request, "facility_access_remove.html", render_dict)
+            else:
+                print("error no data")
+                # User  is chosen
+        elif 'sel_user' in request.POST:
+            data = request.POST['user']
+            if data != "None":
+                user_is_chosen = True
+                list_from_user = data.split("&", 1)
+                try:
+                    remove_chosen = JoinTable.objects.get(user__email=list_from_user[0], facility__name=list_from_user[1])
+                    print(remove_chosen)
+                    remove_chosen.delete()
+                    facility_is_chosen = False
+                    user_is_chosen = False
+                    access_remove = True
+                    # Set header text
+                    user_header_text = "Access successfully removed"
+                    render_dict = {
+                        'fc': facility_is_chosen,
+                        'uc': user_is_chosen,
+                        'ac': access_remove,
+                        'header_text': user_header_text}
+                    return render(request, "facility_access_remove.html", render_dict)
+                except JoinTable.DoesNotExist:
+                    # Something failed
+                    user_header_text = "Something failed try again"
+                    render_dict = {
+                        'fc': facility_is_chosen,
+                        'uc': user_is_chosen,
+                        'ac': access_remove,
+                        'header_text': user_header_text}
+                    return render(request, "facility_access_remove.html", render_dict)
+            else:
+                print("error no data")
+
+    # Set header text
+    user_header_text = "Choose facilities:"
+
+    # Default render with all locations, and all facilities
+    render_dict = {
+        'users': users,
+        'facilities': facilities,
+        'fc': facility_is_chosen,
+        'uc': user_is_chosen,
+        'ac': access_remove,
+        'header_text': user_header_text}
+
+    return render(request, "facility_access_remove.html", render_dict)
 
 @login_required
 @user_controller
