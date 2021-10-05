@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Give facility access page</title>
+</head>
+<body>
+    <br>
+    <br>
+<fieldset>
+
+    <!-- BOX-DROPDOWN: address -->
+    <h1>Choose an address</h1>
+    <form action={% url 'facility_access_give_filter' %} method="post">
+    {% csrf_token %}
+        <select name="location_list">
+            <option value="None" selected hidden>Choose adress</option>
+            <option value="None">All addresses</option>
+            {% for val in location %}
+                <option value='{{ val }}'> {{ val }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter" style="width: 200px">
+    </form>
+    <br>
+
+    <!-- BOX-DROPDOWN: names -->
+    <h1>{{ header_text }}</h1>
+    <form action={% url 'facility_access_give'  %}>
+    {% csrf_token %}
+        <select name="names_list">
+            {% for val in names %}
+                <option value="None" selected hidden>Choose facility</option>
+                <option value='{{ val.name }}'> {{ val.name }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Edit facility" style="width: 200px">
+    </form>
+    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
+</body>
+</html>
