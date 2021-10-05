@@ -9,6 +9,10 @@
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/registration/login.html" afterDir="false" />
+    <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_access_give_filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_access_give_filter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +25,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -176,6 +180,12 @@
       <workItem from="1633332240554" duration="23276000" />
       <workItem from="1633374690313" duration="1661000" />
       <workItem from="1633417580273" duration="13440000" />
+      <workItem from="1633009849208" duration="969000" />
+      <workItem from="1633070807730" duration="18219000" />
+      <workItem from="1633190299468" duration="366000" />
+      <workItem from="1633284521202" duration="1224000" />
+      <workItem from="1633330572473" duration="28302000" />
+      <workItem from="1633415228177" duration="13773000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>

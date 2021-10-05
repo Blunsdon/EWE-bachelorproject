@@ -20,6 +20,7 @@ class AllUsersFields(ModelForm):
         model = Users
         fields = ('email', 'name', 'phoneNumber', 'company')
 
+
 class AllFacilityFields(ModelForm):
     class Meta:
         model = Facilities
@@ -31,12 +32,20 @@ class EditFieldUser(ModelForm):
         model = Users
         fields = ('phoneNumber', 'email')
 
+
 class AddFacility(ModelForm):
     class Meta:
         model = Facilities
         fields = ('name', 'location', 'owner', 'key')
 
+
 class CreateNewUserForm(UserCreationForm):
     class Meta:
         model = Users
         fields = ('email', 'name', 'phoneNumber', 'company')
+
+
+class CreateJoinTableForm(ModelForm):
+    class Meta:
+        model = JoinTable
+        fields = ('user', 'facility', 'timer')

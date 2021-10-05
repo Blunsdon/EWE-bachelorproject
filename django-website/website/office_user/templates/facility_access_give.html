@@ -4,35 +4,76 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
     <meta charset="UTF-8">
-    <title>Give facility access page</title>
+    <title>Edit facility</title>
 </head>
 <body>
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+<legend>Edit facility access</legend>
+    <table>
+        {% for key, value in disp_text.items %}
+            <tr>
+                <td style="font-size: 26px; font-weight: bold">{{ key }}</td>
+                <td style="font-size: 26px; font-weight: bold">{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
     <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Give facility access</h1>
-    <br>
-    <br>
-    <h1>BOX-DROPDOWN: Company</h1>
-    <br>
-    <h1>BOX-DROPDOWN: User</h1>
-    <br>
-    <h1>BOX-DROPDOWN: Facility</h1>
-    <br>
-    <h1>BOX: Access time</h1>
-    <br>
-    <br>
-    <button  style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Give access</button>
-    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
+    <form action="" method = "POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="facility"; >Facility name: {{ name.name }}</label></td>
+                </tr>
+                <tr>
+                    <td><label for="location"; >Location: {{ name.location }}</label></td>
+                </tr>
+                <tr>
+                    <td><label for="owner" ; >Owner:{{ name.owner }}</label></td>
+                </tr>
+                <select name="user">
+                    {% for val in users %}
+                        <option value="None" selected hidden>Choose user</option>
+                        <option value='{{ val.email }}'> {{ val.name }} ({{ val.email }}) </option>
+                    {% endfor %}
+                </select>
+                <tr>
+                    <td><label for="timer_start"; >Access from:</label></td>
+                    <td><input type="date" id="date" name="timer_start" ></td>
+                </tr>
+                <tr>
+                    <td><label for="timer"; >Access until:</label></td>
+                    <td><input type="date" id="date" name="timer" ></td>
+                </tr>
+
+                <td><br><button  style="padding: 4px; width: 150px; background-color:
+                        lightskyblue; color:aliceblue; border-radius: 8px;font-size: 18px">Give access</button></td>
+            </table>
+        </form>
+    <button onClick="location.href = '{% url 'facility_access_give_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</fieldset>
 </body>
 </html>

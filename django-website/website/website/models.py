@@ -92,6 +92,7 @@ class JoinTable(models.Model):
     facility = models.ForeignKey('Facilities', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     user = models.ForeignKey('Users', on_delete=models.CASCADE, blank=True, null=True, db_constraint=False)
     timer = models.CharField(max_length=80, null=True, blank=True)
+    timer_start = models.CharField(max_length=80, null=True, blank=True)
 
 
 class CreateUserCode(models.Model):

@@ -4,33 +4,79 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
     <meta charset="UTF-8">
-    <title>Remove facility access page</title>
+    <title>Edit facility</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Remove facility access</h1>
-    <br>
-    <br>
-    <h1>BOX-DROPDOWN: Company</h1>
-    <br>
-    <h1>BOX-DROPDOWN: User</h1>
-    <br>
-    <h1>BOX-DROPDOWN: Facility</h1>
-    <br>
-    <br>
-    <button  style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Remove access</button>
-    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+<legend>Edit facility access</legend>
+       <!-- BOX-DROPDOWN: Facility-->
+{% if ac  == False %}
+    {% if fc == False %}
+        <h1>Choose a facility</h1>
+        <form action={% url 'facility_access_remove' %} method="POST">
+        {% csrf_token %}
+            <select name="facility">
+                <option value="None" selected hidden>Select Facility</option>
+                <option value="None">All Facility</option>
+                {% for val in facilities %}
+                    <option value='{{ val }}'> {{ val }} </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Choose facility" style="width: 150px" name="sel_facility">
+        </form>
+    {% endif %}
+        <br>
+
+        <!-- BOX-DROPDOWN: Users -->
+    {% if fc == True %}
+        {% if uc == True %}
+            <h1>{{ header_text }}</h1>
+        {% endif %}
+        {% if uc == False %}
+            <h1>{{ header_text }}</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <select name="user">
+                    {% for val in users %}
+                        <option value="None" selected hidden>Choose User</option>
+                        <option value='{{ val.1 }}&{{ facilities }}'> {{ val.0 }} ({{ val.1 }}) </option>
+                    {% endfor %}</select>
+                <br><br>
+                <input type="submit" value="Remove access" style="padding: 8px; background-color:
+        darkred; color:aliceblue; border-radius: 8px;font-size: 18px", name="sel_user" >
+            </form>
+        {% endif %}
+    {% endif %}
+{% endif %}
+{% if ac == True %}
+    <h1>{{ header_text }}</h1>
+{% endif %}
+    <br><br>
+    <button onClick="location.href = '{% url 'facility_access' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</fieldset>
 </body>
 </html>
