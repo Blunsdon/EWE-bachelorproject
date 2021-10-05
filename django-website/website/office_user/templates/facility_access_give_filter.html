@@ -28,13 +28,13 @@
     <br>
 <fieldset>
 
-    <!-- BOX-DROPDOWN: adress -->
-    <h1>Choose an adress</h1>
+    <!-- BOX-DROPDOWN: address -->
+    <h1>Choose an address</h1>
     <form action={% url 'facility_access_give_filter' %} method="post">
     {% csrf_token %}
         <select name="location_list">
             <option value="None" selected hidden>Choose adress</option>
-            <option value="None">All adresses</option>
+            <option value="None">All addresses</option>
             {% for val in location %}
                 <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}

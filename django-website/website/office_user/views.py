@@ -227,22 +227,16 @@ def facility_access_give_filter(request):
     :param request:
     :return:
     """
-    # Dummy parameter
-    comp = 'comp'
-
     # Query all unique companies in the database
     location = Facilities.objects.order_by().values_list('location', flat=True).distinct()
-
     # No company chosen yet, so query all users in the database
     names = Facilities.objects.order_by()
 
-    # Company is chosen:
     if request.method == 'POST':
         data = request.POST['location_list']
         if data != "None":
-            # Query database for users, filtered by chosen company
+            # Query database for users, filtered by chosen location
             names = Facilities.objects.order_by().filter(location=data)
-            print(data)
             user_header_text = "Facilities for: " + str(data)
             # Render page with filtered users, instead of all users
             render_dict = {
@@ -254,12 +248,10 @@ def facility_access_give_filter(request):
 
     # Text for a header
     user_header_text = "All facilities:"
-
     # Default render with all companies, and all users
     render_dict = {
         'location': location,
         'names': names,
-        'param': comp,
         'header_text': user_header_text}
     return render(request, "facility_access_give_filter.html", render_dict)
 
@@ -273,19 +265,16 @@ def facility_access_give(request):
     :param request:
     :return:
     """
-    # Get facility chosen from "facility_edit_filter"
+    # Get facility chosen from "facility_access_give_filter"
     data = request.GET['names_list']
-
     # Query all Users in the database
     all_user = Users.objects.order_by('name')
-
-    # If there's no user chosen, redirect back to "office_edit_user"
+    # If there's no user chosen, redirect back to "facility access give filter"
     if data == 'None':
         return redirect("facility_access_give_filter")
-
-    # Make query based on chosen user from "office_access_give_filter"
+    # Make query based on chosen user from "facility_access_give_filter"
     facility_choice = Facilities.objects.get(name=data)
-    # Run if statement, if "edit button" is clicked on website
+
     if request.method == 'POST':
         access = JoinTable()
         # get User object from unique Email
@@ -340,11 +329,11 @@ def access_time_error(request):
 @user_controller
 def facility_access_remove(request):
     """
-        This function is for filtering the JoinTable
+        This function is for filtering the JoinTable and removing access to facility
         :param request:
         :return:
         """
-    # Query all unique users in the database
+    # Used for html
     facility_is_chosen = False
     user_is_chosen = False
     access_remove = False
@@ -360,6 +349,7 @@ def facility_access_remove(request):
                 facility_is_chosen = True
                 # Set header text
                 user_header_text = "Facility chosen: " + str(data)
+                # Query all unique users in the database that has access to chosen facility
                 users = JoinTable.objects.filter(facility__name=data).values_list('user__name',
                                                                                   'user__email').distinct()
                 # Render page with filtered facilities, instead of all facilities
@@ -381,8 +371,9 @@ def facility_access_remove(request):
                 user_is_chosen = True
                 list_from_user = data.split("&", 1)
                 try:
-                    remove_chosen = JoinTable.objects.get(user__email=list_from_user[0], facility__name=list_from_user[1])
-                    print(remove_chosen)
+                    remove_chosen = JoinTable.objects.get(user__email=list_from_user[0],
+                                                          facility__name=list_from_user[1])
+                    # Delete the chosen access
                     remove_chosen.delete()
                     facility_is_chosen = False
                     user_is_chosen = False
@@ -418,8 +409,8 @@ def facility_access_remove(request):
         'uc': user_is_chosen,
         'ac': access_remove,
         'header_text': user_header_text}
-
     return render(request, "facility_access_remove.html", render_dict)
+
 
 @login_required
 @user_controller

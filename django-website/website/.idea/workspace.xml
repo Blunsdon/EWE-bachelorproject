@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="700f18c1-a9cd-4245-939e-df7dd3d9a623" name="Default Changelist" comment="urls.py commit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_access.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_access.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_access_remove.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_access_remove.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_access_give_filter.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_access_give_filter.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/office_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,7 +177,7 @@
       <workItem from="1633190299468" duration="366000" />
       <workItem from="1633284521202" duration="1224000" />
       <workItem from="1633330572473" duration="28302000" />
-      <workItem from="1633415228177" duration="8419000" />
+      <workItem from="1633415228177" duration="13773000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
