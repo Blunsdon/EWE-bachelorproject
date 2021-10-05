@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Edit facility filter</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br>
+<fieldset>
+
+    <!-- BOX-DROPDOWN: company -->
+    <h1>Choose a company</h1>
+    <form action={% url 'logs_user_filter' %} method="post">
+    {% csrf_token %}
+        <select name="company_list" style="width: 40%">
+            <option value="None" selected hidden>Choose company</option>
+            <option value="None">All companies</option>
+            {% for val in company_chosen %}
+                <option value='{{ val }}'> {{ val }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter" style="width: 50%" name="DC">
+    </form>
+    <br>
+
+    <!-- BOX-DROPDOWN: users -->
+    <h1>{{ header_text }}</h1>
+    <form action={% url 'logs_user_filter' %} method="post">
+    {% csrf_token %}
+        <select name="user_list" style="width: 40%">
+            <option value="None" selected hidden>Choose user</option>
+            {% for key, value in user_chosen.items %}
+                <option value='{{ key }}'> {{ value }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="choose user" style="width: 50%" name="DU">
+    </form>
+    <br>
+
+    <!-- BOX-DROPDOWN: facilities -->
+    {% if iuc == "true" %}
+    <h1>{{ header_text2 }}</h1>
+    <form action={% url 'logs_user' %}>
+    {% csrf_token %}
+        <select name="facility_list" style="width: 40%">
+            <option value="{{ user_email }}" selected>All facilities</option>
+            {% for val in facility %}
+                <option value='{{ val }}&{{ user_email }}'> {{ val }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="choose facility" style="width: 50%" name="DF">
+    </form>
+    {% endif %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</fieldset>
+</body>
+</html>

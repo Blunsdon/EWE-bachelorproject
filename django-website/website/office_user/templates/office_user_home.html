@@ -22,10 +22,10 @@
     <p style="padding: 16px; width: 370px; background-color: darkblue; color:aliceblue; border-radius: 8px; font-size: 22px"> Create user code: {{ cu }} </p>
     <button onClick="document.location.href = 'office_edit_user'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit user</button>
-    <button onClick="document.location.href = 'logs_facility/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="document.location.href = '{% url 'logs_facility_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View facility logs</button>
     <br>
-    <button onClick="document.location.href = 'logs_user/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="document.location.href = '{% url 'logs_user_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View user logs</button>
     <button onClick="document.location.href = 'facility_access/'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility access</button>

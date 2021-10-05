@@ -74,8 +74,11 @@ class Logs(models.Model):
     facility = models.ForeignKey('Facilities', on_delete=models.DO_NOTHING, blank=True, null=True, db_constraint=False)
     user = models.ForeignKey('Users', on_delete=models.DO_NOTHING, blank=True, null=True, db_constraint=False)
     dateTime = models.DateTimeField()
+    companyName = models.CharField(max_length=120)
     userName = models.CharField(max_length=80)
+    userEmail = models.EmailField(null=True, blank=True)
     facilityName = models.CharField(max_length=80)
+    facilityLocation = models.CharField(max_length=120, null=True, blank=True)
 
 
 "Join table:"

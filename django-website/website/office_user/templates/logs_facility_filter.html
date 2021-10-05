@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <style>
+        body {
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: 40%;
+            margin-right: 40%;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+</head>
+<body>
+<br><br><br><br><br><br><br><br>
+
+<fieldset>
+    <!-- BOX-DROPDOWN: facility location -->
+    <h1>Choose a location</h1>
+    <form action={% url 'logs_facility_filter' %} method="post">
+    {% csrf_token %}
+        <select name="fac_loc_list">
+            <option value="None" selected hidden>Choose location</option>
+            <option value="None">All company</option>
+            {% for val in facility_locs %}
+                <option value='{{ val }}'> {{ val }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Filter" style="width: 170px">
+    </form>
+    <br>
+
+    <!-- BOX-DROPDOWN: facilities -->
+    <h1>{{ header_text }}</h1>
+    <form action={% url 'logs_facility'  %}>
+    {% csrf_token %}
+        <select name="facilities_list" style="width: 40%">
+            <option value="None" selected hidden>Choose facility</option>
+            {% for key, values in facilities.items %}
+                <option value='{{ key }}&{{ values }}'> {{ values }} </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="view facility" style="width: 170px">
+    </form>
+
+    <br>
+    <br>
+    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</fieldset>
+</body>
+</html>
