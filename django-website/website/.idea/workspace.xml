@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="85ebff88-d1bb-4d43-b2e2-9d806c2e81c9" name="Default Changelist" comment="urls.py commit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/office_user/templates/facility_remove.html" beforeDir="false" afterPath="$PROJECT_DIR$/office_user/templates/facility_remove.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,22 +51,23 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/office_user/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\office_user\templates" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\office_user\templates" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\create_user" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\office_user" />
-      <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\field_user" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\website" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\create_user" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\office_user" />
@@ -75,7 +77,6 @@
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\website" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\static\website" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\static" />
-      <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website" />
       <recent name="D:\pycharm\python_progs\EWE-bachelorproject\django-website\website\assets\images" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\field_user" />
       <recent name="C:\Users\Bluns\Desktop\EWE-bachelorproject\django-website\website\assets\images" />
@@ -173,7 +174,8 @@
       <workItem from="1632990172358" duration="13025000" />
       <workItem from="1633003334020" duration="4028000" />
       <workItem from="1633332240554" duration="23276000" />
-      <workItem from="1633374690313" duration="839000" />
+      <workItem from="1633374690313" duration="1661000" />
+      <workItem from="1633417580273" duration="13440000" />
     </task>
     <task id="LOCAL-00001" summary="urls.py commit test">
       <created>1631693215292</created>
