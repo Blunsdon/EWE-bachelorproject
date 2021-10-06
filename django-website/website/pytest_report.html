@@ -429,7 +429,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>pytest_report.html</h1>
-    <p>Report generated on 06-Oct-2021 at 09:28:53 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 06-Oct-2021 at 15:51:27 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -440,13 +440,13 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Windows-10-10.0.19041-SP0</td></tr>
       <tr>
         <td>Plugins</td>
-        <td>{"django": "4.4.0", "html": "3.1.1", "metadata": "1.11.0"}</td></tr>
+        <td>{"django": "4.4.0", "html": "3.1.1", "metadata": "1.11.0", "ordering": "0.6"}</td></tr>
       <tr>
         <td>Python</td>
         <td>3.9.5</td></tr></table>
     <h2>Summary</h2>
-    <p>6 tests ran in 21.00 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">5 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>13 tests ran in 40.83 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">13 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -457,21 +457,66 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="failed results-table-row">
+      <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-name">test.py::CreateUserTestCase::test_create_user</td>
-          <td class="col-duration">1.70</td>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::CreateEditDeleteUserTestCase::test_create_user</td>
+          <td class="col-duration">2.40</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">self = &lt;test.CreateUserTestCase testMethod=test_create_user&gt;<br/><br/>    def test_create_user(self):<br/>        &quot;&quot;&quot;<br/>        This function tests the creation of a user by<br/>        login to the new user that is created<br/>        &quot;&quot;&quot;<br/>        selenium = self.driver<br/>        # Choose start Url<br/>        selenium.get(&quot;http://127.0.0.1:8000/create_user/&quot;)<br/>        # Get create user code from database<br/>&gt;       cuc = CreateUserCode.objects.get(id=1)<br/><br/>test.py:249: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>venv\lib\site-packages\django\db\models\manager.py:85: in manager_method<br/>    return getattr(self.get_queryset(), name)(*args, **kwargs)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;QuerySet []&gt;, args = (), kwargs = {&#x27;id&#x27;: 1}, clone = &lt;QuerySet []&gt;, limit = 21, num = 0<br/><br/>    def get(self, *args, **kwargs):<br/>        &quot;&quot;&quot;<br/>        Perform the query and return a single object matching the given<br/>        keyword arguments.<br/>        &quot;&quot;&quot;<br/>        if self.query.combinator and (args or kwargs):<br/>            raise NotSupportedError(<br/>                &#x27;Calling QuerySet.get(...) with filters after %s() is not &#x27;<br/>                &#x27;supported.&#x27; % self.query.combinator<br/>            )<br/>        clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)<br/>        if self.query.can_filter() and not self.query.distinct_fields:<br/>            clone = clone.order_by()<br/>        limit = None<br/>        if not clone.query.select_for_update or connections[clone.db].features.supports_select_for_update_with_limit:<br/>            limit = MAX_GET_RESULTS<br/>            clone.query.set_limits(high=limit)<br/>        num = len(clone)<br/>        if num == 1:<br/>            return clone._result_cache[0]<br/>        if not num:<br/>&gt;           raise self.model.DoesNotExist(<br/>                &quot;%s matching query does not exist.&quot; %<br/>                self.model._meta.object_name<br/>            )<br/><span class="error">E           website.models.CreateUserCode.DoesNotExist: CreateUserCode matching query does not exist.</span><br/><br/>venv\lib\site-packages\django\db\models\query.py:435: DoesNotExist<br/> -----------------------------Captured stderr setup------------------------------ <br/>Creating test database for alias &#x27;default&#x27;...
+            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>Creating test database for alias &#x27;default&#x27;...
 <br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test.py::CreateUserTestCase::test_create_user_lp</td>
-          <td class="col-duration">1.51</td>
+          <td class="col-name">test.py::EditFacilityAccessTestCase::test_edit_facility_lp</td>
+          <td class="col-duration">1.91</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::CreateEditDeleteUserTestCase::test_edit_other_user</td>
+          <td class="col-duration">6.25</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::EditFacilityAccessTestCase::test_give_access</td>
+          <td class="col-duration">2.03</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::CreateEditDeleteUserTestCase::test_delete_other_user</td>
+          <td class="col-duration">4.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::EditFacilityAccessTestCase::test_remove_access</td>
+          <td class="col-duration">2.06</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::CreateEditDeleteUserTestCase::test_create_user_lp</td>
+          <td class="col-duration">3.53</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -480,7 +525,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test.py::LoginTestCase::test_login_admin</td>
-          <td class="col-duration">1.78</td>
+          <td class="col-duration">1.76</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -489,7 +534,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test.py::LoginTestCase::test_login_field</td>
-          <td class="col-duration">5.85</td>
+          <td class="col-duration">1.68</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -498,7 +543,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test.py::LoginTestCase::test_login_office</td>
-          <td class="col-duration">1.81</td>
+          <td class="col-duration">1.67</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
@@ -506,8 +551,28 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">test.py::EditUserTestCase::test_choose_user</td>
-          <td class="col-duration">7.96</td>
+          <td class="col-name">test.py::OfficePersonalInfoAndAccessTestCase::test_facility_access_lp</td>
+          <td class="col-duration">1.80</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::OfficePersonalInfoAndAccessTestCase::test_give_access</td>
+          <td class="col-duration">2.07</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stdout call------------------------------ <br/>&lt;selenium.webdriver.remote.webelement.WebElement (session=&quot;aa66a4621927df3a2a2306f97ea8ab29&quot;, element=&quot;dd2d74cb-fe09-4060-843f-ce1d1d3c7772&quot;)&gt;
+&lt;selenium.webdriver.remote.webelement.WebElement (session=&quot;aa66a4621927df3a2a2306f97ea8ab29&quot;, element=&quot;1832be04-f768-43dc-895b-21c0ce732fee&quot;)&gt;
+<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test.py::OfficePersonalInfoAndAccessTestCase::test_personal_info_lp</td>
+          <td class="col-duration">9.45</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
