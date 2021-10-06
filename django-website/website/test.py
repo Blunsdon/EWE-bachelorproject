@@ -677,7 +677,7 @@ class FacilityAddEditRemoveTestCase(unittest.TestCase):
         fac_name = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[1]/td[2]").text
         self.assertEqual(fac_name, 'Selenium facility 2')
 
-        ## Find "ADD LOGS" link and click
+        ## Find link and click
         button = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[5]/td/button")
         button.submit()
 
