@@ -443,6 +443,31 @@ class EditFacilityAccessTestCase(unittest.TestCase):
         result_url = 'http://127.0.0.1:8000/office_user_home/'
         # Check result
         self.assertEqual(result_url, selenium.current_url)
+
+        # Direct to "Add facility"
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Add/Edit/Remove facility')]")
+        button.click()
+        ## Find link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Add facility')]")
+        button.click()
+        ## Find elements
+        name = selenium.find_element_by_id('name')
+        adress = selenium.find_element_by_id('location')
+        owner = selenium.find_element_by_id('owner')
+        key = selenium.find_element_by_id('key')
+        submit = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[5]/td/button")
+        ## Populate elements form
+        name.send_keys('test fac1')
+        adress.send_keys('Selenium road')
+        owner.send_keys('Selenium')
+        key.send_keys('1234')
+        ## Submit form
+        submit.send_keys(Keys.RETURN)
+        # Assert
+        self.assertEqual('http://127.0.0.1:8000/office_user_home/facility/', selenium.current_url)
+        back_from_add = selenium.find_element_by_xpath("/html/body/fieldset/button[4]")
+        back_from_add.click()
+
         # Go to facility access page
         edit_facility_access = selenium.find_element_by_xpath("/html/body/button[4]")
         edit_facility_access.click()
@@ -478,7 +503,6 @@ class EditFacilityAccessTestCase(unittest.TestCase):
         # Give access to "test fac1" to the user "test"
         give_access = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[6]/td/button")
         give_access.send_keys(Keys.RETURN)
-
         # Expected results
         result_url = 'http://127.0.0.1:8000/office_user_home/facility_access/'
         # Check result
@@ -542,6 +566,30 @@ class EditFacilityAccessTestCase(unittest.TestCase):
         result_url = 'http://127.0.0.1:8000/office_user_home/facility_access/'
         # Check result
         self.assertEqual(result_url, selenium.current_url)
+
+        # Go back to home page for office user
+        back_from_facility_access = selenium.find_element_by_xpath("/html/body/button[3]")
+        back_from_facility_access.click()
+        # Direct to "Remove facility"
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Add/Edit/Remove facility')]")
+        button.click()
+        ## Find link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Remove facility')]")
+        button.click()
+        # find test fac1 facility
+        select = Select(selenium.find_element_by_name('names_list'))
+        select.select_by_visible_text('test fac1')
+        ## Click filter
+        button = selenium.find_element_by_xpath("/html/body/fieldset/form[2]/input[2]")
+        button.submit()
+        # Remove facility
+        fac_name = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[1]/td[2]").text
+        self.assertEqual(fac_name, 'test fac1')
+        ## Find "Remove facility" link and click
+        button = selenium.find_element_by_xpath("/html/body/fieldset/form/table/tbody/tr[5]/td/button")
+        button.submit()
+        self.assertEqual('http://127.0.0.1:8000/office_user_home/facility/facility_remove_filter/',
+                         selenium.current_url)
 
     def tearDown(self):
         """
