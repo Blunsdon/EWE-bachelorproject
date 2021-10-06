@@ -555,7 +555,6 @@ class EditFacilityAccessTestCase(unittest.TestCase):
 class OfficePersonalInfoAndAccessTestCase(unittest.TestCase):
     """
     Must have to work:
-    - a user named "test" with email "test@test.com"
     - a facility named "test fac1" in Database
 
     class for testing
