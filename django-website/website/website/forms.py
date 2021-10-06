@@ -24,7 +24,7 @@ class AllUsersFields(ModelForm):
 class AllFacilityFields(ModelForm):
     class Meta:
         model = Facilities
-        fields = ('name', 'location', 'owner', 'key')
+        fields = ('name', 'location', 'owner')
 
         
 class EditFieldUser(ModelForm):
