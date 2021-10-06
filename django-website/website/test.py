@@ -199,12 +199,12 @@ class CreateEditDeleteUserTestCase(unittest.TestCase):
         company = selenium.find_element_by_id('id_company')
         user_password = selenium.find_element_by_id('id_password1')
         user_password2 = selenium.find_element_by_id('id_password2')
-        # Create the selenium user
+        # Create the test user
         submit = selenium.find_element_by_id('sign_up')
         # Populate elements form
         create_user_code.send_keys(cuc.code)
-        user_email.send_keys('selenium@selenium.com')
-        user_name.send_keys('selenium')
+        user_email.send_keys('test@test.com')
+        user_name.send_keys('test')
         phone_number.send_keys('69854732')
         company.send_keys('test')
         user_password.send_keys('testbruger')
@@ -217,7 +217,7 @@ class CreateEditDeleteUserTestCase(unittest.TestCase):
         user_password2 = selenium.find_element_by_id('id_password')
         submit2 = selenium.find_element_by_id('login')
         # Populate elements
-        user_email2.send_keys('selenium@selenium.com')
+        user_email2.send_keys('test@test.com')
         user_password2.send_keys('testbruger')
 
         # Login with new user
@@ -229,7 +229,7 @@ class CreateEditDeleteUserTestCase(unittest.TestCase):
         # Check result
         self.assertEqual(result_url, selenium.current_url)
 
-    @pytest.mark.run(order=2)
+    @pytest.mark.run(order=4)
     def test_edit_other_user(self):
         """
         This function tests the edit functionality of other user from office user type
@@ -263,7 +263,7 @@ class CreateEditDeleteUserTestCase(unittest.TestCase):
 
         # Select in dropdown
         select = Select(selenium.find_element_by_name('users_list'))
-        select.select_by_visible_text('selenium')
+        select.select_by_visible_text('test')
         button = selenium.find_element_by_xpath("/html/body/fieldset/form[2]/input[2]")
         button.click()
 
@@ -289,7 +289,7 @@ class CreateEditDeleteUserTestCase(unittest.TestCase):
         # Check result
         self.assertEqual(result_url, selenium.current_url)
 
-    @pytest.mark.run(order=3)
+    @pytest.mark.run(order=6)
     def test_delete_other_user(self):
         """
         This function tests the delete functionality of other user from office user type
@@ -367,7 +367,6 @@ class EditFacilityAccessTestCase(unittest.TestCase):
         """
         self.driver = webdriver.Chrome()
 
-    @pytest.mark.run(order=1)
     def test_edit_facility_lp(self):
         """
         This test test's the
