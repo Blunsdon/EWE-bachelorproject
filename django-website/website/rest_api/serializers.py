@@ -1,17 +1,8 @@
+from abc import ABC
+
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from website.models import *
-
-
-class UsersSerializer(serializers.HyperlinkedModelSerializer):
-    name = serializers.CharField(max_length=80)
-    phoneNumber = serializers.CharField(max_length=20)
-    company = serializers.CharField(max_length=120)
-    password = serializers.CharField(max_length=200)
-
-    class Meta:
-        model = Users
-        fields = ['__all__']
 
 
 class LogSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,12 +19,22 @@ class LogSerializer(serializers.HyperlinkedModelSerializer):
                   'facilityName', 'facilityName', 'facilityLocation']
 
 
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    userEmail = serializers.EmailField()
+
+    class Meta:
+        model = Users
+        fields = ['userEmail']
+
+
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     name = serializers.CharField(max_length=80)
-    location = serializers.CharField(max_length=120)
-    owner = serializers.CharField(max_length=80)
-    key = serializers.CharField(max_length=200)
 
     class Meta:
         model = Facilities
-        fields = ['__all__']
+        fields = ['name']
+
+
+class GetKeyPostLogSerializer(serializers.Serializer):
+    facility = FacilitySerializer(many=True)
+    log = LogSerializer(many=True)
