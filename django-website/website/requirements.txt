@@ -5,3 +5,4 @@ sqlparse==0.4.2
 selenium~=3.141.0
 pytest~=6.2.5
 djangorestframework~=3.12.4
+djoser~=2.1.0

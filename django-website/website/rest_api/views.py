@@ -22,6 +22,8 @@ class LogsView(APIView):
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Example for login on windows curl:
+# curl -X POST -d "{\"email\": \"admin@admin.com\",\"password\": \"admin\"}" -H "Content-Type:application/json"  http://127.0.0.1:8000/api/auth/token/login/
 class UserView(APIView):
     def post(self, request):
         return False

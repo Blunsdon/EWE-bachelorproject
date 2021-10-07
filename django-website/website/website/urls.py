@@ -13,4 +13,5 @@ urlpatterns = [
     path('', views.homepage, name="front_page"),
     path('office_user_home/', include('office_user.urls')),
     path('rest_api/', include('rest_api.urls')),
+    path('api/auth/', include('djoser.urls.authtoken')),
 ]
