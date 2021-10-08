@@ -19,7 +19,6 @@ curl -X POST http://127.0.0.1:8000/api/auth/token/logout/ -H "Authorization: Tok
 """
 
 class LogsView(APIView):
-    @csrf_exempt
     def post(self, request):
         post_data = GetKeyPostLogSerializer(data=request.data)
         if post_data.is_valid():
@@ -29,7 +28,7 @@ class LogsView(APIView):
             log_dateTime = post_data.data['log'][0]['dateTime']
             log_userEmail = post_data.data['log'][0]['userEmail']
             log_facilityName = post_data.data['log'][0]['facilityName']
-            log_facilityLocaltion = post_data.data['log'][0]['facilityName']
+            log_facilityLocaltion = post_data.data['log'][0]['facilityLocation']
             data2 = post_data.data['facility'][0]['name']
             # make log
             make_log = Logs()
@@ -57,7 +56,6 @@ class FacilityView(APIView):
         post_data = UsersSerializer(data=request.data)
         if post_data.is_valid():
             data = post_data.data['userEmail']
-            print(data)
             pk = Users.objects.get(email=data)
             list_fac = JoinTable.objects.all().filter(user=pk).values_list("facility__name", "facility__location",
                                                                            "user__email", "user__company",

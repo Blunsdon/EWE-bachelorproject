@@ -19,14 +19,6 @@ class LogSerializer(serializers.HyperlinkedModelSerializer):
                   'facilityName', 'facilityName', 'facilityLocation']
 
 
-class UsersSerializer(serializers.HyperlinkedModelSerializer):
-    userEmail = serializers.EmailField()
-
-    class Meta:
-        model = Users
-        fields = ['userEmail']
-
-
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     name = serializers.CharField(max_length=80)
 
@@ -38,3 +30,11 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 class GetKeyPostLogSerializer(serializers.Serializer):
     facility = FacilitySerializer(many=True)
     log = LogSerializer(many=True)
+
+
+class UsersSerializer(serializers.HyperlinkedModelSerializer):
+    userEmail = serializers.EmailField()
+
+    class Meta:
+        model = Users
+        fields = ['userEmail']
