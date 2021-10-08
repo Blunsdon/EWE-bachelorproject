@@ -8,12 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/website.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-    </list>
-    <list default="true" id="cba70a22-697e-47e8-907c-475785afc0dc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest_report.html" beforeDir="false" afterPath="$PROJECT_DIR$/pytest_report.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest_api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest_api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest_api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest_api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest_api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,6 +123,7 @@
       <workItem from="1633591238797" duration="5275000" />
       <workItem from="1633612012122" duration="1704000" />
       <workItem from="1633591238797" duration="20247000" />
+      <workItem from="1633679011026" duration="5277000" />
     </task>
     <servers />
   </component>
