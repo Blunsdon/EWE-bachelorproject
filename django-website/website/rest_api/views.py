@@ -5,6 +5,18 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
 
+"""
+cURL examples:
+
+Login curl
+curl -X POST -d "{\"email\": \"admin@admin.com\",\"password\": \"admin\"}" -H "Content-Type:application/json"  http://127.0.0.1:8000/api/auth/token/login/
+
+Post data curl, with login token
+curl -X POST -d "{\"userName\":\"Marc\",\"companyName\":\"Jan\",\"dateTime\":\"2021-10-07T08:59:52\",\"userEmail\":\"field@field2.com\",\"facilityName\":\"EVE\",\"facilityLocation\":\"Herning\"}" -H "Authorization: Token d356ad4063cba234aec952d98fa9a9500dddf08e" -H "Content-Type:application/json" http://127.0.0.1:8000/rest_api/log_api/
+
+Logout curl
+curl -X POST http://127.0.0.1:8000/api/auth/token/logout/ -H "Authorization: Token ~token-code~"
+"""
 
 class LogsView(APIView):
     def post(self, request):

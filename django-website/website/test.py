@@ -5,7 +5,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 import pytest
 from website.models import *
-import time #for test testing purpose
+import time
+import requests
+import json
 
 
 class LoginTestCase(unittest.TestCase):
@@ -1300,6 +1302,205 @@ class OfficePersonalInfoAndAccessTestCase(unittest.TestCase):
         :return:
         """
         self.driver.close()
+
+
+class RAPITestCase(unittest.TestCase):
+
+    def setUp(self):
+        return None
+
+    @pytest.mark.run(order=3)
+    def test_curl_create(self):
+        selenium = webdriver.Chrome()
+
+        # Choose start URL
+        selenium.get("http://127.0.0.1:8000/")
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Login
+        ## Find elements
+        user_email = selenium.find_element_by_id('id_username')
+        user_password = selenium.find_element_by_id('id_password')
+
+        submit = selenium.find_element_by_id('login')
+
+        ## Populate elements form
+        user_email.send_keys('admin@admin.com')
+        user_password.send_keys('admin')
+
+        ## Submit form
+        submit.send_keys(Keys.RETURN)
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Direct to "facilities" and create a test facility
+        ## Find "Facilitiess" link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Facilitiess')]")
+        button.click()
+
+        ## Find "Add facilities" link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Add facilities')]")
+        button.click()
+
+        ## Find elements
+        Name = selenium.find_element_by_id('id_name')
+        Location = selenium.find_element_by_id('id_location')
+        Owner = selenium.find_element_by_id('id_owner')
+        Key = selenium.find_element_by_id('id_key')
+
+        submit = selenium.find_element_by_name('_save')
+
+        ## Populate elements form
+        Name.send_keys('curl test fac')
+        Location.send_keys('curl location')
+        Owner.send_keys('curl')
+        Key.send_keys('curl key')
+
+        ## Submit form
+        submit.send_keys(Keys.RETURN)
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Direct to "join tables" and create a test jointable
+        ## Find "Join tables" link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Join tables')]")
+        button.click()
+
+        ## Find "Add Join table" link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Add join table')]")
+        button.click()
+
+        ## Find elements
+        select_fac = Select(selenium.find_element_by_id('id_facility'))
+        select_fac.select_by_visible_text('curl test fac')
+        select_user = Select(selenium.find_element_by_id('id_user'))
+        select_user.select_by_visible_text('field@field.com')
+
+        submit = selenium.find_element_by_name('_save')
+
+        submit.submit()
+
+        selenium.close()
+
+    @pytest.mark.run(order=5)
+    def test_RAPI_endpoints(self):
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Test login endpoint
+        ## structure request
+        url = 'http://127.0.0.1:8000/api/auth/token/login/'
+        payload = '{' \
+                  '"email": "field@field.com",' \
+                  '"password": "field"' \
+                  '}'
+        headers = {'Content-Type': 'application/json'}
+
+        ## send request
+        r = requests.post(url, data=payload, headers=headers)
+
+        ## extract response payload
+        response = r.json()
+        token = response['auth_token']
+
+        ## assert token
+        self.assertTrue(isinstance(token, str))
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Test facility list endpoint
+        ## structure request
+        url = 'http://127.0.0.1:8000/rest_api/key_api/'
+        payload = '{\"userEmail\":\"field@field.com\"}'
+        string = 'Token ' + str(token)
+        headers = {'Content-Type':'application/json',
+               'Authorization': 'Token {}'.format(token)}
+
+        ## send request
+        r = requests.post(url, data=payload, headers=headers)
+
+        ## extract response payload
+        response = r.json()
+        list = response['list']
+
+        ## assert response payload
+        self.assertEqual(list[0][0], 'curl test fac')
+        self.assertEqual(list[0][1], 'curl location')
+        self.assertEqual(list[0][2], 'field@field.com')
+        self.assertEqual(list[0][3], 'ewe2')
+        self.assertEqual(list[0][4], 'field')
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Test log + key endpoint
+        ## structure request
+        url = 'http://127.0.0.1:8000/rest_api/log_api/'
+        payload = '{"facility":' \
+                    '[{"name":"curl test fac"}],' \
+                  '"log":' \
+                    '[{"userName":"field"' \
+                    ',"companyName":"ewe2",' \
+                    '"dateTime":"2021-10-10T18:44:22",' \
+                    '"userEmail":"field@field.com",' \
+                    '"facilityName":"curl test fac",' \
+                    '"facilityLocation":"curl location"}]}'
+        string = 'Token ' + str(token)
+        headers = {'Content-Type':'application/json',
+               'Authorization': 'Token {}'.format(token)}
+
+        ## send request
+        r = requests.post(url, data=payload, headers=headers)
+
+        ## extract response payload
+        response = r.json()
+
+        ## assert response payload
+        self.assertEqual(response['status'], 'success')
+        self.assertEqual(response['key'], 'curl key')
+
+    @pytest.mark.run(order=6)
+    def test_curl_delete(self):
+        selenium = webdriver.Chrome()
+
+        # Choose start URL
+        selenium.get("http://127.0.0.1:8000/")
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Login
+        ## Find elements
+        user_email = selenium.find_element_by_id('id_username')
+        user_password = selenium.find_element_by_id('id_password')
+
+        submit = selenium.find_element_by_id('login')
+
+        ## Populate elements form
+        user_email.send_keys('admin@admin.com')
+        user_password.send_keys('admin')
+
+        ## Submit form
+        submit.send_keys(Keys.RETURN)
+
+        # ----------------------------------------------------------------------------------------------------------- #
+        # Direct to "facilities" and delete all facilities
+        ## Find "Facilitiess" link and click
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Facilitiess')]")
+        button.click()
+
+        ## Find "checkbox" link and click
+        checkbox = selenium.find_element_by_id('action-toggle')
+        checkbox.click()
+
+        ## Find select option
+        select = Select(selenium.find_element_by_name('action'))
+        select.select_by_visible_text('Delete selected facilitiess')
+
+        ## Press "GO"
+        button = selenium.find_element_by_xpath("//*[contains(text(), 'Go')]")
+        button.click()
+
+        ## Press "Yes"
+        button = selenium.find_element_by_xpath("/html/body/div/div[3]/div/div[1]/form/div/input[4]")
+        button.submit()
+
+        selenium.close()
+
+
+    def tearDown(self):
+        return None
 
 
 if __name__ == "__main__":
