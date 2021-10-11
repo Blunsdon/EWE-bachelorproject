@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
@@ -17,3 +18,9 @@ def index(request):
 
 def homepage(request):
     return redirect('/accounts/login')
+
+def logout_view(request):
+    logout(request)
+    print('trying')
+    return redirect('front_page')
+
