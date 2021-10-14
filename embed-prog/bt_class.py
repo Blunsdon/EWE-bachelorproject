@@ -1,6 +1,15 @@
+#!/bin/python3
+
 import bluetooth
 import time
 from lock_control import lock_control
+import os
+
+time.sleep(3)
+
+print("starting up")
+
+os.system('sudo hciconfig hci0 piscan')
 
 lock_control = lock_control()
 msg = 42
@@ -26,12 +35,14 @@ try:
     while True:
         client_sock, client_info = server_sock.accept()
         print("Accepted connection from", client_info)
+        e = client_sock.send('hello')
         try:
             while True:
                 msg = client_sock.recv(1024)
                 msg = str(msg)
                 msg = msg.replace("'", "")
                 msg = msg[1:]
+                msg = msg[:2]
                 print(msg)
                 print(isinstance(msg, str))
                 if lock_control.validate_key(msg):
@@ -41,13 +52,21 @@ try:
                         "The lock is now unlocked for 30 sec"
                         time.sleep(5)
                         if lock_control.lock_lock():
+                            "200 = success"
+                            client_sock.send("200")
                             print("The lock is now locked")
                             "Great lock is locked"
                         else:
+                            "500 = internal error"
+                            client_sock.send("500")
                             "lock failed"
                     else:
+                        "500 = internal error"
+                        client_sock.send("500")
                         "lock failed to unlock"
                 else:
+                    "401 = unauthorized"
+                    client_sock.send("401")
                     client_sock.close()
                     print("Key is no good")
         except OSError:
