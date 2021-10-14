@@ -5,6 +5,9 @@ import time
 from lock_control import lock_control
 import os
 
+#TODO: remove bluetoothctl pairing in some way...
+#TODO: change RB3 to not be an audio device?
+
 time.sleep(3)
 
 print("starting up")
