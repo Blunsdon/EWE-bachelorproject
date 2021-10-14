@@ -1,6 +1,7 @@
 # importing the random module
 import random
-from .models import CreateUserCode
+from .models import CreateUserCode, JoinTable
+from datetime import date, timedelta
 
 
 def gen_user_code():
@@ -18,4 +19,16 @@ def gen_user_code():
     cu_id = CreateUserCode.objects.get(id=1)
     cu_id.code = cu
     cu_id.save()
+    pass
+
+
+def clean_access():
+    """
+    Cleans facility access
+    Removes all JoinTable that have expired
+    :return:
+    """
+    today = date.today() - timedelta(days=1)
+    yesterday = today.strftime("%Y-%m-%d")
+    JoinTable.objects.all().filter(timer=yesterday).delete()
     pass

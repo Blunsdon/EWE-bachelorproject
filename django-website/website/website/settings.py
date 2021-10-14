@@ -41,12 +41,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+CRONJOBS = [
+    ('1 00 * * *', 'website.cron.gen_user_code'),
+    ('1 00 * * *', 'website.cron.clean_access')
 ]
 
 REST_FRAMEWORK = {
@@ -133,7 +139,8 @@ AUTH_USER_MODEL = 'website.Users'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Copenhagen'
 
 USE_I18N = True
 
