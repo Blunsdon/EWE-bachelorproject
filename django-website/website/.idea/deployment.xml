@@ -5,6 +5,13 @@
       <paths name="aws">
         <serverdata>
           <mappings>
+            <mapping deploy="/Django-final-server" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="pi">
+        <serverdata>
+          <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>

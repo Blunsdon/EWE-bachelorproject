@@ -6,3 +6,4 @@ selenium~=3.141.0
 pytest~=6.2.5
 djangorestframework~=3.12.4
 djoser~=2.1.0
+django-crontab~=0.7.1
