@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0e1cb65c-f22e-4249-9a27-d27d2b40cfac" name="Bachelor project">
+        <fileTransfer rootFolder="/home/bitnami/Django-test-server" accessType="SFTP" host="3.69.102.33" port="22" sshConfigId="ce8d7dbe-f03e-4dfc-9de4-c77c27554354" sshConfig="bitnami@3.69.102.33:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
