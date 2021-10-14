@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f0216c82-f896-467a-8da4-8bef642a695d" name="aws">
+        <fileTransfer accessType="SFTP" host="3.210.255.190" port="22" sshConfigId="5aaba1ed-8ad6-4ddb-acea-b4f191a46724" sshConfig="bitnami@3.210.255.190:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
