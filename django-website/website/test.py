@@ -1305,12 +1305,29 @@ class OfficePersonalInfoAndAccessTestCase(unittest.TestCase):
 
 
 class RAPITestCase(unittest.TestCase):
+    """
+    class for testing restAPI
+
+    Methods
+    -------
+    setUp(self):
+    test_curl_create(self):
+    test_RAPI_endpoints(self):
+    test_curl_delete(self):
+    tearDown(self):
+    """
 
     def setUp(self):
+        """This function has no functionality in this class"""
         return None
 
     @pytest.mark.run(order=3)
     def test_curl_create(self):
+        """
+        This function creates a facility for testing
+
+        :return:
+        """
         selenium = webdriver.Chrome()
 
         # Choose start URL
@@ -1382,6 +1399,11 @@ class RAPITestCase(unittest.TestCase):
 
     @pytest.mark.run(order=5)
     def test_RAPI_endpoints(self):
+        """
+        This function test's the restAPI's endpoints
+
+        :return:
+        """
         # ----------------------------------------------------------------------------------------------------------- #
         # Test login endpoint
         ## structure request
@@ -1454,6 +1476,11 @@ class RAPITestCase(unittest.TestCase):
 
     @pytest.mark.run(order=6)
     def test_curl_delete(self):
+        """
+        This function deletes all the facilities
+
+        :return:
+        """
         selenium = webdriver.Chrome()
 
         # Choose start URL
@@ -1498,8 +1525,8 @@ class RAPITestCase(unittest.TestCase):
 
         selenium.close()
 
-
     def tearDown(self):
+        """This function has no functionality in this class"""
         return None
 
 
