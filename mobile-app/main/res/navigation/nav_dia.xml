@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_dia"
+    app:startDestination="@id/loginFrag">
+
+    <fragment
+        android:id="@+id/loginFrag"
+        android:name="com.example.controllockbt.LoginFrag"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFrag_to_scanFrag"
+            app:destination="@id/scanFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanFrag"
+        android:name="com.example.controllockbt.ScanFrag"
+        android:label="fragment_scan"
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_scanFrag_to_unlockFrag"
+            app:destination="@id/unlockFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/unlockFrag"
+        android:name="com.example.controllockbt.UnlockFrag"
+        android:label="fragment_unlock"
+        tools:layout="@layout/fragment_unlock" >
+        <action
+            android:id="@+id/action_unlockFrag_to_successFrag"
+            app:destination="@id/successFrag" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFrag"
+        android:name="com.example.controllockbt.SuccessFrag"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" >
+        <action
+            android:id="@+id/action_successFrag_to_scanFrag"
+            app:destination="@id/scanFrag" />
+    </fragment>
+</navigation>
