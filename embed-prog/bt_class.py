@@ -1,20 +1,19 @@
-#!/bin/python3
-
 import bluetooth
 import time
 from lock_control import lock_control
+from btctlTest import btcl
 import os
 
-#TODO: remove bluetoothctl pairing in some way...
 #TODO: change RB3 to not be an audio device?
 
-time.sleep(3)
+time.sleep(10)
 
 print("starting up")
 
 os.system('sudo hciconfig hci0 piscan')
 
 lock_control = lock_control()
+btcl = btcl()
 msg = 42
 time.sleep(3)
 
@@ -57,22 +56,30 @@ try:
                         if lock_control.lock_lock():
                             "200 = success"
                             client_sock.send("200")
+                            client_sock.close()
+                            btcl.unpair()
                             print("The lock is now locked")
                             "Great lock is locked"
                         else:
                             "500 = internal error"
                             client_sock.send("500")
+                            client_sock.close()
+                            btcl.unpair()
                             "lock failed"
                     else:
                         "500 = internal error"
                         client_sock.send("500")
+                        client_sock.close()
+                        btcl.unpair()
                         "lock failed to unlock"
                 else:
                     "401 = unauthorized"
                     client_sock.send("401")
                     client_sock.close()
+                    btcl.unpair()
                     print("Key is no good")
         except OSError:
+            client_sock.close()
             pass
 except OSError:
     pass

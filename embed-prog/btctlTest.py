@@ -1,29 +1,18 @@
-from sh import bluetoothctl
+import sh
 import re
 
-lopd = bluetoothctl("paired-devices")
-print("lopd: " + str(lopd))
-span = []
-for device in lopd:
-    search = re.search("[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]", device).span()
-    span.append(search)
+class btcl(object):
+    def unpair(self):
+        lopd = sh.bluetoothctl("paired-devices")
+        llopd = []
 
-x = 0
-mac_list = []
-mac_str = ""
-count = len(span)
-for device in span:
-    count -= count
-    print("device: " + str(device))
-    for mac_int in range(len(lopd[count])):
-        if mac_int >= span[count][0] and mac_int < span[count][1]:
-            mac_str += lopd[count][mac_int]
-            x += 1
-        print("mac_str: " + str(mac_str))
-        mac_list.append(mac_str)
+        for device in lopd:
+            llopd.append(device)
 
-print(mac_list)
+        span = []
+        for device in llopd:
+            search = re.search("[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]:[a-zA-Z0-9][a-zA-Z0-9]", device)
+            span.append(search.group(0))
 
-#ctl_unpair = "remove " + mac_str
-
-#bluetoothctl("remove", mac_str)
+        for mac_str in span:
+            sh.bluetoothctl("remove", mac_str)
