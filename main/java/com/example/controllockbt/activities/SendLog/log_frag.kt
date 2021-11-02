@@ -11,9 +11,12 @@
 //import android.widget.TextView
 //import androidx.lifecycle.ViewModelProvider
 //import androidx.navigation.Navigation
+//import com.example.controllockbt.R
 //import com.example.restapift.R
 //import com.example.controllockbt.activities.FacInfo.FacInfoModelFactory
 //import com.example.controllockbt.activities.FacInfo.FacInfoViewModel
+//import com.example.controllockbt.activities.SendLog.SendLogModelFactory
+//import com.example.controllockbt.activities.SendLog.SendLogViewModel
 //import com.example.controllockbt.model.Facility
 //import com.example.controllockbt.model.PostGetFacInfo
 //import com.example.controllockbt.model.PostSendLog
