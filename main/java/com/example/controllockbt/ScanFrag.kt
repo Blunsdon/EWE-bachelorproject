@@ -258,6 +258,9 @@ class ScanFrag : Fragment() {
                     }
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_STARTED ->{
+                    // Make sure lists are cleared
+                    aLMac.clear()
+                    aLName.clear()
                     loadingInfo?.text = "Scanning for facilities"
                     // Make Visible
                     progressBar?.visibility = View.VISIBLE
