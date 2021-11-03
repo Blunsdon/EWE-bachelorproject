@@ -80,7 +80,7 @@ class LoginFrag : Fragment() {
                     bundle.putString("UserEmail", viewEmail.text.toString())
                     bundle.putString("Token", response.body()?.auth_token.toString())
                     // Redirect to ScanFrag
-                    Navigation.findNavController(view).navigate(R.id.scanFrag, bundle)
+                    Navigation.findNavController(view).navigate(R.id.action_loginFrag_to_scanFrag, bundle)
                 }
                 else{
                     // Failed to login send error message

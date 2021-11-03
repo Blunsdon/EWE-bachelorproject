@@ -55,7 +55,6 @@ class SuccessFrag : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_successFrag_to_scanFrag, bundle)
         }
 
-
         return view
     }
 

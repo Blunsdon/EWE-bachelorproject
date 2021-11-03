@@ -134,12 +134,13 @@ class ScanFrag : Fragment() {
 
 
     private fun startBT() {
+        Log.d("sf_startBt", "function started")
         val permissionCheck = ContextCompat.checkSelfPermission(
             requireActivity(),
             Manifest.permission.ACCESS_FINE_LOCATION
         )
         if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-
+                Log.d("sf_startBt", "permissions granted")
                 // Register for broadcasts when a device is discovered.
                 val filter = IntentFilter().apply {
                 addAction(BluetoothDevice.ACTION_FOUND)
@@ -161,6 +162,7 @@ class ScanFrag : Fragment() {
             }
         }
         else{
+            Log.d("sf_startBt", "permissions not granted")
             showToast("Bluetooth must be enabled")
         }
     }
@@ -319,16 +321,17 @@ class ScanFrag : Fragment() {
                             Log.d("Bundle: ", "token: $token")
                             bundle.putString("MacAdress", chosenDeviceMac)
                             bundle.putString("FacName", chosenDeviceName)
-                            view?.let { Navigation.findNavController(it).navigate(R.id.unlockFrag, bundle) }
+                            view?.let { Navigation.findNavController(it).navigate(R.id.action_scanFrag_to_unlockFrag, bundle) }
                         }
                     }
                 }
             }
         }
     }
+
     override fun onDestroy() {
-        super.onDestroy()
         activity?.unregisterReceiver(receiver)
+        super.onDestroy()
     }
 }
 
