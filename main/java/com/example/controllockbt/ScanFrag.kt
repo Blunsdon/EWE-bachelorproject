@@ -57,8 +57,8 @@ class ScanFrag : Fragment() {
         //Get arguments
         val args = this.arguments
         //get a specific data entry in the bundle
-        val inputData = args?.get("useremail")
-        val inputToken = args?.get("token")
+        val inputData = args?.get("UserEmail")
+        val inputToken = args?.get("Token")
         //display bundle data
         useremail = inputData.toString()
         token = inputToken.toString()
@@ -293,7 +293,7 @@ class ScanFrag : Fragment() {
                             var index = 0
                             for(name in aLName){
                                 if(item == name){
-                                    showList.add(aLName.toString())
+                                    showList.add(name)
                                     MacList.add(aLMac[index])
                                 }
                                 index += 1
@@ -310,12 +310,12 @@ class ScanFrag : Fragment() {
                             Log.d("arguments ff: ", "CDM: " + chosenDeviceMac)
                             // make bundle
                             val bundle = Bundle()
-                            bundle.putString("useremail", useremail)
+                            bundle.putString("UserEmail", useremail)
                             Log.d("Bundle: ", "username: $useremail")
-                            bundle.putString("token", token)
+                            bundle.putString("Token", token)
                             Log.d("Bundle: ", "token: $token")
-                            bundle.putString("Mac", chosenDeviceMac)
-                            bundle.putString("Name", chosenDeviceName)
+                            bundle.putString("MacAdress", chosenDeviceMac)
+                            bundle.putString("FacName", chosenDeviceName)
                             view?.let { Navigation.findNavController(it).navigate(R.id.unlockFrag, bundle) }
                         }
                     }

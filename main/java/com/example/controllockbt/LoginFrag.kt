@@ -77,8 +77,8 @@ class LoginFrag : Fragment() {
                 if(response.code() == 200) {
                     // Create bundle
                     val bundle = Bundle()
-                    bundle.putString("useremail", viewEmail.text.toString())
-                    bundle.putString("token", response.body()?.auth_token.toString())
+                    bundle.putString("UserEmail", viewEmail.text.toString())
+                    bundle.putString("Token", response.body()?.auth_token.toString())
                     // Redirect to ScanFrag
                     Navigation.findNavController(view).navigate(R.id.scanFrag, bundle)
                 }
