@@ -78,7 +78,6 @@ class LoginFrag : Fragment() {
                     // Create bundle
                     val bundle = Bundle()
                     bundle.putString("useremail", viewEmail.text.toString())
-                    bundle.putString("password", viewPassword.text.toString()) // TODO: slet denne
                     bundle.putString("token", response.body()?.auth_token.toString())
                     // Redirect to ScanFrag
                     Navigation.findNavController(view).navigate(R.id.scanFrag, bundle)
