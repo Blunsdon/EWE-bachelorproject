@@ -1,3 +1,5 @@
+import android.util.Log
+
 //package com.example.restapift.activities.FacInfo
 //
 //import android.os.Bundle
@@ -65,13 +67,13 @@
 //            viewModel.myResponse.observe(viewLifecycleOwner, { response ->
 //                if (response.isSuccessful) {
 //                    //got a response
-//                        if(response.body()?.userEmail != null) {
+//                        if(response.body()?.list.isNullOrEmpty()){
+//                            Log.d("Response msg", "NO facility access")
+//                        }else{
 //                            Log.d("Response msg", response.message().toString())
 //                            Log.d("Response code", response.code().toString())
 //                            Log.d("Response string", response.body()?.list?.get(0).toString())
-//                            textView.text = response.body()?.list.toString()
-//                        } else {
-//                            textView.text = "dumdum"
+//                            //textView.text = response.body()?.list.toString()
 //                        }
 //                } else {
 //                    //no response

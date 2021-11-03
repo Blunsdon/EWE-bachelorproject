@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_scanFrag_to_unlockFrag"
             app:destination="@id/unlockFrag" />
+        <action
+            android:id="@+id/action_scanFrag_to_loginFrag"
+            app:destination="@id/loginFrag" />
     </fragment>
     <fragment
         android:id="@+id/unlockFrag"
