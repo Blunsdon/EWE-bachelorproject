@@ -70,21 +70,19 @@ class ScanFrag : Fragment() {
         val bluetoothManager = context?.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         mBluetoothAdapter = bluetoothManager.adapter
         // Check to see if the Bluetooth classic feature is available.
-        val blueManager = context?.applicationContext?.getSystemService(
-            Context.BLUETOOTH_SERVICE)  as BluetoothManager
-        val mBlueAdapter: BluetoothAdapter? = blueManager.adapter
+
         // Do we have Bluetooth?
-        if (mBlueAdapter == null) {
+        if (mBluetoothAdapter == null) {
             showToast("This device doesn't support Bluetooth")
         }
         //make sure bluetooth is enabled.
-        if(!mBlueAdapter!!.isEnabled){
+        if(!mBluetoothAdapter!!.isEnabled){
             showToast("Bluetooth is OFF, trying to turn ON")
             val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             resultContract.launch(enableBluetoothIntent)
             showToast("Bluetooth is turned ON!")
         }else{
-            if(mBlueAdapter.isEnabled){
+            if(mBluetoothAdapter!!.isEnabled){
                 showToast("Bluetooth is already ON!")
             }
         }

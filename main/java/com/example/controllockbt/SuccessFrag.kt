@@ -10,15 +10,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.controllockbt.activities.Logout.LogoutFragModelFactory
+import com.example.controllockbt.activities.Logout.LogoutFragViewModel
+import com.example.controllockbt.repository.Repository
 
 
 class SuccessFrag : Fragment() {
+
+    // Logout var
+    private lateinit var viewModel: LogoutFragViewModel
 
     // Bundle variables
     private var tokenString: String = ""
     private var userEmailString = ""
     private var facNameString = ""
+    private var statusString: String = ""
+    private var vis: Boolean = false
 
     // For counter
     lateinit var counter: TextView
@@ -40,33 +49,83 @@ class SuccessFrag : Fragment() {
         var token = args?.get("Token")
         var userEmail = args?.get("UserEmail")
         var facName = args?.get("FacName")
+        var status = args?.get("StatusCode")
         //Assign arguments (production)
         tokenString = token.toString()
         userEmailString = userEmail.toString()
         facNameString = facName.toString()
+        statusString = status.toString()
 
         var button: Button = view.findViewById(R.id.buttonBackSuccess)
-        button.visibility = View.VISIBLE
-        button.setOnClickListener{
+        button.visibility = View.INVISIBLE //invisible
+
+        button.setOnClickListener {
             var bundle = Bundle()
             bundle.putString("Token", tokenString)
             bundle.putString("UserEmail", userEmailString)
             bundle.putString("FacName", facNameString)
-            Navigation.findNavController(view).navigate(R.id.action_successFrag_to_scanFrag, bundle)
+            if(status == "200") {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_successFrag_to_scanFrag, bundle)
+            }
+            if(status == "500") {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_successFrag_to_scanFrag, bundle)
+            }
+            if(status == "401") {
+                logout()
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_successFrag_to_loginFrag)
+            }
         }
 
         return view
     }
 
+    private fun logout(){
+        //retrofit repo
+        val repository = Repository()
+        //retrofit modelFac
+        val viewModelFactory = LogoutFragModelFactory(repository)
+        //model extension
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LogoutFragViewModel::class.java)
+        //push POST to restAPI
+        val tokenPlace = "Token "
+        val tokenString = tokenPlace.plus(tokenString)
+        viewModel.pushPost(tokenString)
+    }
+
     inner class MyCounter(millisInFuture: Long, countDownInterval: Long): CountDownTimer(millisInFuture, countDownInterval){
         override fun onFinish() {
             Log.d("countDown", "CountDown done!")
-            counter.text = ("Door is locked!")
+            var button: Button? = view?.findViewById(R.id.buttonBackSuccess)
+            button?.visibility = View.VISIBLE
+            if(statusString == "200") {
+                button?.text = "Go to scan"
+                counter.text = ("Return to scanning")
+            }
+            if(statusString == "500") {
+                button?.text = "Go to scan"
+                counter.text = ("Return to scanning")
+            }
+            if(statusString == "401") {
+                button?.text = "Logout"
+                counter.text = ("Return to login")
+            }
+
         }
 
         override fun onTick(millisUntilFinished: Long) {
             var ms = millisUntilFinished + 1000
-            counter.text = ("Door is unlocked " + ms/1000).toString() + " seconds"
+            if(statusString == "200") {
+                counter.text = ("Door is unlocked, return to scan in: " + (ms/1000).toString())
+            }
+            if(statusString == "500") {
+                counter.text = ("Internal Error happened, return to scan in: " + (ms/1000).toString())
+            }
+            if(statusString == "401") {
+                counter.text = ("Not authorized for this facility, return to login in: " + (ms/1000).toString())
+            }
         }
     }
 
