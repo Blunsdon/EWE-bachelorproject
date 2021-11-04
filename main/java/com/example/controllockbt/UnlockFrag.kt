@@ -44,6 +44,8 @@ class UnlockFrag : Fragment() {
     private lateinit var mBluetoothAdapter: BluetoothAdapter
     private var mIsConnected: Boolean = false
 
+    private val mmBuffer: ByteArray = ByteArray(1024)
+
     // restAPI variables
     private lateinit var viewModel: SendLogViewModel
     private lateinit var keyString: String
@@ -144,16 +146,34 @@ class UnlockFrag : Fragment() {
         if(mBluetoothSocket != null){
             Log.d("sendCommand", "Socket not null")
             try {
+                mBluetoothSocket!!.inputStream.read(mmBuffer)
+                var readMsg = String(mmBuffer)
+                Log.d("input_stream", readMsg)
+
                 if(mBluetoothSocket!!.isConnected == true) {
-                    Log.d("sendCommand", "Sending msg: " + keyString)
-                    mBluetoothSocket!!.outputStream.write(keyString.toByteArray())
+                    var loopControl: Boolean = false
+                    while(!loopControl){
+                        Log.d("sendCommand", "Sending msg: " + keyString)
+                        mBluetoothSocket!!.outputStream.write(keyString.toByteArray())
+
+                        mBluetoothSocket!!.inputStream.read(mmBuffer)
+                        var readMsg = String(mmBuffer)
+                        Log.d("input_stream", readMsg)
+                        if(readMsg.contains("200")){
+                            loopControl = true
+                        }
+                    }
                 }
             } catch (e: IOException) {
                 Log.d("sendCommand error", e.toString())
             }
             try {
                 if(mBluetoothSocket!!.isConnected == true) {
-                    mBluetoothSocket!!.close()
+                    try {
+                        mBluetoothSocket?.close()
+                    } catch (e: IOException) {
+                        Log.e("CloseSocket_sc", "Could not close the client socket", e)
+                    }
                     mBluetoothSocket = null
                     mIsConnected = false
                 }
@@ -199,7 +219,11 @@ class UnlockFrag : Fragment() {
     }
 
     override fun onDestroy() {
-        mBluetoothSocket?.close()
+        try {
+            mBluetoothSocket?.close()
+        } catch (e: IOException) {
+            Log.e("CloseSocket_od", "Could not close the client socket", e)
+        }
         super.onDestroy()
     }
 }
