@@ -12,16 +12,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.controllockbt.activities.Login.LoginFragModelFactory
 import com.example.controllockbt.activities.Login.LoginFragViewModel
 import com.example.controllockbt.model.PostLogin
 import com.example.controllockbt.repository.Repository
+import kotlin.math.log
 
 
 class LoginFrag : Fragment() {
-        private lateinit var viewModel: LoginFragViewModel
+
+    private lateinit var viewModel: LoginFragViewModel
+    private lateinit var tokenmodel: LogOut
 
     //  Function for opening web page
     fun openWebPage(url: String) {
@@ -41,7 +46,7 @@ class LoginFrag : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-
+        tokenmodel = ViewModelProvider(requireActivity()).get(LogOut::class.java)
         // Find button for create user
         val btnCreateUser = view.findViewById<Button>(R.id.btnCreateUser);
         // Create new user
@@ -75,6 +80,11 @@ class LoginFrag : Fragment() {
             viewModel.myResponse.observe(viewLifecycleOwner, { response ->
                 // check if login successful
                 if(response.code() == 200) {
+
+                    // save token for onDestroy
+                    tokenmodel.setToken(response.body()?.auth_token.toString())
+                    val test = tokenmodel.getToken()
+                    Log.d("ViewModel", test.toString())
                     // Create bundle
                     val bundle = Bundle()
                     bundle.putString("UserEmail", viewEmail.text.toString())

@@ -109,7 +109,6 @@ class ScanFrag : Fragment() {
         btnScan.setOnClickListener {
             showToast("Scanning started")
             val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
-            startBT()
             if(!mBluetoothAdapter!!.isDiscovering) {
                 loadingInfo?.text = "Scanning error wait X seconds"
                 }
