@@ -25,11 +25,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okio.ByteString.Companion.readByteString
 import java.io.BufferedReader
 import java.io.IOException
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.logging.Logger.global
 
 class UnlockFrag : Fragment() {
 
@@ -57,6 +59,7 @@ class UnlockFrag : Fragment() {
     private var temp_facLocation: String = "temp location"
     private var temp_userName: String = "temp user"
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,11 +77,6 @@ class UnlockFrag : Fragment() {
 
         sendLog()
 
-        Log.d("uf_bundleInfo", "Token: " + Token)
-        Log.d("uf_bundleInfo", "UserEmail: " + UserEmail)
-        Log.d("uf_bundleInfo", "FacName: " + FacName)
-        Log.d("uf_bundleInfo", "MacAdress: " + MacAdress)
-
         //response okay -> launch coroutines
         CoroutineScope(Dispatchers.IO).launch {
             connectBt()
@@ -88,6 +86,7 @@ class UnlockFrag : Fragment() {
     }
 
     private fun sendLog(){
+        var logReturn: Boolean
         val repository = Repository()
         //retrofit modelFac
         val viewModelFactory = SendLogModelFactory(repository)
@@ -105,22 +104,14 @@ class UnlockFrag : Fragment() {
 
         viewModel.pushPost(tokenString, myPost)
         //read response
-        Log.d("restAPI", "sending log")
         viewModel.myResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful) {
                 //got a response
-                Log.d("restAPI: Response msg", response.message().toString())
                 keyString = response.body()?.key.toString()
-                Log.d("restAPI: Response code", response.code().toString())
 
                 logSucces = true
-
             } else {
                 //no response
-                Log.d("restAPI: Response-error", response.message().toString())
-                Log.d("restAPI: Response-error", response.code().toString())
-
-                // TODO: bad response do something!
             }
         })
     }
@@ -145,8 +136,6 @@ class UnlockFrag : Fragment() {
     private fun sendCommand(input: String, view: View): String {
         Log.d("SCCode", keyString)
         if(mBluetoothSocket != null){
-            Log.d("sendCommand", "Socket not null")
-            Log.d("input_stream_before", mBluetoothSocket!!.inputStream.available().toString())
             try {
                 if(mBluetoothSocket!!.isConnected == true) {
                     var loopControl: Boolean = false
@@ -166,12 +155,15 @@ class UnlockFrag : Fragment() {
                                 var readMsg = String(mmBuffer)
                                 Log.d("input_stream", readMsg)
                                 if (readMsg.contains("200")) {
-                                    loopControl = true
+                                    cleanSocket()
+                                    return "200"
                                 }
                                 if (readMsg.contains("500")) {
+                                    cleanSocket()
                                     return("500")
                                 }
                                 if (readMsg.contains("401")) {
+                                    cleanSocket()
                                     return("401")
                                 }
                             }
@@ -186,37 +178,38 @@ class UnlockFrag : Fragment() {
                 }
 
             } catch (e: IOException) {
-                Log.d("sendCommand error", e.toString())
+                Log.e("sendCommand error", e.toString())
             }
-            try {
-                if(mBluetoothSocket!!.isConnected == true) {
-                    try {
-                        Log.d("CloseSocket_sc", "Closing inputstream")
-                        mBluetoothSocket?.inputStream?.close()
-                    } catch (e: IOException) {
-                        Log.d("CloseSocket_sc", "Could not close the client socket inputstream", e)
-                    }
-                    try {
-                        Log.d("CloseSocket_sc", "Closing outputstream")
-                        mBluetoothSocket?.outputStream?.close()
-                    } catch (e: IOException) {
-                        Log.d("CloseSocket_sc", "Could not close the client socket outputstream", e)
-                    }
-                    try {
-                        Log.d("CloseSocket_sc", "Closing socket")
-                        mBluetoothSocket?.close()
-                    } catch (e: IOException) {
-                        Log.d("CloseSocket_sc", "Could not close the client socket", e)
-                    }
-                    mBluetoothSocket = null
-                    mIsConnected = false
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            Log.d("CloseSocket_SC_isConnected", mBluetoothSocket?.isConnected.toString())
         }
         return "200"
+    }
+
+    private fun cleanSocket(){
+        Log.d("CloseSocket_sc", "closing socket connections")
+        if(mBluetoothSocket!!.isConnected == true) {
+            try {
+                Log.d("CloseSocket_sc", "closing s.input: " + mBluetoothSocket?.inputStream?.available())
+                mBluetoothSocket?.inputStream?.close()
+            } catch (e: IOException) {
+                Log.d("CloseSocket_sc", "Could not close the client socket inputstream", e)
+            }
+            try {
+                Log.d("CloseSocket_sc", "closing s.output")
+                mBluetoothSocket?.outputStream?.close()
+            } catch (e: IOException) {
+                Log.d("CloseSocket_sc", "Could not close the client socket outputstream", e)
+            }
+            try {
+                Log.d("CloseSocket_sc", "closing socket")
+                mBluetoothSocket?.close()
+            } catch (e: IOException) {
+                Log.d("CloseSocket_sc", "Could not close the client socket", e)
+            }
+            mBluetoothSocket = null
+            mIsConnected = false
+        } else {
+            Log.d("CloseSocket_sc", "socket not connected")
+        }
     }
 
     private suspend fun connectBt() {
@@ -234,13 +227,10 @@ class UnlockFrag : Fragment() {
 
                 try{
                     mBluetoothSocket!!.connect()
-                    Log.d("connectBt", "connected")
                 } catch (e: IOException){
-                    Log.d("connectBt", "error: couldn't connect")
                     navigate("500")
                 }
                 mIsConnected = true
-                Log.d("connectBt", "success: BtSocket created")
                 var SCstring: String? = view?.let { sendCommand("42", it) }
                 if (SCstring != null) {
                     editMainThread("done", SCstring)
@@ -249,12 +239,11 @@ class UnlockFrag : Fragment() {
                 }
 
             } else {
-                Log.d("connectBt", "error: BtSocket not null")
+                editMainThread("done", "500")
             }
         } catch (e: IOException) {
-            Log.d("connectBt", "error: " + e.toString())
+            editMainThread("done", "500")
             mIsConnected = false
-            e.printStackTrace()
         }
     }
 
@@ -268,12 +257,6 @@ class UnlockFrag : Fragment() {
     }
 
     override fun onDestroy() {
-        try {
-            Log.d("CloseSocket_od_isConnected", mBluetoothSocket?.isConnected.toString())
-
-        } catch (e: IOException) {
-            Log.e("CloseSocket_od", "Could not close the client socket", e)
-        }
         super.onDestroy()
     }
 }
