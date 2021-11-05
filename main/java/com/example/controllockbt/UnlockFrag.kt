@@ -126,7 +126,12 @@ class UnlockFrag : Fragment() {
         val progressBar: ProgressBar? = view?.findViewById(R.id.progressBarUnlock)
         val textCode: TextView? = view?.findViewById(R.id.textViewUnlock)
         if(status == "done"){
-            navigate(code)
+            var bundle = Bundle()
+            bundle.putString("Token", Token)
+            bundle.putString("UserEmail", UserEmail)
+            bundle.putString("FacName", FacName)
+            bundle.putString("StatusCode", code)
+            view?.let { Navigation.findNavController(it).navigate(R.id.action_unlockFrag_to_successFrag, bundle)}
         } else {
             progressBar?.visibility = View.VISIBLE
             textCode?.text = "Unlocking door!"
