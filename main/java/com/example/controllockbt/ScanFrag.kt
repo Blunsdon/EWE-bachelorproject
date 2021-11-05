@@ -48,7 +48,6 @@ class ScanFrag : Fragment() {
         Toast.makeText( context, msg, Toast.LENGTH_SHORT).show()
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,18 +110,12 @@ class ScanFrag : Fragment() {
             showToast("Scanning started")
             val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
             startBT()
-            var btON = false //TODO:
-            loadingInfo?.text = "Forcing Bluetooth to start scanning"
-            while(!btON){
-                if(mBluetoothAdapter!!.isDiscovering){
-                    // all is OK
-                        btON= true
-                }else{
-                    btON = false
-                    startBT()
-                }
+            if(!mBluetoothAdapter!!.isDiscovering) {
+                loadingInfo?.text = "Scanning error wait X seconds"
             }
+            startBT()
         }
+
         return view
     }
 
@@ -134,13 +127,13 @@ class ScanFrag : Fragment() {
             Manifest.permission.ACCESS_FINE_LOCATION
         )
         if (permissionCheck == PackageManager.PERMISSION_GRANTED){
-                Log.d("sf_startBt", "permissions granted")
-                // Register for broadcasts when a device is discovered.
-                val filter = IntentFilter().apply {
+            Log.d("sf_startBt", "permissions granted")
+            // Register for broadcasts when a device is discovered.
+            val filter = IntentFilter().apply {
                 addAction(BluetoothDevice.ACTION_FOUND)
                 addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
                 addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
-                }
+            }
 
             if (mBluetoothAdapter?.isDiscovering!!) {
                 mBluetoothAdapter!!.cancelDiscovery()
@@ -214,8 +207,8 @@ class ScanFrag : Fragment() {
                 }
             } else {
                 //no response
-                    Log.d("Response-error", response.message().toString())
-                    Log.d("Response-error", response.code().toString())
+                Log.d("Response-error", response.message().toString())
+                Log.d("Response-error", response.code().toString())
             }
         })
     }
