@@ -1,6 +1,7 @@
 package com.example.controllockbt
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -39,7 +40,6 @@ class ScanFrag : Fragment() {
     private var chosenDeviceName: String = ""
     private val aLMac = ArrayList<String>()
     private var chosenDeviceMac: String = ""
-
     private lateinit var useremail: String
     private lateinit var token: String
     private val facilityAccess = ArrayList<String>()
@@ -48,6 +48,7 @@ class ScanFrag : Fragment() {
         Toast.makeText( context, msg, Toast.LENGTH_SHORT).show()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,36 +65,18 @@ class ScanFrag : Fragment() {
         token = inputToken.toString()
         val viewtest = view.findViewById<TextView>(R.id.textView)
         viewtest.text = useremail
+
         // Get facililty access
         facilityAccess(useremail, inputToken.toString())
 
         val bluetoothManager = context?.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         mBluetoothAdapter = bluetoothManager.adapter
-        // Check to see if the Bluetooth classic feature is available.
-        val blueManager = context?.applicationContext?.getSystemService(
-            Context.BLUETOOTH_SERVICE)  as BluetoothManager
-        val mBlueAdapter: BluetoothAdapter? = blueManager.adapter
-        // Do we have Bluetooth?
-        if (mBlueAdapter == null) {
-            showToast("This device doesn't support Bluetooth")
-        }
-        //make sure bluetooth is enabled.
-        if(!mBlueAdapter!!.isEnabled){
-            showToast("Bluetooth is OFF, trying to turn ON")
-            val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            resultContract.launch(enableBluetoothIntent)
-            showToast("Bluetooth is turned ON!")
-        }else{
-            if(mBlueAdapter.isEnabled){
-                showToast("Bluetooth is already ON!")
-            }
-        }
 
-        // start BT
-        startBT()
+        // Run Bluetooth checks
+        checkBT()
 
         // finds log out button
-        val btnLogOut = view.findViewById<Button>(R.id.btnLogOut);
+        val btnLogOut = view.findViewById<Button>(R.id.btnLogOut)
         btnLogOut.setOnClickListener {
             showToast("Log Out Click")
             val repository = Repository()
@@ -111,7 +94,7 @@ class ScanFrag : Fragment() {
                     // Go back to login fragment
                     Log.d("Response", response.code().toString())
                     showToast("Logged out")
-                    Navigation.findNavController(view).navigate(R.id.loginFrag)
+                    Navigation.findNavController(view).navigate(R.id.action_scanFrag_to_loginFrag)
                 }
                 else{
                     //no response
@@ -126,9 +109,20 @@ class ScanFrag : Fragment() {
         val btnScan = view.findViewById<Button>(R.id.btnScan)
         btnScan.setOnClickListener {
             showToast("Scanning started")
+            val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
             startBT()
+            var btON = false //TODO:
+            loadingInfo?.text = "Forcing Bluetooth to start scanning"
+            while(!btON){
+                if(mBluetoothAdapter!!.isDiscovering){
+                    // all is OK
+                        btON= true
+                }else{
+                    btON = false
+                    startBT()
+                }
+            }
         }
-
         return view
     }
 
@@ -168,6 +162,7 @@ class ScanFrag : Fragment() {
     }
 
     // Get facility access info
+    @SuppressLint("SetTextI18n")
     private fun facilityAccess(useremail: String, token: String){
         //retrofit repo
         val repository = Repository()
@@ -186,12 +181,12 @@ class ScanFrag : Fragment() {
         viewModel.myResponse.observe(viewLifecycleOwner, { response ->
             Log.d("Iam IN", response.code().toString())
             if (response.isSuccessful) {
+                val progressBar: ProgressBar? = view?.findViewById(R.id.scanningBar)
+                val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
+                val listOfScanning = view?.findViewById<ListView>(R.id.scanResult)
+                val buttonScan = view?.findViewById<Button>(R.id.btnScan)
                 if(response.body()?.list.isNullOrEmpty()){
                     Log.d("Response msg", "NO facility access")
-                    val progressBar: ProgressBar? = view?.findViewById(R.id.scanningBar)
-                    val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
-                    val listOfScanning = view?.findViewById<ListView>(R.id.scanResult)
-                    val buttonScan = view?.findViewById<Button>(R.id.btnScan)
                     // Remove all features
                     loadingInfo?.text = "You have NO access to any facility"
                     // Make Visible
@@ -200,6 +195,14 @@ class ScanFrag : Fragment() {
                     listOfScanning?.visibility = View.INVISIBLE
                     buttonScan?.visibility = View.INVISIBLE
                 }else{
+
+                    // Remove all features
+                    loadingInfo?.text = "Press Scan to scan for facilities"
+                    // Make Invisible
+                    progressBar?.visibility = View.INVISIBLE
+                    listOfScanning?.visibility = View.INVISIBLE
+                    // Make Visible
+                    buttonScan?.visibility = View.VISIBLE
                     Log.d("Response msg", response.message().toString())
                     Log.d("Response code", response.code().toString())
                     // get all facilities
@@ -208,7 +211,6 @@ class ScanFrag : Fragment() {
                         facilityAccess.add(item[0])
                     }
 
-                    //textView.text = response.body()?.list.toString()
                 }
             } else {
                 //no response
@@ -218,6 +220,25 @@ class ScanFrag : Fragment() {
         })
     }
 
+
+    private fun checkBT(){
+        if (mBluetoothAdapter == null) {
+            showToast("This device doesn't support Bluetooth")
+        }
+
+        // start BT if user has access to facilities
+        //make sure bluetooth is enabled.
+        if(!mBluetoothAdapter!!.isEnabled){
+            showToast("Bluetooth is OFF, trying to turn ON")
+            val enableBluetoothIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            resultContract.launch(enableBluetoothIntent)
+            showToast("Bluetooth is turned ON!")
+        }else{
+            if(mBluetoothAdapter!!.isEnabled){
+                showToast("Bluetooth is already ON!")
+            }
+        }
+    }
 
     // Checking Bluetooth
     private val resultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -231,26 +252,25 @@ class ScanFrag : Fragment() {
 
     // receiver for Bluetooth
     private val receiver = object : BroadcastReceiver() {
+        @SuppressLint("CutPasteId", "SetTextI18n") //TODO: fix
         override fun onReceive(context: Context, intent: Intent) {
             val progressBar: ProgressBar? = view?.findViewById(R.id.scanningBar)
             val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
             val listOfScanning = view?.findViewById<ListView>(R.id.scanResult)
             val buttonScan = view?.findViewById<Button>(R.id.btnScan)
-            val action: String? = intent.action
-            when(action) {
+            when(intent.action) {
                 BluetoothDevice.ACTION_FOUND -> {
                     // Discovery has found a device. Get the BluetoothDevice
                     // object and its info from the Intent.
                     val device: BluetoothDevice? = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-
-                    var deviceName = device?.name.toString()
+                    val deviceName = device?.name.toString()
                     Log.d("deviceName", "" + deviceName)
-                    var deviceHardwareAddress = device?.address.toString() // MAC address
+                    val deviceHardwareAddress = device?.address.toString() // MAC address
                     Log.d("deviceHardwareAddress", "" + deviceHardwareAddress)
                     // filter founded devices
                     if(deviceName.contains("facility")){
                         // Get MAC address
-                        var deviceHardwareAddress = device?.address.toString()
+                        val deviceHardwareAddress = device?.address.toString()
                         Log.d("deviceHardwareAddress", "" + deviceHardwareAddress)
                         // Add  to list
                         aLMac.add(deviceHardwareAddress)
@@ -285,7 +305,7 @@ class ScanFrag : Fragment() {
                         // listView setup with NO facilities founded
                         val noneFound = ArrayList<String>()
                         noneFound.add("No facilities found, try to scan again")
-                        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, noneFound)}
+                        val adapter = context.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, noneFound)}
                         val selectDeviceList: ListView? = view?.findViewById(R.id.scanResult)
                         selectDeviceList?.adapter = adapter
                         Log.d("Bundle: ", "username: " + useremail)
@@ -305,7 +325,7 @@ class ScanFrag : Fragment() {
                             }
                         }
                         // listView setup
-                        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, showList)}
+                        val adapter = context.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, showList)}
                         val selectDeviceList: ListView? = view?.findViewById(R.id.scanResult)
                         selectDeviceList?.adapter = adapter
                         selectDeviceList?.setOnItemClickListener{_,_,position,_ ->
