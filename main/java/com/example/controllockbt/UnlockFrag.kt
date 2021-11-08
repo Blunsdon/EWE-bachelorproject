@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -59,6 +61,11 @@ class UnlockFrag : Fragment() {
     private var temp_facLocation: String = "temp location"
     private var temp_userName: String = "temp user"
 
+    //toast
+    private fun showToast(msg: String) {
+        Toast.makeText( context, msg, Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +85,14 @@ class UnlockFrag : Fragment() {
         sendLog()
 
         //response okay -> launch coroutines
-        CoroutineScope(Dispatchers.IO).launch {
+        var job = CoroutineScope(Dispatchers.IO).launch {
             connectBt()
+        }
+
+        // This callback will only be called when MyFragment is at least Started.
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            Log.d("bpc", "pressed back")
+            showToast("Back not allowed while unlocking")
         }
 
         return view
@@ -259,9 +272,5 @@ class UnlockFrag : Fragment() {
         bundle.putString("FacName", FacName)
         bundle.putString("StatusCode", status)
         view?.let { Navigation.findNavController(it).navigate(R.id.action_unlockFrag_to_successFrag, bundle) }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

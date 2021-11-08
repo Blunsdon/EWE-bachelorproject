@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -55,6 +56,12 @@ class ScanFrag : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_scan, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            Log.d("bpc", "pressed back")
+            logout()
+        }
+
         //Get arguments
         val args = this.arguments
         //get a specific data entry in the bundle
@@ -78,31 +85,7 @@ class ScanFrag : Fragment() {
         // finds log out button
         val btnLogOut = view.findViewById<Button>(R.id.btnLogOut)
         btnLogOut.setOnClickListener {
-            showToast("Log Out Click")
-            val repository = Repository()
-            //retrofit modelFac
-            val viewModelFactory = LogoutFragModelFactory(repository)
-            //model extension
-            viewModel2 = ViewModelProvider(this, viewModelFactory).get(LogoutFragViewModel::class.java)
-            //push POST to restAPI
-            val tokenPlace = "Token "
-            val tokenString = tokenPlace.plus(token)
-            viewModel2.pushPost(tokenString)
-            //read response
-            viewModel2.myResponse.observe(viewLifecycleOwner, { response ->
-                if(response.isSuccessful) {
-                    // Go back to login fragment
-                    Log.d("Response", response.code().toString())
-                    showToast("Logged out")
-                    Navigation.findNavController(view).navigate(R.id.action_scanFrag_to_loginFrag)
-                }
-                else{
-                    //no response
-                    Log.d("Response-error", response.message().toString())
-                    Log.d("Response-error", response.code().toString())
-                }
-            })
-
+            logout()
         }
 
         // button for making new scans
@@ -117,6 +100,33 @@ class ScanFrag : Fragment() {
             }
 
         return view
+    }
+
+    private fun logout(){
+        showToast("Log Out Click")
+        val repository = Repository()
+        //retrofit modelFac
+        val viewModelFactory = LogoutFragModelFactory(repository)
+        //model extension
+        viewModel2 = ViewModelProvider(this, viewModelFactory).get(LogoutFragViewModel::class.java)
+        //push POST to restAPI
+        val tokenPlace = "Token "
+        val tokenString = tokenPlace.plus(token)
+        viewModel2.pushPost(tokenString)
+        //read response
+        viewModel2.myResponse.observe(viewLifecycleOwner, { response ->
+            if(response.isSuccessful) {
+                // Go back to login fragment
+                Log.d("Response", response.code().toString())
+                showToast("Logged out")
+                view?.let { Navigation.findNavController(it).navigate(R.id.action_scanFrag_to_loginFrag) }
+            }
+            else{
+                //no response
+                Log.d("Response-error", response.message().toString())
+                Log.d("Response-error", response.code().toString())
+            }
+        })
     }
 
 

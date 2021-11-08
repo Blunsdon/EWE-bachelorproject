@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.controllockbt.activities.Logout.LogoutFragModelFactory
@@ -32,6 +34,12 @@ class SuccessFrag : Fragment() {
     // For counter
     lateinit var counter: TextView
 
+    //toast
+    //toast
+    private fun showToast(msg: String) {
+        Toast.makeText( context, msg, Toast.LENGTH_SHORT).show()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +47,13 @@ class SuccessFrag : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_success, container, false)
+
+        // This callback will only be called when MyFragment is at least Started.
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            Log.d("bpc", "pressed back")
+            showToast("Back to unlocking not allowed")
+        }
+
         val timer = MyCounter(5000, 1000)
         timer.start()
 
