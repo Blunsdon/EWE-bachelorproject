@@ -37,7 +37,6 @@ try:
     while True:
         client_sock, client_info = server_sock.accept()
         print("Accepted connection from", client_info)
-        e = client_sock.send('hello')
         try:
             while True:
                 msg = client_sock.recv(1024)
@@ -52,20 +51,15 @@ try:
                     print("Key is valid lock is now unlocked")
                     if lock_control.unlock_lock():
                         "The lock is now unlocked for 30 sec"
+                        "200 = success"
+                        client_sock.send("200")
+                        client_sock.close()
+                        btcl.unpair()
+
                         time.sleep(5)
-                        if lock_control.lock_lock():
-                            "200 = success"
-                            client_sock.send("200")
-                            client_sock.close()
-                            btcl.unpair()
-                            print("The lock is now locked")
-                            "Great lock is locked"
-                        else:
-                            "500 = internal error"
-                            client_sock.send("500")
-                            client_sock.close()
-                            btcl.unpair()
-                            "lock failed"
+                        lock_control.lock_lock()
+                        print("The lock is now locked")
+                        "Great lock is locked"
                     else:
                         "500 = internal error"
                         client_sock.send("500")
