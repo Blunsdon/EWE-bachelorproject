@@ -30,6 +30,7 @@ import com.example.controllockbt.activities.Logout.LogoutFragModelFactory
 import com.example.controllockbt.activities.Logout.LogoutFragViewModel
 import com.example.controllockbt.model.PostGetFacInfo
 import com.example.controllockbt.repository.Repository
+import java.lang.IllegalArgumentException
 
 
 class ScanFrag : Fragment() {
@@ -342,7 +343,13 @@ class ScanFrag : Fragment() {
     }
 
     override fun onDestroy() {
-        activity?.unregisterReceiver(receiver)
+        try {
+            if (receiver != null) {
+                activity?.unregisterReceiver(receiver)
+            }
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        }
         super.onDestroy()
     }
 }
