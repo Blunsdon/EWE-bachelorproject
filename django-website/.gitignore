@@ -1,0 +1,4 @@
+# ignore venv folder
+venv/
+.idea/
+.pytest_cache/
