@@ -1,9 +1,9 @@
 # EWE-bachelorproject
 
 
-ved deploy af ny server/hjemme husk 
+##Ved deploy af ny server/hjemme husk 
 
-1. luk ned for gunicorn (ps -aux // kill -9 "pidnr") og slet mappen inde i Django-final-server
+1. luk ned for gunicorn (ps -aux // kill -9 "pidnr") og slet mappen inde i django-website
 
 2. upload ny django 
 
