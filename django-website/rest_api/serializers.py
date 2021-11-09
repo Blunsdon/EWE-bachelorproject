@@ -7,16 +7,13 @@ from website.models import *
 
 class LogSerializer(serializers.HyperlinkedModelSerializer):
     dateTime = serializers.DateTimeField()
-    companyName = serializers.CharField(max_length=120)
-    userName = serializers.CharField(max_length=80)
     userEmail = serializers.EmailField()
     facilityName = serializers.CharField(max_length=80)
-    facilityLocation = serializers.CharField(max_length=120)
+
 
     class Meta:
         model = Logs
-        fields = ['companyName', 'userName', 'dateTime', 'userEmail',
-                  'facilityName', 'facilityName', 'facilityLocation']
+        fields = ['dateTime', 'userEmail', 'facilityName']
 
 
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
