@@ -21,3 +21,4 @@ class SendLogViewModel(private val repository: Repository): ViewModel() {
     }
 
 }
+

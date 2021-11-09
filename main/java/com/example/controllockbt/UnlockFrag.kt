@@ -56,11 +56,6 @@ class UnlockFrag : Fragment() {
     private lateinit var viewModel: SendLogViewModel
     private lateinit var keyString: String
 
-    //temp var's till restAPI is updated
-    private var temp_companyString: String = "temp comp"
-    private var temp_facLocation: String = "temp location"
-    private var temp_userName: String = "temp user"
-
     //toast
     private fun showToast(msg: String) {
         Toast.makeText( context, msg, Toast.LENGTH_SHORT).show()
@@ -109,10 +104,9 @@ class UnlockFrag : Fragment() {
         val tokenPlace = "Token "
         val tokenString = tokenPlace.plus(Token)
 
-        // TODO: change to correct variables after restAPI is fixed
         var fac: List<Facility> = listOf(Facility(FacName))
-        var log: List<com.example.controllockbt.model.Log> = listOf(com.example.controllockbt.model.Log(temp_userName, temp_companyString, DateTimeFormatter.ISO_INSTANT.format(
-            Instant.now()), UserEmail, FacName, temp_facLocation))
+        var log: List<com.example.controllockbt.model.Log> = listOf(com.example.controllockbt.model.Log(DateTimeFormatter.ISO_INSTANT.format(
+            Instant.now()), UserEmail, FacName))
         val myPost = PostSendLog(fac, log,"")
 
         viewModel.pushPost(tokenString, myPost)

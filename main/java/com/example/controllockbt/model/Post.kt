@@ -29,11 +29,11 @@ data class Facility (
 
 data class Log (
 
-    var userName : String?,
-    var companyName : String?,
+    //var userName : String?,
+    //var companyName : String?,
     var dateTime : String?,
     var userEmail : String?,
     var facilityName : String?,
-    var facilityLocation : String?
+    //var facilityLocation : String?
 
 )
