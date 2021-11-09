@@ -8,11 +8,17 @@ ved deploy af ny server/hjemme husk
 2. upload ny django 
 
 3. kør følgende
+
 $ python manager.py makemigration
+
 $ python manage.py migrate
+
 $ python manage.py createsuperuser
+
 $ python manage.py collectstatic
+
 $ pip install gunicorn
+
 $ gunicorn website.wsgi:application –bind 0.0.0.0:8000 --access-logfile /var/log/web_log/gunicorn-access.log --error-logfile /var/log/web_log/gunicorn-error.log
 
 9. Gå ind og fix admin og superusers
