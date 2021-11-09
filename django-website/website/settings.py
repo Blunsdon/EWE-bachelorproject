@@ -28,7 +28,7 @@ DEBUG = False
 
 # ROOT_URL = 'https://www.control-center.xyz/' 3.210.255.190
 
-ALLOWED_HOSTS = ['www.control-center.xyz', '3.210.255.190']
+ALLOWED_HOSTS = ['www.control-center.xyz', 'control-center.xyz']
 #ALLOWED_HOSTS = ['0.0.0.0',  '127.0.0.1']
 
 # Application definition
