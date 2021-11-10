@@ -94,7 +94,7 @@ class ScanFrag : Fragment() {
             showToast("Scanning started")
             val loadingInfo = view?.findViewById<TextView>(R.id.loadingInfo)
             if(!mBluetoothAdapter!!.isDiscovering) {
-                loadingInfo?.text = "Scanning error wait X seconds"
+                loadingInfo?.text = "Scanning error wait 10 seconds"
                 }
             startBT()
             }
@@ -103,7 +103,6 @@ class ScanFrag : Fragment() {
     }
 
     private fun logout(){
-        showToast("Log Out Click")
         val repository = Repository()
         //retrofit modelFac
         val viewModelFactory = LogoutFragModelFactory(repository)
@@ -238,7 +237,6 @@ class ScanFrag : Fragment() {
             showToast("Bluetooth is turned ON!")
         }else{
             if(mBluetoothAdapter!!.isEnabled){
-                showToast("Bluetooth is already ON!")
             }
         }
     }
@@ -308,7 +306,7 @@ class ScanFrag : Fragment() {
                         // listView setup with NO facilities founded
                         val noneFound = ArrayList<String>()
                         noneFound.add("No facilities found, try to scan again")
-                        val adapter = context.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, noneFound)}
+                        val adapter = context.let { ArrayAdapter(it, R.layout.custom_list_item, noneFound)}
                         val selectDeviceList: ListView? = view?.findViewById(R.id.scanResult)
                         selectDeviceList?.adapter = adapter
                         Log.d("Bundle: ", "username: " + useremail)
@@ -328,7 +326,7 @@ class ScanFrag : Fragment() {
                             }
                         }
                         // listView setup
-                        val adapter = context.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, showList)}
+                        val adapter = context.let { ArrayAdapter(it, R.layout.custom_list_item, showList)}
                         val selectDeviceList: ListView? = view?.findViewById(R.id.scanResult)
                         selectDeviceList?.adapter = adapter
                         selectDeviceList?.setOnItemClickListener{_,_,position,_ ->

@@ -64,7 +64,7 @@ class LoginFrag : Fragment() {
             val viewEmail = view.findViewById<EditText>(R.id.editTextTextEmailAddress)
             val viewPassword = view.findViewById<EditText>(R.id.editTextTextPassword)
             // Login message
-            showToast("Login Clicked")
+            //showToast("Login Clicked")
             //retrofit repo
             val repository = Repository()
             //retrofit modelFac
