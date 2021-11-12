@@ -34,7 +34,7 @@
     <form action={% url 'facility_access_give_filter' %} method="post">
     {% csrf_token %}
         <select name="location_list">
-            <option value="None" selected hidden>Choose adress</option>
+            <option value="None" selected hidden>Choose address</option>
             <option value="None">All addresses</option>
             {% for val in location %}
                 <option value='{{ val }}'> {{ val }} </option>
@@ -56,7 +56,7 @@
         </select>
         <input type="submit" value="Edit facility" style="width: 200px">
     </form><br>
-    <button onClick="location.href = '{% url 'facility_access' %}../'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility_access' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
 </fieldset>
 </body>
