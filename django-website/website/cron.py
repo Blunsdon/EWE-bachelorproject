@@ -16,7 +16,10 @@ def gen_user_code():
     for x in range(0, digits):
         cu = cu + str(random.randint(0, 9))
     print(cu)
-    cu_id = CreateUserCode.objects.get(id=1)
+    try:
+        cu_id = CreateUserCode.objects.get(id=1)
+    except:
+        cu_id = CreateUserCode.objects.create(id=1)
     cu_id.code = cu
     cu_id.save()
     pass

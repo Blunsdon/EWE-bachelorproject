@@ -46,9 +46,14 @@ def office_user_home(request):
 
     :return:
     """
-    cuc = CreateUserCode.objects.get(id=1)
-    cu = cuc.code
+
+    try:
+        cuc = CreateUserCode.objects.get(id=1)
+        cu = cuc.code
+    except:
+        cu = " Contact an admin"
     return render(request, "office_user_home.html", {'cu': cu})
+
 
 @login_required
 @user_controller
@@ -70,7 +75,6 @@ def office_user_info(request):
     return render(request, "office_user_info.html", dict)
 
 
-"Facility access view"
 @login_required
 @user_controller
 def office_user_access(request):
@@ -78,6 +82,7 @@ def office_user_access(request):
     fac = JoinTable.objects.filter(user__name=name)
     context = {'facility': fac}
     return render(request, "office_user_access.html", context)
+
 
 @login_required
 @user_controller
@@ -95,14 +100,14 @@ def office_edit_user(request):
     company = Users.objects.order_by().values_list('company', flat=True).distinct()
 
     # No company chosen yet, so query all users in the database
-    users = Users.objects.order_by()
+    users = Users.objects.order_by().exclude(userType='Admin')
 
     # Company is chosen:
     if request.method == 'POST':
         data = request.POST['company_list']
         if data != "None":
             # Query database for users, filtered by chosen company
-            users = Users.objects.order_by().filter(company=data)
+            users = Users.objects.order_by().filter(company=data).exclude(userType='Admin')
             user_header_text = "Users for: " + str(data)
             # Render page with filtered users, instead of all users
             render_dict = {
@@ -122,6 +127,7 @@ def office_edit_user(request):
         'param': comp,
         'header_text': user_header_text}
     return render(request, "office_edit_user.html", render_dict)
+
 
 @login_required
 @user_controller
@@ -154,6 +160,7 @@ def office_edit_user_final(request):
 
     return render(request, "office_edit_user_final.html", {'user': user_choice})
 
+
 @login_required
 @user_controller
 def upgrade_field_user(request):
@@ -177,6 +184,7 @@ def upgrade_field_user(request):
     # return to "office_edit_user"
     return redirect('office_edit_user')
 
+
 @login_required
 @user_controller
 def delete_field_user(request):
@@ -199,6 +207,7 @@ def delete_field_user(request):
     # return to "office_edit_user"
     return redirect('office_edit_user')
 
+
 @login_required
 @user_controller
 def logs_facility(request):
@@ -218,6 +227,7 @@ def logs_facility(request):
         'fac': list[1]
     }
     return render(request, "logs_facility.html", dict)
+
 
 @login_required
 @user_controller
@@ -241,7 +251,6 @@ def logs_facility_filter(request):
     for vals in facility_locations_lq:
         if vals not in facility_locations:
             facility_locations.append(vals)
-
 
     # No facility location chosen yet, so query all facilities in the database
     facilities_fq = Facilities.objects.all()
@@ -292,6 +301,7 @@ def logs_facility_filter(request):
         'header_text': user_header_text}
     return render(request, "logs_facility_filter.html", render_dict)
 
+
 @login_required
 @user_controller
 def logs_user(request):
@@ -311,6 +321,7 @@ def logs_user(request):
         data = Logs.objects.all().filter(userEmail=list[1]).filter(facilityName=list[0])
 
     return render(request, "logs_user.html", {'data': data})
+
 
 @login_required
 @user_controller
@@ -431,7 +442,6 @@ def logs_user_filter(request):
                     'header_text2': user_header_text2}
                 return render(request, "logs_user_filter.html", render_dict)
 
-
     # Text for a header
     user_header_text = "All Users:"
 
@@ -443,11 +453,13 @@ def logs_user_filter(request):
         'header_text': user_header_text}
     return render(request, "logs_user_filter.html", render_dict)
 
+
 @login_required
 @user_controller
 def facility_access(request):
 
     return render(request, "facility_access.html")
+
 
 @login_required
 @user_controller
@@ -649,11 +661,12 @@ def facility(request):
 
     return render(request, "facility.html")
 
+
 @login_required
 @user_controller
 def facility_add(request):
     """
-    This funtion is for adding a new facility to the database
+    This function is for adding a new facility to the database
 
     :param request:
     :return:
@@ -678,6 +691,7 @@ def facility_add(request):
             return render(request, "facility_add.html", {'disp_text': disp_text})
 
     return render(request, "facility_add.html", {'disp_text': disp_text})
+
 
 @login_required
 @user_controller
@@ -723,6 +737,7 @@ def facility_edit_filter(request):
         'param': comp,
         'header_text': user_header_text}
     return render(request, "facility_edit_filter.html", render_dict)
+
 
 @login_required
 @user_controller
@@ -775,6 +790,7 @@ def facility_edit(request):
 
     return render(request, "facility_edit.html", dict)
 
+
 @login_required
 @user_controller
 def facility_remove_filter(request):
@@ -820,6 +836,7 @@ def facility_remove_filter(request):
         'header_text': user_header_text}
     return render(request, "facility_remove_filter.html", render_dict)
 
+
 @login_required
 @user_controller
 def facility_remove(request):
@@ -838,7 +855,6 @@ def facility_remove(request):
         facility_choice.delete()
         return redirect('facility_remove_filter')
 
-
     return render(request, "facility_remove.html", {'facility_choice': facility_choice})
 
 
@@ -849,7 +865,6 @@ def edit_user_error(request):
     return render(request, "edit_user_error.html")
 
 
-"office user password change"
 @login_required
 @user_controller
 def office_user_change_password(request):
@@ -861,7 +876,7 @@ def office_user_change_password(request):
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
             logout(request)
-            return redirect('/accounts/login/')
+            return redirect('front_page')
         else:
             messages.error(request, 'Please correct the error below.')
     else:

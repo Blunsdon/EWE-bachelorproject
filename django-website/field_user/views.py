@@ -48,9 +48,9 @@ def field_user_info(request):
         form = EditFieldUser(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/field_user_home')
+            return redirect('field_user_home')
         else:
-            return redirect('/field_user_home/edit_user_error')
+            return redirect('field_user_edit_error')
     'Gets user information'
     name = request.user.name
     phone = request.user.phoneNumber
@@ -87,7 +87,7 @@ def field_user_change_password(request):
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
             logout(request)
-            return redirect('/accounts/login/')
+            return redirect('front_page')
         else:
             messages.error(request, 'Please correct the error below.')
     else:

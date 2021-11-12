@@ -5,7 +5,7 @@ from . import views
 
 # TODO: check if all added
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin"),
     path('accounts/', include('django.contrib.auth.urls')),
     path('login_redirect/', views.index),
     path('create_user/', include('create_user.urls')),

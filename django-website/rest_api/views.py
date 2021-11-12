@@ -59,6 +59,6 @@ class FacilityView(APIView):
             list_fac = JoinTable.objects.all().filter(user=pk).values_list("facility__name", "facility__location",
                                                                            "user__email", "user__company",
                                                                            "user__name")
-            return Response({"status": "success", "list":list_fac}, status=status.HTTP_200_OK)
+            return Response({"status": "success", "list": list_fac}, status=status.HTTP_200_OK)
         else:
             return Response({"status": "error", "data": post_data.errors}, status=status.HTTP_400_BAD_REQUEST)

@@ -13,10 +13,13 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
-
         legend {
             background-color: #061549;
             color: #ffffff;
@@ -25,13 +28,15 @@
     </style>
 </head>
 <body>
-<br><br><br><br><br><br><br><br>
-    <h1>Error editing personal information</h1>
-<p>Reasons could be:</p>
-<p><span style="color:black;font-weight:bold">Not unique Email</span>  or <span style="color:black;font-weight:bold">Not correct format</span> </p>
-<p> Please make sure Email and/or phone number is correct </p>
-<p>Try again </p>
-    <button onClick="document.location.href = '/office_user_home/'" style="padding: 14px; width: 100px; background-color:
+<fieldset>
+    <legend>Error editing personal information</legend>
+    <p>Reasons could be:</p>
+    <p><span style="color:black;font-weight:bold">Not unique Email</span>  or <span style="color:black;font-weight:bold">Not correct format</span> </p>
+    <p> Please make sure Email and/or phone number is correct </p>
+    <p>Try again </p>
+    <br>
+    <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 14px; width: 100px; background-color:
         darkblue; color:aliceblue; border-radius: 8px;font-size: 16px">back</button>
+</fieldset>
 </body>
 </html>

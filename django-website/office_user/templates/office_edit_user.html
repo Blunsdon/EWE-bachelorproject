@@ -11,8 +11,12 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
         legend {
             background-color: #061549;
@@ -28,9 +32,8 @@
     <title>Edit user</title>
 </head>
 <body>
-<br><br><br><br><br><br><br><br>
-
 <fieldset>
+<legend>Choose user</legend>
     <!-- BOX-DROPDOWN: company -->
     <h1>Choose a company</h1>
     <form action={% url 'office_edit_user' %} method="post">
@@ -61,7 +64,7 @@
 
     <br>
     <br>
-    <button onClick="document.location.href = '../../office_user_home/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </fieldset>
 </body>

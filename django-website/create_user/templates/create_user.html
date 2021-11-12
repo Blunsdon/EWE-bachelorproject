@@ -11,8 +11,12 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 35%;
-            margin-right: 35%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
         legend {
             background-color: #061549;
@@ -25,8 +29,6 @@
 </head>
 <body>
     <br><br><br><br>
-    <h1>INFO: Important!!
-        first time login finger scan is needed</h1>
   <form method="post">
     {% csrf_token %}
       <fieldset>
@@ -49,7 +51,7 @@
                 {% endfor %}
             </table>
       <br>
-          <button onClick="document.location.href = '../accounts/login'" style="padding: 8px; width: 100px; background-color:
+          <button onClick="location.href = '{% url 'front_page' %}'" style="padding: 8px; width: 100px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Back</button>
           <button style="padding: 8px; width: 100px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" type="submit" id="sign_up">Sign up</button>

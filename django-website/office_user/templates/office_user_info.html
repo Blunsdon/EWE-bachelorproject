@@ -11,8 +11,12 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
         legend {
             background-color: #061549;
@@ -28,7 +32,6 @@
     <title>Personal info</title>
 </head>
 <body>
- <br><br><br><br><br><br><br><br>
         <fieldset>
         <legend>Personal info</legend>
         <form action="" method = "POST">
@@ -60,12 +63,12 @@
                 <tr>
                     <td><label for="password"; ><span style="padding-right:32px">Password:</span></label>  </td>
                     <td> <span style="padding-right:45px">**** **** ****</span> </td>
-                    <td> <button onClick="document.location.href = '../office_user_change_password/'"  style="padding: 4px; width: 40px; background-color:
+                    <td> <button onClick="location.href = '{% url 'office_user_change_password' %}'"  style="padding: 4px; width: 40px; background-color:
     lightskyblue; color:aliceblue; border-radius: 8px;font-size: 12px">Edit </button></td>
                 </tr>
             </table>
         <br><br>
-            <button onClick="document.location.href = '../'" style="padding: 14px; width: 100px; background-color:
+            <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 14px; width: 100px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 16px">back</button></fieldset>
 </body>
 </html>

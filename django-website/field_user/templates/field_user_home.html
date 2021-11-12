@@ -4,26 +4,44 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "create_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
+        }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
         }
     </style>
     <meta charset="UTF-8">
     <title>Field user home page</title>
 </head>
 <body>
-    <br><br><br><br>
-    <h1>INFO: Field user home page</h1>
-    <button onClick="document.location.href = 'field_user_info/'" style="padding: 16px; width: 200px; background-color:
+<fieldset>
+    <legend>Home</legend>
+
+    <button onClick="location.href = '{% url 'field_user_info' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Personal info</button>
     <br>
-    <button onClick="document.location.href = 'field_user_access/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'field_user_access' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Facility access</button>
     <br>
-    <button onClick="document.location.href = '{% url 'logout_user' %}'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log out</button>
+    <button onClick="location.href = '{% url 'logout_user' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Logout</button>
+
+</fieldset>
+
 
 </body>
 </html>

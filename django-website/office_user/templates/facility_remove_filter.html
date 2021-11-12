@@ -11,8 +11,12 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
         legend {
             background-color: #061549;
@@ -29,16 +33,14 @@
 </head>
 
 <body>
-<br><br><br><br><br><br><br><br>
-
     <!-- BOX-DROPDOWN: adress -->
 <fieldset>
-    <h1>Choose an adress</h1>
+<legend>Choose an address</legend>
     <form action={% url 'facility_remove_filter' %} method="post">
     {% csrf_token %}
         <select name="location_list">
             <option value="None" selected hidden>Choose adress</option>
-            <option value="None">All adresses</option>
+            <option value="None">All addresses</option>
             {% for val in location %}
                 <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}

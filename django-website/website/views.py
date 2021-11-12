@@ -3,21 +3,24 @@ from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
+
 @login_required
 def index(request):
     usertype = request.user.userType
 
     if usertype == 'Field user':
-        return redirect('/field_user_home')
+        return redirect('field_user_home')
     elif usertype == 'Office user':
-        return redirect('/office_user_home')
+        return redirect('office_user_home')
     elif usertype == 'Admin':
-        return redirect('/admin')
+        return redirect('admin')
     else:
-        return redirect('')
+        return redirect('logout')
+
 
 def homepage(request):
-    return redirect('/accounts/login')
+    return redirect('front_page')
+
 
 def logout_view(request):
     logout(request)

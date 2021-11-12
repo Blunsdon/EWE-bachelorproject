@@ -11,8 +11,12 @@
         }
         fieldset {
             background-color: rgba(238, 238, 238, 0.5);
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
         }
         legend {
             background-color: #061549;
@@ -29,15 +33,12 @@
             -moz-appearance: textfield;
         }
     </style>
-    </style>
     <meta charset="UTF-8">
     <title>Facility page</title>
 </head>
 <body>
-<br><br><br><br><br><br><br><br>
 <fieldset>
 <legend>Add/Edit/Remove facilities</legend>
-    <h1>INFO: Facility page</h1>
     <button onClick="location.href = '{% url 'facility_add' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add facility</button>
     <br>
@@ -49,7 +50,7 @@
     <br>
     <br>
     <br>
-    <button onClick="document.location.href = '../'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </fieldset>
 </body>

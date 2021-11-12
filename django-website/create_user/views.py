@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from website.models import Users, CreateUserCode
+from website.models import CreateUserCode
 from website.forms import CreateNewUserForm
-
 
 def create_user(request):
     """
@@ -16,7 +15,7 @@ def create_user(request):
             cuc = CreateUserCode.objects.get(id=1)
             if cu == cuc.code:
                 form.save()
-                return redirect('/accounts/login/')
+                return redirect('front_page')
     else:
         form = CreateNewUserForm()
     return render(request, "create_user.html", {'form': form})

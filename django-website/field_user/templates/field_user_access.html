@@ -20,27 +20,45 @@
             background-color: lightskyblue;
             border-collapse: collapse;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Facility access</title>
 </head>
 <body>
-    <br><br><br><br>
-    <h1>INFO: Field user facility access page</h1>
+<fieldset>
+    <legend>Facility access</legend>
     <table>
-    <tr>
-        <th style="width:70%"> <h3>Facility</h3></th>
-        <th><h3>Access until</h3></th>
-    </tr>
-    {% for i in facility %}
         <tr>
-        <th style= "background-color: white" > {{ i.facility }}  </th>
-        <th style= "background-color: white" > {{ i.timer }} </th>
+            <th style="width:70%"> <h3>Facility</h3></th>
+            <th><h3>Access from</h3></th>
+            <th><h3>Access until</h3></th>
         </tr>
-    {% endfor %}
+        {% for i in facility %}
+            <tr>
+                <th style= "background-color: white" > {{ i.facility }}  </th>
+                <th style= "background-color: white" > {{ i.timer_start }} </th>
+                <th style= "background-color: white" > {{ i.timer }} </th>
+            </tr>
+        {% endfor %}
     </table>
     <br>
-    <button onClick="document.location.href = '../../field_user_home/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'field_user_home' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+</fieldset>
+
 </body>
 </html>

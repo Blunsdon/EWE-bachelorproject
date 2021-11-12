@@ -10,48 +10,55 @@
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
     </style>
     <meta charset="UTF-8">
     <title>login</title>
 </head>
 <body class="center-screen">
-    <br>
-    <br>
-    <br>
-    <br>
+<fieldset>
+    <legend>Login</legend>
     <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-    <div class="form-group">
-
-        <label for="{{ form.username.id_for_label }}"
-               style="font-weight: bold; font-size: 25px;">Email:</label>
-        <br>
-        {{ form.username }}
-        {{ form.username.errors }}
-
-    </div>
-        <br>
-    <div class="form-group">
-
-        <label for="{{ form.password.id_for_label }}"
-        style="font-weight: bold; font-size: 25px;">Password:</label>
-        <br>
-        {{ form.password }}
-        {{ form.password.errors }}
-    </div>
-        <div>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}" style="font-weight: bold; font-size: 25px;">Email:</label>
             <br>
-        <button type="submit" style="padding: 16px; width: 200px; background-color:
-      darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" id="login">Log in</button>
+            {{ form.username }}
+            {{ form.username.errors }}
         </div>
         <br>
-        <br>
-        <br>
+        <div class="form-group">
+            <label for="{{ form.password.id_for_label }}" style="font-weight: bold; font-size: 25px;">Password:</label>
+            <br>
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
         <div>
-        <button onClick="location.href = '{% url 'create_user' %}'" style="padding: 16px; width: 200px; background-color:
+            <br>
+            <button type="submit" style="padding: 16px; width: 200px; background-color:
+      darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" id="login">Login</button>
+        </div>
+        <br><br><br>
+        <div>
+            <button onClick="location.href = '{% url 'create_user' %}'" style="padding: 16px; width: 200px; background-color:
         darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" id="create_user">Create user</button>
         </div>
     </form>
+</fieldset>
+
 </body>
 </html>

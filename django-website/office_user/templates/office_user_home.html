@@ -9,39 +9,51 @@
             background-attachment: fixed;
             background-size: 100% 100%;
         }
+        fieldset {
+            background-color: rgba(238, 238, 238, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5%;
+            padding: 1%;
+            alignment: center;
+            width: fit-content;
+        }
+        legend {
+            background-color: #061549;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
     </style>
     <meta charset="UTF-8">
     <title>Office user home page</title>
 </head>
 <body>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>INFO: Office user home page</h1>
+<fieldset>
+    <legend>Home page</legend>
     <p style="padding: 16px; width: 370px; background-color: darkblue; color:aliceblue; border-radius: 8px; font-size: 22px"> Create user code: {{ cu }} </p>
-    <button onClick="document.location.href = 'office_edit_user'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'office_edit_user' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" id="edit_user">Edit user</button>
-    <button onClick="document.location.href = '{% url 'logs_facility_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'logs_facility_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View facility logs</button>
     <br>
-    <button onClick="document.location.href = '{% url 'logs_user_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'logs_user_filter' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">View user logs</button>
-    <button onClick="document.location.href = 'facility_access/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility_access' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility access</button>
     <br>
-    <button onClick="document.location.href = 'facility/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'facility' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add/Edit/Remove facility</button>
-
     <br>
     <br>
-    <button onClick="document.location.href = 'office_user_info/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{% url 'office_user_info' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Personal info</button>
-    <button onClick="document.location.href = 'office_user_access/'" style="padding: 16px; width: 200px; background-color:
+    <button onClick="location.href = '{%  url 'office_user_access' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Facility access</button>
     <br>
     <br>
-    <button onClick="document.location.href = '{% url 'logout_user' %}'" style="padding: 16px; width: 200px; background-color:
-    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Log out</button>
+    <button onClick="location.href = '{% url 'logout_user' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Logout</button>
+</fieldset>
+
 </body>
 </html>
