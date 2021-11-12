@@ -4,7 +4,7 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
@@ -22,6 +22,17 @@
             background-color: #061549;
             color: #ffffff;
             padding: 5px 10px;
+            width: 200px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
     <meta charset="UTF-8">
@@ -30,7 +41,7 @@
 <body>
 <fieldset>
     <legend>Home page</legend>
-    <p style="padding: 16px; width: 370px; background-color: darkblue; color:aliceblue; border-radius: 8px; font-size: 22px"> Create user code: {{ cu }} </p>
+    <p style="padding: 16px; width: auto; background-color: darkblue; color:aliceblue; border-radius: 8px; font-size: 22px"> Create user code: {{ cu }} </p>
     <button onClick="location.href = '{% url 'office_edit_user' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px" id="edit_user">Edit user</button>
     <button onClick="location.href = '{% url 'logs_facility_filter' %}'" style="padding: 16px; width: 200px; background-color:

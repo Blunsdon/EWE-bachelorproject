@@ -4,7 +4,7 @@
     {% load static %}
     <style>
         body {
-            background-image: url({% static "office_user/EWE-baggrundsbillede-website.png" %});
+            background-image: url({% static "field_user/EWE-baggrundsbillede-website.png" %});
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: 100% 100%;
@@ -22,10 +22,21 @@
             background-color: #061549;
             color: #ffffff;
             padding: 5px 10px;
+            width: 200px;
+            text-align: center;
+        }
+        button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
         }
     </style>
     <meta charset="UTF-8">
-    <title>Facility access page</title>
+    <title>Facility page</title>
 </head>
 <body>
 <fieldset>
@@ -38,8 +49,19 @@
     <br>
     <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 16px; width: 200px; background-color:
     darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
+    <button onClick="location.href = '{% url 'facility_add' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Add facility</button>
+    <br>
+    <button onClick="location.href = '{% url 'facility_edit_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Edit facility</button>
+    <br>
+    <button onClick="location.href = '{% url 'facility_remove_filter' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">Remove facility</button>
+    <br>
+    <br>
+    <br>
+    <button onClick="location.href = '{% url 'office_user_home' %}'" style="padding: 16px; width: 200px; background-color:
+    darkblue; color:aliceblue; border-radius: 8px;font-size: 18px">back</button>
 </fieldset>
-
-
 </body>
 </html>
