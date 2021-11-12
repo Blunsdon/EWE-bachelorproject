@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="834dp"
-        android:layout_height="607dp"
+        android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/ewe_baggrundsbillede_website"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,6 +110,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="40dp"
         android:background="#2338AE"
         android:text="Create new user"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +118,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintVertical_bias="0.786" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

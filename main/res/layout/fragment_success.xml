@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="834dp"
-        android:layout_height="607dp"
+        android:layout_width="837dp"
+        android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/ewe_baggrundsbillede_website"
         app:layout_constraintBottom_toBottomOf="parent"
