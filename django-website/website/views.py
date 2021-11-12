@@ -19,11 +19,13 @@ def index(request):
 
 
 def homepage(request):
-    return redirect('front_page')
+    return redirect('/accounts/login')
 
 
 def logout_view(request):
     logout(request)
-    print('trying')
-    return redirect('front_page')
+    response = redirect('front_page')
+    for cookie in request.COOKIES:
+        response.delete_cookie(cookie)
+    return response
 
