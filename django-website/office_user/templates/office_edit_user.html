@@ -42,7 +42,7 @@
     {% csrf_token %}
         <select name="company_list">
             <option value="None" selected hidden>Choose company</option>
-            <option value="None">All company</option>
+            <option value="None">All companies</option>
             {% for val in company %}
                 <option value='{{ val }}'> {{ val }} </option>
             {% endfor %}
