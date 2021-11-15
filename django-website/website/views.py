@@ -13,7 +13,7 @@ def index(request):
     elif usertype == 'Office user':
         return redirect('office_user_home')
     elif usertype == 'Admin':
-        return redirect('admin')
+        return redirect('/admin')
     else:
         return redirect('logout')
 
