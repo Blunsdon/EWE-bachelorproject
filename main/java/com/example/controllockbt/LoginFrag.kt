@@ -21,6 +21,8 @@ import com.example.controllockbt.activities.Login.LoginFragViewModel
 import com.example.controllockbt.model.PostLogin
 import com.example.controllockbt.repository.Repository
 import kotlin.math.log
+import android.os.Build
+import androidx.fragment.app.FragmentTransaction
 
 
 class LoginFrag : Fragment() {
@@ -47,6 +49,21 @@ class LoginFrag : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         tokenmodel = ViewModelProvider(requireActivity()).get(LogOut::class.java)
+
+        //Get arguments
+        val args = this.arguments
+        //get a specific data entry in the bundle
+        var error = args?.get("error").toString()
+        if(error == null){error = "false"}
+        Log.d("error", error)
+
+        if(error == "true"){
+            // Error message view
+            val errormsg = view.findViewById<TextView>(R.id.errorText)
+            // Failed to login send error message
+            errormsg.visibility = View.VISIBLE
+        }
+
         // Find button for create user
         val btnCreateUser = view.findViewById<Button>(R.id.btnCreateUser);
         // Create new user
@@ -64,7 +81,7 @@ class LoginFrag : Fragment() {
             val viewEmail = view.findViewById<EditText>(R.id.editTextTextEmailAddress)
             val viewPassword = view.findViewById<EditText>(R.id.editTextTextPassword)
             // Login message
-            showToast("Login Clicked")
+            //showToast("Login Clicked")
             //retrofit repo
             val repository = Repository()
             //retrofit modelFac
@@ -74,13 +91,10 @@ class LoginFrag : Fragment() {
             val myPost = PostLogin(viewEmail.text.toString(), viewPassword.text.toString(), auth_token = "")
             //push POST to restAPI
             viewModel.pushPost(myPost)
-            // Error message view
-            val errormsg = view.findViewById<TextView>(R.id.errorText)
             // Check response
             viewModel.myResponse.observe(viewLifecycleOwner, { response ->
                 // check if login successful
                 if(response.code() == 200) {
-
                     // save token for onDestroy
                     tokenmodel.setToken(response.body()?.auth_token.toString())
                     val test = tokenmodel.getToken()
@@ -93,8 +107,9 @@ class LoginFrag : Fragment() {
                     Navigation.findNavController(view).navigate(R.id.action_loginFrag_to_scanFrag, bundle)
                 }
                 else{
-                    // Failed to login send error message
-                    errormsg.visibility = View.VISIBLE
+                    val bundle = Bundle()
+                    bundle.putString("error", "true")
+                    Navigation.findNavController(view).navigate(R.id.loginFrag, bundle)
                 }
             })
         }
