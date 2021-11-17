@@ -51,7 +51,7 @@ class SuccessFrag : Fragment() {
         // This callback will only be called when MyFragment is at least Started.
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             Log.d("bpc", "pressed back")
-            showToast("Back to unlocking not allowed")
+            showToast("Not allowed!")
         }
 
         val timer = MyCounter(5000, 1000)
@@ -133,13 +133,13 @@ class SuccessFrag : Fragment() {
         override fun onTick(millisUntilFinished: Long) {
             var ms = millisUntilFinished + 1000
             if(statusString == "200") {
-                counter.text = ("Door is unlocked, return to scan in: " + (ms/1000).toString())
+                counter.text = ("Door is unlocked for " + (ms/1000).toString() + " sec.")
             }
             if(statusString == "500") {
-                counter.text = ("Internal Error happened, return to scan in: " + (ms/1000).toString())
+                counter.text = ("Internal Error happened (" + (ms/1000).toString() + ")")
             }
             if(statusString == "401") {
-                counter.text = ("Not authorized for this facility, return to login in: " + (ms/1000).toString())
+                counter.text = ("Not authorized for this facility (" + (ms/1000).toString() + ")")
             }
         }
     }
