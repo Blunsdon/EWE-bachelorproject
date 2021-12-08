@@ -1,3 +1,8 @@
 # EWE-bachelorproject
 
-Denne branch er beregnet til dokumentationen af projektet, hvilket medfører at alt dokumentation lavet kan findes herinde under.
+I dette reposiory er der 4 branches:
+1. main = dokumentation
+2. embed = koden til den embedden og låsen
+3. mobile = koden til mobil applikationen
+4. website = koden til hjemmesiden og databasen
+
